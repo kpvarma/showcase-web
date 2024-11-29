@@ -1,0 +1,33 @@
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+  }
+  
+  .card-header {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .card-type {
+    background-color: #007bff; /* Example vibrant color */
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .card-content {
+    font-size: 16px;
+  }
+  
+  @media (min-width: 768px) {
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  

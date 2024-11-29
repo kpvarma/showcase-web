@@ -1,0 +1,5 @@
+{    
+    "watch": ["data/**/*.mdx"],
+    "ext": "mdx",              
+    "exec": "npx contentlayer2 build"
+}

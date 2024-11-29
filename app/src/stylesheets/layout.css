@@ -1,0 +1,22 @@
+/* Make sure the root elements occupy the full height */
+html, body, .app-container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The main-layout container will fill the available space */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Main content should stretch to fill available space */
+.main-content {
+  flex: 1; /* Makes it grow and take the remaining height */
+  padding: 20px; /* Optional padding for content */
+  background-color: #f9f9f9; /* Optional background for clarity */
+}
