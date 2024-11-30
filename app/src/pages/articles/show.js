@@ -35,12 +35,6 @@ export default function ArticleShow() {
         {article.title}
       </Typography>
 
-      {/* <img
-        src={article.img}
-        alt={article.title}
-        style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '16px' }}
-      /> */}
-
       <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 2 }}>
         Published on:{' '}
         {new Date(article.date).toLocaleDateString('en-US', {
@@ -56,15 +50,7 @@ export default function ArticleShow() {
         ))}
       </Box>
 
-      <Box
-        sx={{
-          marginTop: 2,
-          // padding: 2,
-          // backgroundColor: '#f9f9f9',
-          // borderRadius: '8px',
-          // lineHeight: 1.8,
-        }}
-      >
+      <Box sx={{ marginTop: 2 }}>
         <Layout content={article} toc={article.toc}>
           <MDXLayoutRenderer code={article.body.code} components={{}} />
         </Layout>
