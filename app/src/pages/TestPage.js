@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 // Components
-import ClientSlider from "../components/elements/ClientSlider";
-import ServiceBox from "../components/elements/ServiceBox";
-import FullButton from "../components/elements/FullButton";
+import ClientSlider from "../components/elements-bck/ClientSlider";
+import ServiceBox from "../components/elements-bck/ServiceBox";
+import FullButton from "../components/elements-bck/FullButton";
 
 // Assets
 import AddImage1 from "../assets/img/add/1.png";
