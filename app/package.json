@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
-    "prebuild": "contentlayer2 build", 
-    "build": "webpack --mode production"
+    "build": "contentlayer2 build && webpack --mode production"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
