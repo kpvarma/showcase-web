@@ -5,8 +5,5 @@
       "NODE_ENV": "production"
     }
   },
-  "includeFiles": [
-    "data/**",
-    ".contentlayer/**"
-  ]
+  "outputDirectory": "dist"
 }
