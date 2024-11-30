@@ -89,3 +89,6 @@ pnpm-lock.yaml
 
 # backup files
 app/data-backup/**
+
+# Build folder
+app/dist/**

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
+    "prebuild": "contentlayer2 build", 
     "build": "webpack --mode production"
   },
   "dependencies": {
