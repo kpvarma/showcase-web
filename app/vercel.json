@@ -6,7 +6,7 @@
     }
   },
   "includeFiles": [
-    "data/**", // Include the directory containing your MDX files
-    ".contentlayer/**" // Ensure Contentlayer's output is available
+    "data/**",
+    ".contentlayer/**"
   ]
 }
