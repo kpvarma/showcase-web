@@ -1,103 +1,216 @@
 import React, { memo } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import MuiTable from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
+import {
+  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Divider,
+  Checkbox,
+} from '@mui/material';
 import CodeBlock from './mdx-mui-codeblock';
 
-const components = {
-  p: Typography,
-  h1: (() => {
-    const H1 = props => <Typography {...props} component="h1" variant="h1" />;
-    return memo(H1);
-  })(),
-  h2: (() => {
-    const H2 = props => <Typography {...props} component="h2" variant="h2" />;
-    return memo(H2);
-  })(),
-  h3: (() => {
-    const H3 = props => <Typography {...props} component="h3" variant="h3" />;
-    return memo(H3);
-  })(),
-  h4: (() => {
-    const H4 = props => <Typography {...props} component="h4" variant="h4" />;
-    return memo(H4);
-  })(),
-  h5: (() => {
-    const H5 = props => <Typography {...props} component="h5" variant="h5" />;
-    return memo(H5);
-  })(),
-  h6: (() => {
-    const H6 = props => <Typography {...props} component="h6" variant="h6" />;
-    return memo(H6);
-  })(),
-  blockquote: (() => {
-    const Blockquote = props => (
-      <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
-    );
-    return memo(Blockquote);
-  })(),
-  ul: (() => {
-    const Ul = props => <Typography {...props} component="ul" />;
-    return memo(Ul);
-  })(),
-  ol: (() => {
-    const Ol = props => <Typography {...props} component="ol" />;
-    return memo(Ol);
-  })(),
-  li: (() => {
-    const Li = props => <Typography {...props} component="li" />;
-    return memo(Li);
-  })(),
-  table: (() => {
-    const Table = props => <MuiTable {...props} />;
-    return memo(Table);
-  })(),
-  tr: (() => {
-    const Tr = props => <TableRow {...props} />;
-    return memo(Tr);
-  })(),
-  td: (() => {
-    const Td = ({ align, ...props }) => (
-      <TableCell align={align || undefined} {...props} />
-    );
-    return memo(Td);
-  })(),
-  tbody: (() => {
-    const TBody = props => <TableBody {...props} />;
-    return memo(TBody);
-  })(),
-  th: (() => {
-    const Th = ({ align, ...props }) => (
-      <TableCell align={align || undefined} {...props} />
-    );
-    return memo(Th);
-  })(),
-  thead: (() => {
-    const THead = props => <TableHead {...props} />;
-    return memo(THead);
-  })(),
-  code: CodeBlock,
-  hr: Divider,
-  input: (() => {
-    const Input = props => {
-      const { type } = props;
-      if (type === 'checkbox') {
-        return <Checkbox {...props} disabled={false} readOnly={true} />;
-      }
-      return <input {...props} />;
-    };
-    return memo(Input);
-  })(),
-  wrapper: (() => {
-    const Wrapper = props => <div {...props} className="markdown-body" />;
-    return memo(Wrapper);
-  })(),
+const MuiComponents = {
+  // Paragraphs with better styling
+  p: memo((props) => (
+    <Typography
+      {...props}
+      component="p"
+      sx={{
+        fontSize: '1rem',
+        lineHeight: 1.7,
+        marginBottom: 4,
+        marginTop: 4,
+        color: '#333',
+        fontFamily: 'Roboto, Arial, sans-serif',
+      }}
+    />
+  )),
+
+  // Headers with better spacing and font weight
+  h1: memo((props) => (
+    <Typography
+      {...props}
+      component="h1"
+      variant="h4"
+      gutterBottom
+      sx={{
+        fontWeight: 'bold',
+        marginBottom: 5,
+        marginTop: 2,
+        color: '#2C3E50',
+      }}
+    />
+  )),
+  h2: memo((props) => (
+    <Typography
+      {...props}
+      component="h2"
+      variant="h5"
+      gutterBottom
+      sx={{
+        fontWeight: 'bold',
+        marginBottom: 4,
+        marginTop: 2,
+        color: '#34495E',
+      }}
+    />
+  )),
+  h3: memo((props) => (
+    <Typography
+      {...props}
+      component="h3"
+      variant="h6"
+      gutterBottom
+      sx={{
+        fontWeight: 'bold',
+        marginBottom: 3,
+        marginTop: 2,
+        color: '#5D6D7E',
+      }}
+    />
+  )),
+  h4: memo((props) => (
+    <Typography {...props} component="h4" variant="h6" gutterBottom sx={{ marginBottom: 2, marginTop: 2 }} />
+  )),
+  h5: memo((props) => (
+    <Typography {...props} component="h5" variant="subtitle1" gutterBottom sx={{ marginBottom: 1.5, marginTop: 1 }} />
+  )),
+  h6: memo((props) => (
+    <Typography {...props} component="h6" variant="subtitle2" gutterBottom sx={{ marginBottom: 1, marginTop: 1 }} />
+  )),
+
+  // Blockquote styling
+  blockquote: memo((props) => (
+    <Paper
+      {...props}
+      elevation={1}
+      sx={{
+        padding: 0,
+        paddingLeft: 1,
+        marginBottom: 2,
+        marginTop: 2,
+        backgroundColor: '#f7f9fc',
+        borderLeft: '5px solid #2196F3',
+      }}
+    >
+      <Typography component="blockquote" variant="body1" sx={{ color: '#2C3E50' }} {...props} />
+    </Paper>
+  )),
+
+  // Lists with spacing
+  ul: memo((props) => (
+    <Typography
+      {...props}
+      component="ul"
+      sx={{
+        paddingLeft: 3,
+        marginBottom: 2,
+        marginTop: 2,
+        listStyleType: 'disc',
+      }}
+    />
+  )),
+  ol: memo((props) => (
+    <Typography
+      {...props}
+      component="ol"
+      sx={{
+        paddingLeft: 3,
+        marginBottom: 2,
+        marginTop: 2,
+        listStyleType: 'decimal',
+      }}
+    />
+  )),
+  li: memo((props) => (
+    <Typography
+      {...props}
+      component="li"
+      variant="body1"
+      sx={{
+        marginBottom: 1,
+        fontSize: '1rem',
+        color: '#555',
+      }}
+    />
+  )),
+
+  // Tables with styling
+  table: memo((props) => (
+    <Table
+      {...props}
+      sx={{
+        marginBottom: 2,
+        marginTop: 2,
+        border: '1px solid #ddd',
+        '& th, & td': {
+          padding: 1.5,
+          textAlign: 'left',
+        },
+      }}
+    />
+  )),
+  tr: memo((props) => <TableRow {...props} />),
+  td: memo(({ align, ...props }) => <TableCell align={align || undefined} {...props} />),
+  tbody: memo((props) => <TableBody {...props} />),
+  th: memo(({ align, ...props }) => (
+    <TableCell align={align || undefined} sx={{ fontWeight: 'bold', backgroundColor: '#f9f9f9' }} {...props} />
+  )),
+  thead: memo((props) => <TableHead {...props} />),
+
+  // CodeBlock with improved styling
+  code: memo((props) => (
+    <CodeBlock
+      {...props}
+      sx={{
+        backgroundColor: '#282C34',
+        color: '#FFFFFF',
+        padding: 2,
+        borderRadius: '4px',
+        fontFamily: '"Fira Code", "Roboto Mono", monospace',
+        fontSize: '0.875rem',
+        overflowX: 'auto',
+        marginBottom: 2,
+      }}
+    />
+  )),
+
+  // Divider for horizontal rule
+  hr: memo(() => (
+    <Divider
+      sx={{
+        marginY: 2,
+      }}
+    />
+  )),
+
+  // Input styling (checkbox and text input)
+  input: memo((props) => {
+    const { type } = props;
+    if (type === 'checkbox') {
+      return <Checkbox {...props} disabled={false} readOnly />;
+    }
+    return <input {...props} />;
+  }),
+
+  // Wrapper with consistent margin and padding
+  wrapper: memo((props) => (
+    <div
+      {...props}
+      className="markdown-body"
+      style={{
+        fontFamily: '"Roboto", Arial, sans-serif',
+        lineHeight: 1.6,
+        // margin: '0 auto',
+        // padding: '0 16px',
+        // maxWidth: '800px',
+        color: '#333',
+      }}
+    />
+  )),
 };
 
-export default components;
+export default MuiComponents;

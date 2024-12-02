@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 export default function MainLayout(props) {
   return (
     <AppTheme {...props}>
-      <CssBaseline />
+      <CssBaseline enableColorScheme/>
       <AppAppBar />
       <Container
         maxWidth="lg"

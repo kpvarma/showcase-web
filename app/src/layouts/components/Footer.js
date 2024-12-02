@@ -16,6 +16,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
 import logo from '../../assets/logo.png';
 
+import HireMeSection from './HireMeFooter';
+
 function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
@@ -33,6 +35,8 @@ export default function Footer() {
   return (
     <React.Fragment>
       <Divider />
+      <HireMeSection />
+      <Divider />
       <Container
         sx={{
           display: 'flex',
@@ -43,9 +47,11 @@ export default function Footer() {
           textAlign: { sm: 'center', md: 'left' },
         }}
       >
+        
+        {/* Logo & Footer Links for Desktop */}
         <Box
           sx={{
-            display: 'flex',
+            display: { xs: 'none', sm: 'flex' },
             flexDirection: { xs: 'column', sm: 'row' },
             width: '100%',
             justifyContent: 'space-between',
@@ -80,13 +86,8 @@ export default function Footer() {
                   }}
                 />
               </DefaultLink>
-              
-              <Typography
-                variant="body2"
-                gutterBottom
-                sx={{ fontWeight: 600, mt: 2 }}
-              >
-                An Engineer, crafting solutions through code.
+              <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+                An Engineer, crafting solutions through code. asd
               </Typography>
             </Box>
           </Box>
@@ -97,7 +98,7 @@ export default function Footer() {
               gap: 1,
             }}
           >
-            <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+            <Typography variant="body2" sx={{ fontWeight: 'medium', color: 'text.primary' }}>
               VarmaLabs
             </Typography>
             <Link color="text.secondary" variant="body2" href="/projects">
@@ -106,9 +107,9 @@ export default function Footer() {
             <Link color="text.secondary" variant="body2" href="/articles">
               Articles
             </Link>
-            <Link color="text.secondary" variant="body2" href="/repository_links">
+            {/* <Link color="text.secondary" variant="body2" href="/repository_links">
               Respository Links
-            </Link>
+            </Link> */}
           </Box>
           <Box
             sx={{
@@ -117,7 +118,7 @@ export default function Footer() {
               gap: 1,
             }}
           >
-            <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+            <Typography variant="body2" sx={{ fontWeight: 'medium', color: 'text.primary' }}>
               About Me
             </Typography>
             <Link color="text.secondary" variant="body2" href="/AboutMe">
@@ -137,7 +138,7 @@ export default function Footer() {
               gap: 1,
             }}
           >
-            <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+            <Typography variant="body2" sx={{ fontWeight: 'medium', color: 'text.primary' }}>
               Reach Me
             </Typography>
             <Link color="text.secondary" variant="body2" href="/hireme">
@@ -148,11 +149,13 @@ export default function Footer() {
             </Link>
           </Box>
         </Box>
+        
+        {/* Social Media and Copyright for Desktop */}
         <Box
           sx={{
-            display: 'flex',
+            display: { xs: 'none', sm: 'flex' },
             justifyContent: 'space-between',
-            pt: { xs: 4, sm: 8 },
+            pt: { xs: 4, sm: 4 },
             width: '100%',
             borderTop: '1px solid',
             borderColor: 'divider',
@@ -169,6 +172,9 @@ export default function Footer() {
               Terms of Service
             </Link> */}
             <Copyright />
+            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+              Crafted with passion, using <strong>React.js</strong>, <strong>Contentlayer</strong>, <strong>Django</strong>, and <strong>MongoDB</strong>.
+            </Typography>
           </div>
           <Stack
             direction="row"
@@ -208,6 +214,152 @@ export default function Footer() {
             </IconButton>
           </Stack>
         </Box>
+        
+        {/* Logo for Mobile */}
+        <Box
+          sx={{
+            display: {xs: 'flex', sm: 'none'},
+            flexDirection: 'column',
+            gap: 1.5,
+            alignItems: { xs: 'center', sm: 'flex-start' },
+            width: '100%',
+          }}
+        >
+          <DefaultLink
+            to="/"
+            style={{
+              color: '#00bcd4',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+            }}
+          >
+            <img
+              src={logo}
+              alt="Varma Labs Logo"
+              style={{
+                margin: '3px',
+                padding: '3px',
+                height: 'auto',
+                width: 'auto',
+                maxHeight: '50px',
+              }}
+            />
+          </DefaultLink>
+          <Typography
+            variant="body2"
+            gutterBottom
+            sx={{
+              fontWeight: 600,
+              mt: 1,
+              mb: 2, // Reduce spacing between logo and text
+              color: 'text.secondary',
+              maxWidth: { xs: '80%', sm: '100%' },
+            }}
+          >
+            An Engineer, crafting solutions through code.
+          </Typography>
+        </Box>
+
+        {/* Footer Links for Mobile */}
+        <Box
+          sx={{
+            display: { xs: 'grid', sm: 'none' },
+            gridTemplateColumns: '1fr 1fr', // Two columns
+            gap: 1.5, // Space between items
+            justifyItems: 'center', // Center items horizontally
+            alignItems: 'center', // Center items vertically
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >
+          <Link color="text.secondary" variant="body2" href="/projects">
+            Projects
+          </Link>
+          <Link color="text.secondary" variant="body2" href="/aboutme">
+            About Me
+          </Link>
+          <Link color="text.secondary" variant="body2" href="/articles">
+            Articles
+          </Link>
+          <Link
+            color="text.secondary"
+            variant="body2"
+            href="https://www.linkedin.com/in/krishnaprasadvarma"
+            target="_blank"
+          >
+            My LinkedIn
+          </Link>
+          {/* <Link color="text.secondary" variant="body2" href="/repository_links">
+            Repository Links
+          </Link> */}
+          {/* <Link color="text.secondary" variant="body2" href="/AboutMe">
+            My Profile
+          </Link> */}
+          <Link color="text.secondary" variant="body2" href="/hireme">
+            Hire Me
+          </Link>
+          <Link
+            color="text.secondary"
+            variant="body2"
+            href="https://github.com/kpvarma"
+            target="_blank"
+          >
+            My Github
+          </Link>
+        </Box>
+
+        {/* Social Media and Copyright for Mobile */}
+        <Box
+          sx={{
+            display: {xs: 'flex', sm: 'none'},
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            pt: { xs: 4, sm: 8 },
+          }}
+        >
+          <Copyright />
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              justifyContent: 'center',
+              color: 'text.secondary',
+              mt: 2, // Margin top for social media icons
+            }}
+          >
+            <IconButton
+              color="inherit"
+              size="small"
+              href="https://github.com/kpvarma"
+              aria-label="GitHub"
+              target="_blank"
+            >
+              <FacebookIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              size="small"
+              href="https://www.kaggle.com/kpvarma27"
+              aria-label="Kaggle"
+              target="_blank"
+            >
+              <CodeIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              size="small"
+              href="https://www.linkedin.com/in/krishnaprasadvarma"
+              aria-label="LinkedIn"
+              target="_blank"
+            >
+              <LinkedInIcon />
+            </IconButton>
+          </Stack>
+        </Box>
+
       </Container>
     </React.Fragment>
   );

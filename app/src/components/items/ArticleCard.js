@@ -49,7 +49,7 @@ const StyledTypography = styled(Typography)({
 // Tags Component
 function Tags({ tags }) {
   return (
-    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', marginTop: '10px' }}>
+    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', marginTop: 4 }}>
       {tags.map((tag, index) => (
         <Chip
           key={index}
@@ -124,7 +124,7 @@ export default function ArticleCard({
             {article.summary}
           </StyledTypography>
           <Typography variant="body2" color="text.secondary">
-            Published: {formatDate(article.date_published)}
+            Published: {formatDate(article.date)}
           </Typography>
           {article.date_modified && (
             <Typography variant="caption" color="text.secondary">
@@ -142,13 +142,14 @@ ArticleCard.propTypes = {
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
-    date_published: PropTypes.string.isRequired,
-    date_modified: PropTypes.string,
+    date: PropTypes.string.isRequired,
+    last_modified: PropTypes.string,
     thumb_image: PropTypes.string.isRequired,
     cover_image: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    layout: PropTypes.string.isRequired,
-    draft: PropTypes.bool.isRequired,
+    layout: PropTypes.string,
+    draft: PropTypes.bool,
+    featured: PropTypes.bool,
   }).isRequired,
   onFocus: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,

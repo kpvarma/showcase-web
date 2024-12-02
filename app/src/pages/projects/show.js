@@ -1,6 +1,7 @@
 // General Imports
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // UI Imports
 import Typography from '@mui/material/Typography';
@@ -31,24 +32,30 @@ export default function ProjectShow() {
   const Layout = layouts[project.layout || defaultLayout];
 
   return (
-    <Box sx={{ padding: 2 }}>
+    <div>
+      <Helmet>
+        <title>{project.title || 'VarmaLabs - My experiement with the tech'}</title>
+        <meta name="description" content={project.summary || 'A platform where I experiment with the latest technologies and share my learnings.'} />
+      </Helmet>
+      <Box sx={{ padding: 2 }}>
 
-      <ProjectCover project={project}/>
+        <ProjectCover project={project}/>
 
-      {/* <Typography variant="h2" gutterBottom> {project.title} </Typography>
-      <img src={project.cover_image} alt={project.title} style={{ width: '100%', height: 'auto', borderRadius: '8px' }}/> */}
+        {/* <Typography variant="h2" gutterBottom> {project.title} </Typography>
+        <img src={project.cover_image} alt={project.title} style={{ width: '100%', height: 'auto', borderRadius: '8px' }}/> */}
 
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, marginTop: 1 }}>
-        {project.skills.map((skill, index) => (
-          <Chip key={index} label={skill} color="primary" />
-        ))}
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, marginTop: 1 }}>
+          {project.skills.map((skill, index) => (
+            <Chip key={index} label={skill} color="primary" />
+          ))}
+        </Box>
+
+        <Box sx={{ marginTop: 2}}>
+          <Layout content={project} toc={project.toc}>
+            <MDXLayoutRenderer code={project.body.code} components={{}} />
+          </Layout>
+        </Box>
       </Box>
-
-      <Box sx={{ marginTop: 2}}>
-        <Layout content={project} toc={project.toc}>
-          <MDXLayoutRenderer code={project.body.code} components={{}} />
-        </Layout>
-      </Box>
-    </Box>
+    </div>
   );
 }
