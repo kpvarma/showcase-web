@@ -17,7 +17,9 @@ import AboutMe from './pages/AboutMe';
 import HireMe from './pages/HireMe'; 
 import TestPage from './pages/TestPage.js';
 
-import './stylesheets/layout.css';
+import ScrollToTop from './components/elements/scroll-to-top.js';
+
+// import './stylesheets/layout.css';
 
 const theme = createTheme({
   // Customize your theme here, e.g.:
@@ -37,6 +39,7 @@ const theme = createTheme({
 const App = () => (
   <ThemeProvider theme={theme}>
     <CssBaseline /> {/* Reset CSS styles */}
+    <ScrollToTop/>
     <Routes>
       {/* Home Route */}
       <Route path="/" element={

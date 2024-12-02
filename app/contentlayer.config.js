@@ -58,6 +58,7 @@ const Project = defineDocumentType(() => ({
     cover_image: { type: 'string', required: true },
     thumb_image: { type: 'string', required: true },
 
+    featured: { type: 'boolean' },
     layout: { type: 'string' },
     draft: { type: 'boolean' },
     
@@ -89,6 +90,7 @@ const Article = defineDocumentType(() => ({
     thumb_image: { type: 'string', required: true },
     cover_image: { type: 'string', required: true },
 
+    featured: { type: 'boolean' },
     layout: { type: 'string' },
     draft: { type: 'boolean' },
   },

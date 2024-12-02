@@ -53,7 +53,7 @@ function Skill({ skills }) {
         {skills.map((skill, index) => (
           <Chip
             key={index}
-            label={skill.name}
+            label={skill}
             sx={{
               backgroundColor: '#f0f0f0', // Light gray background for the badge
               color: '#333', // Dark text
@@ -92,6 +92,7 @@ export default function ProjectCard({
           onBlur={onBlur}
           tabIndex={0}
           className={focusedCardIndex === cardIndex ? 'Mui-focused' : ''}
+          sx={{marginLeft: 1, marginRight: 1}}
         >
           <CardMedia
             component="img"
@@ -105,7 +106,7 @@ export default function ProjectCard({
           />
           <StyledCardContent>
             <Typography gutterBottom variant="h6" component="div">
-              {project.title} | {project.slug} | {project.id}
+              {project.title}
             </Typography>
             <StyledTypography variant="body2" color="text.secondary" gutterBottom>
               {project.summary}
@@ -121,8 +122,8 @@ ProjectCard.propTypes = {
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
-    date_published: PropTypes.string.isRequired,
-    date_modified: PropTypes.string,
+    date: PropTypes.string.isRequired,
+    last_modified: PropTypes.string,
     skills: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -131,8 +132,9 @@ ProjectCard.propTypes = {
     thumb_image: PropTypes.string.isRequired,
     cover_image: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    layout: PropTypes.string.isRequired,
-    draft: PropTypes.bool.isRequired,
+    layout: PropTypes.string,
+    draft: PropTypes.bool,
+    featured: PropTypes.bool,
   }).isRequired,
   onFocus: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,

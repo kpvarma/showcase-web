@@ -11,7 +11,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|avif)$/i,
         type: 'asset/resource', // Use Webpack 5's built-in asset modules
       },
       {

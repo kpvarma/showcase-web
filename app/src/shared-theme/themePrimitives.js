@@ -80,7 +80,7 @@ export const getDesignTokens = (mode) => {
       mode,
       primary: {
         light: brand[200],
-        main: brand[400],
+        main: mode === 'light' ? '#0275da' : brand[400],
         dark: brand[700],
         contrastText: brand[50],
         ...(mode === 'dark' && {

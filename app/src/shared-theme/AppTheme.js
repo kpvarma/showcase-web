@@ -29,6 +29,38 @@ function AppTheme({ children, disableCustomTheme, themeComponents }) {
             ...feedbackCustomizations,
             ...navigationCustomizations,
             ...surfacesCustomizations,
+            // Add custom global styles
+            MuiCssBaseline: {
+              styleOverrides: {
+                // Common styles for both light and dark modes
+                body: {
+                  backgroundRepeat: 'no-repeat',
+                  margin: 0,
+                  padding: 0,
+                  boxSizing: 'border-box',
+                  fontFamily: 'Roboto, Arial, sans-serif',
+                },
+                // Light mode specific styles
+                '@media (prefers-color-scheme: light)': {
+                  body: {
+                    backgroundImage:
+                      'radial-gradient(80% 50% at 50% -20%, rgb(204, 230, 255), transparent)',
+                    backgroundSize: 'cover',
+                    color: 'rgb(30, 30, 30)', // Dark text for light mode
+                  },
+                },
+                // Dark mode specific styles
+                '@media (prefers-color-scheme: dark)': {
+                  body: {
+                    backgroundImage:
+                      'radial-gradient(80% 50% at 50% -20%, rgb(0, 41, 82), transparent)',
+                    backgroundSize: 'cover',
+                    backgroundColor: 'rgb(0, 30, 60)', // Fallback background
+                    color: 'rgb(220, 220, 220)', // Light text for dark mode
+                  },
+                },
+              },
+            },
             ...themeComponents,
           },
         });
@@ -37,7 +69,7 @@ function AppTheme({ children, disableCustomTheme, themeComponents }) {
     return <React.Fragment>{children}</React.Fragment>;
   }
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} disableTransitionOnChange>
       {children}
     </ThemeProvider>
   );

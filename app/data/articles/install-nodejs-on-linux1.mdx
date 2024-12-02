@@ -1,0 +1,80 @@
+---
+title: "How to Install Node.js on Linux (Updated for 2023)"
+summary: "Learn how to install Node.js on Linux step-by-step, including updating your package list, installing dependencies, importing the GPG key, and verifying your installation."
+date: "2023-04-03"
+last_modified: "2023-04-03"
+thumb_image: "https://picsum.photos/800/450?random=2"
+cover_image: "https://picsum.photos/800/450?random=2"
+tags:
+  - Node.js
+  - Linux
+  - Installation
+  - Tutorial
+  - Software Setup
+featured: true
+layout: "PostLayout"
+draft: false
+---
+
+## Installing Node.js on Linux
+
+Node.js is a powerful JavaScript runtime that works seamlessly across platforms. If you're setting it up on Linux, follow this updated guide to get started.
+
+### Step 1: Update Your Package List
+
+Open your terminal and run the following command to ensure your package list is up to date:
+
+```bash
+sudo apt-get update
+```
+
+### Step 2: Install Required Dependencies
+
+Node.js requires several dependencies to function properly. Install them using:
+
+```bash
+sudo apt-get install -y curl dirmngr apt-transport-https lsb-release ca-certificates
+```
+
+### Step 3: Import the Node.js GPG Key
+
+To verify the authenticity of Node.js packages, import the GPG key:
+
+```bash
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+```
+
+> **Note:** Replace **16** with the version of Node.js you wish to install.
+
+<blockquote>
+**What Is a GPG Key?**
+The Node.js GPG (GNU Privacy Guard) key ensures the authenticity of Node.js downloads by verifying that packages are untampered with and come from a trusted source. This key signs the checksum files used to validate the integrity of downloaded files, providing an added layer of security.
+</blockquote>
+
+### Step 4: Install Node.js
+
+With the GPG key imported, install Node.js by running:
+
+```code
+sudo apt-get install -y nodejs
+```
+
+### Step 5: Verify the Installation
+
+After installation, confirm that Node.js is installed by checking the version:
+
+```code
+node -v
+```
+
+### Step 6: (Optional) Install Build Tools
+
+If you plan to build native modules for Node.js, install the build tools:
+
+```code
+sudo apt-get install -y build-essential
+```
+
+### Conclusion
+
+Congratulations! You've successfully installed Node.js on your Linux system. Whether you're building APIs, web applications, or tools, you're now ready to explore the power of Node.js.
