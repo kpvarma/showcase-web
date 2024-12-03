@@ -4,9 +4,9 @@ import { Helmet } from 'react-helmet-async';
 import { Box, Grid, Typography, TextField, Button, Alert } from "@mui/material";
 import axios from "axios";
 
-import hireme1Image from "../assets/hireme3.png";
-import hireme2Image from "../assets/hireme1.png";
-import hireme3Image from "../assets/hireme2.png";
+import hireme1Image from "../assets/images/hireme3.png";
+import hireme2Image from "../assets/images/hireme1.png";
+import hireme3Image from "../assets/images/hireme2.png";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
