@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { Box, Typography, Button, Grid, Chip } from '@mui/material';
+import LogoCollection from "../components/items/LogoCollection"
 
 const skills = [
   "HTML",
@@ -21,6 +22,7 @@ const skills = [
 export default function AboutMe() {
   return (
     <div>
+      <LogoCollection/>
       <Helmet>
         <title>About Me | Varma Labs - My experiement with tech</title>
         <meta name="description" content='' />
