@@ -32,7 +32,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   padding: '8px 12px',
 }));
 
-export default function AppAppBar() {
+export default function Header() {
   const [open, setOpen] = React.useState(false);
 
   // Function to check if the current path matches a given pattern

@@ -89,8 +89,8 @@ const CodeBlock = ({ children, className }) => {
         sx={{
           position: "relative",
           padding: 2,
-          // backgroundColor: "#4b4b4b",
-          border: "1px solid #f1f1f1",
+          backgroundColor: "text.secondary",
+          // border: "1px solid #f1f1f1",
           borderRadius: "4px",
           overflowX: "auto",
           fontFamily: '"Fira Code", "Roboto Mono", monospace',

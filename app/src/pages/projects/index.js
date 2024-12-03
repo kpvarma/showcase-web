@@ -48,10 +48,10 @@ export default function ProjectIndex() {
         <title>Projects | Varma Labs - My experiment with tech</title>
         <meta name="description" content="" />
       </Helmet>
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h1" sx={{ color: "text.primary" }} gutterBottom>
         Projects
       </Typography>
-      <Typography>From Concepts to Code: My Experimental Projects</Typography>
+      <Typography sx={{ color: "text.primary" }} >From Concepts to Code: My Experimental Projects</Typography>
 
       {/* Filter Section */}
       <Box sx={{ marginTop: 2 }}>

@@ -24,6 +24,7 @@ const HireMeSection = () => {
     <Box 
       sx={{ 
         width: "100%", 
+        height: "80vh", 
         position: "relative", 
         py: 8, 
         // backgroundImage: `url(${aboutMeImage})`,
@@ -47,7 +48,7 @@ const HireMeSection = () => {
         }}
       />
       <Container
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",}}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingTop: 20}}
       >
         <Typography variant="h1" sx={{ color: "text.primary", mb: 4, maxWidth: "80%" }}>
           Ready to&nbsp;

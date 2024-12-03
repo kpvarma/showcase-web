@@ -1,0 +1,17 @@
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background: #f5f2f0;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    color: #fff;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+.token.function, .token.class-name {
+    color: #fffe57;
+}
+
+.token.variable {
+    color: #c1b099;
+}
