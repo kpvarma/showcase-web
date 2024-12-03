@@ -7,8 +7,8 @@ import Container from '@mui/material/Container';
 
 // Layout Imports
 import AppTheme from './shared-theme/AppTheme';
-import Header from './components/layouts/Header.js';
-import Footer from './components/layouts/Footer.js';
+import Header from './components/layouts/app_header.js';
+import Footer from './components/layouts/app_footer.js';
 
 // Page Imports
 import Home from './pages/Home';
