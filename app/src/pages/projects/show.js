@@ -26,7 +26,26 @@ export default function ProjectShow() {
   const project = allProjects.find((project) => String(project.slug) === slug);
 
   if (!project) {
-    return <Typography variant="h4">Project not found SLUG{slug}SLUG</Typography>;
+    return (
+      <Box
+        sx={{
+          height: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography 
+          variant="h2" 
+          sx={{
+            color: "text.primary", 
+            textAlign: "center",
+          }}
+        >
+          Project '{slug}' not found
+        </Typography>
+      </Box>
+    );
   }
 
   const Layout = layouts[project.layout || defaultLayout];

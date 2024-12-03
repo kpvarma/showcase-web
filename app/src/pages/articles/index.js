@@ -49,10 +49,10 @@ export default function ArticlesIndex() {
       <Box sx={{ maxWidth: '1200px', margin: '0 left', padding: '16px' }}>
         {/* Heading and Description */}
         <Box sx={{ mb: 3 }}>
-          <Typography variant="h1" gutterBottom>
+          <Typography variant="h1" sx={{ color: "text.primary" }} gutterBottom>
             Articles
           </Typography>
-          <Typography>From Concepts to Code: My Experimental Articles</Typography>
+          <Typography sx={{ color: "text.primary" }}>From Concepts to Code: My Experimental Articles</Typography>
         </Box>
 
         {/* Main Layout */}
@@ -87,7 +87,7 @@ export default function ArticlesIndex() {
                   gap: 1,
                 }}
               >
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ color: "text.primary" }}>
                   Filter by Tags
                 </Typography>
                 {tags.map((tag) => (

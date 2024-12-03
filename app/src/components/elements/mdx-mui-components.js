@@ -20,10 +20,10 @@ const MuiComponents = {
       component="p"
       sx={{
         fontSize: '1rem',
-        lineHeight: 1.7,
-        marginBottom: 4,
-        marginTop: 4,
-        color: '#333',
+        lineHeight: 1.5,
+        marginBottom: 2,
+        marginTop: 2,
+        color: 'text.primary',
         fontFamily: 'Roboto, Arial, sans-serif',
       }}
     />
@@ -37,10 +37,10 @@ const MuiComponents = {
       variant="h4"
       gutterBottom
       sx={{
+        color: 'text.primary',
         fontWeight: 'bold',
-        marginBottom: 5,
-        marginTop: 2,
-        color: '#2C3E50',
+        marginBottom: 2,
+        marginTop: 6,
       }}
     />
   )),
@@ -51,10 +51,10 @@ const MuiComponents = {
       variant="h5"
       gutterBottom
       sx={{
+        color: 'text.primary',
         fontWeight: 'bold',
-        marginBottom: 4,
-        marginTop: 2,
-        color: '#34495E',
+        marginBottom: 2,
+        marginTop: 5,
       }}
     />
   )),
@@ -65,21 +65,21 @@ const MuiComponents = {
       variant="h6"
       gutterBottom
       sx={{
+        color: 'text.primary',
         fontWeight: 'bold',
-        marginBottom: 3,
-        marginTop: 2,
-        color: '#5D6D7E',
+        marginBottom: 2,
+        marginTop: 4,
       }}
     />
   )),
   h4: memo((props) => (
-    <Typography {...props} component="h4" variant="h6" gutterBottom sx={{ marginBottom: 2, marginTop: 2 }} />
+    <Typography {...props} component="h4" variant="h6" gutterBottom sx={{ color: 'text.secondary', marginBottom: 2, marginTop: 2 }} />
   )),
   h5: memo((props) => (
-    <Typography {...props} component="h5" variant="subtitle1" gutterBottom sx={{ marginBottom: 1.5, marginTop: 1 }} />
+    <Typography {...props} component="h5" variant="subtitle1" gutterBottom sx={{ color: 'text.secondary', marginBottom: 1.5, marginTop: 1 }} />
   )),
   h6: memo((props) => (
-    <Typography {...props} component="h6" variant="subtitle2" gutterBottom sx={{ marginBottom: 1, marginTop: 1 }} />
+    <Typography {...props} component="h6" variant="subtitle2" gutterBottom sx={{ color: 'text.secondary', marginBottom: 1, marginTop: 1 }} />
   )),
 
   // Blockquote styling
@@ -88,6 +88,7 @@ const MuiComponents = {
       {...props}
       elevation={1}
       sx={{
+        color: 'text.secondary',
         padding: 0,
         paddingLeft: 1,
         marginBottom: 2,
@@ -106,6 +107,7 @@ const MuiComponents = {
       {...props}
       component="ul"
       sx={{
+        color: 'text.primary',
         paddingLeft: 3,
         marginBottom: 2,
         marginTop: 2,
@@ -118,6 +120,7 @@ const MuiComponents = {
       {...props}
       component="ol"
       sx={{
+        color: 'text.primary',
         paddingLeft: 3,
         marginBottom: 2,
         marginTop: 2,
@@ -133,6 +136,7 @@ const MuiComponents = {
       sx={{
         marginBottom: 1,
         fontSize: '1rem',
+        color: 'text.primary',
         color: '#555',
       }}
     />
@@ -166,7 +170,7 @@ const MuiComponents = {
     <CodeBlock
       {...props}
       sx={{
-        backgroundColor: '#282C34',
+        // backgroundColor: '#282C34',
         color: '#FFFFFF',
         padding: 2,
         borderRadius: '4px',

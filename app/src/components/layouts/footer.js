@@ -16,7 +16,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
 import logo from '../../assets/logo.png';
 
-import HireMeSection from './HireMeFooter';
+import HireMeSection from './hire_me_footer';
 
 function Copyright() {
   return (

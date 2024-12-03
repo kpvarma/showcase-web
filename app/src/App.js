@@ -1,105 +1,50 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+// UI Imports
 import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 
-import MainLayout from './layouts/MainLayout'; 
+// Layout Imports
+import AppTheme from './shared-theme/AppTheme';
+import Header from './components/layouts/Header.js';
+import Footer from './components/layouts/Footer.js';
 
-import Home from './pages/Home'; 
-import ProjectIndex from './pages/projects/index'; 
+// Page Imports
+import Home from './pages/Home';
+import ProjectIndex from './pages/projects/index';
 import ProjectShow from './pages/projects/show';
-
-import ArticleIndex from './pages/articles/index'; 
+import ArticleIndex from './pages/articles/index';
 import ArticleShow from './pages/articles/show';
-
-import AboutMe from './pages/AboutMe'; 
-import HireMe from './pages/HireMe'; 
-import TestPage from './pages/TestPage.js';
-
+import AboutMe from './pages/AboutMe';
+import HireMe from './pages/HireMe';
+import TestPage from './pages/TestPage';
 import ScrollToTop from './components/elements/scroll-to-top.js';
 
-// import './stylesheets/layout.css';
-
-const theme = createTheme({
-  // Customize your theme here, e.g.:
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#ff4081',
-    },
-  },
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
-});
-
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <CssBaseline /> {/* Reset CSS styles */}
-    <ScrollToTop/>
-    <Routes>
-      {/* Home Route */}
-      <Route path="/" element={
-          <MainLayout>
-            <Home/>
-          </MainLayout>
-        }
-      />
-
-      {/* Projects Route */}
-      <Route path="/projects" element={
-          <MainLayout>
-            <ProjectIndex />
-          </MainLayout>
-        }
-      />
-      <Route path="/projects/:slug" element={
-          <MainLayout>
-            <ProjectShow />
-          </MainLayout>
-        }
-      />
-      
-      {/* Articles Route */}
-      <Route path="/articles" element={
-          <MainLayout>
-            <ArticleIndex />
-          </MainLayout>
-        }
-      />
-      <Route path="/articles/:slug" element={
-          <MainLayout>
-            <ArticleShow />
-          </MainLayout>
-        }
-      />
-
-      {/* AboutMe Route */}
-      <Route path="/aboutme" element={
-          <MainLayout>
-            <AboutMe />
-          </MainLayout>
-        }
-      />
-      {/* HireMe Route */}
-      <Route path="/hireme" element={
-          <MainLayout>
-            <HireMe />
-          </MainLayout>
-        }
-      />
-      {/* TestPage Route */}
-      <Route path="/testpage" element={
-            <MainLayout>
-              <TestPage />
-            </MainLayout>
-          }
-        />
-    </Routes>
-  </ThemeProvider>
+  <AppTheme>
+    <CssBaseline enableColorScheme /> {/* Reset CSS and apply light/dark mode */}
+    <ScrollToTop /> {/* Ensure the scroll resets on route changes */}
+    <Header /> {/* Add the AppBar component */}
+    <Container
+      maxWidth="lg"
+      component="main"
+      sx={{ display: 'flex', flexDirection: 'column', my: 16, gap: 4 }}
+    >
+      {/* Routes for the application */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<ProjectIndex />} />
+        <Route path="/projects/:slug" element={<ProjectShow />} />
+        <Route path="/articles" element={<ArticleIndex />} />
+        <Route path="/articles/:slug" element={<ArticleShow />} />
+        <Route path="/aboutme" element={<AboutMe />} />
+        <Route path="/hireme" element={<HireMe />} />
+        <Route path="/testpage" element={<TestPage />} />
+      </Routes>
+    </Container>
+    <Footer /> {/* Add the footer component */}
+  </AppTheme>
 );
 
 export default App;

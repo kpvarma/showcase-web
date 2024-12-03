@@ -15,6 +15,9 @@ import MuiComponents from '../../components/elements/mdx-mui-components';
 // Content Import
 import { allArticles } from '../../../.contentlayer/generated/index.mjs';
 
+// Stylesheets
+import '../../stylesheets/overrides.css'
+
 const defaultLayout = 'PostLayout';
 const layouts = {
   PostLayout: (props) => <div {...props} />, // Add your PostLayout component here
@@ -31,7 +34,26 @@ export default function ArticleShow() {
   const article = allArticles.find((article) => String(article.slug) === slug);
 
   if (!article) {
-    return <Typography variant="h4">Article not found</Typography>;
+    return (
+      <Box
+        sx={{
+          height: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography 
+          variant="h2" 
+          sx={{
+            color: "text.primary", 
+            textAlign: "center",
+          }}
+        >
+          Article '{slug}' not found
+        </Typography>
+      </Box>
+    );
   }
 
   const Layout = layouts[article.layout || defaultLayout];
@@ -43,11 +65,11 @@ export default function ArticleShow() {
         <meta name="description" content={article.summary || 'A platform where I experiment with the latest technologies and share my learnings.'} />
       </Helmet>
       <Box sx={{ padding: 2 }}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant="h2" gutterBottom sx={{ color: "text.primary" }}>
           {article.title}
         </Typography>
 
-        <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 2 }}>
+        <Typography variant="body1" sx={{ color: "text.secondary", fontStyle: 'italic', marginBottom: 2 }}>
           Published on:{' '}
           {new Date(article.date).toLocaleDateString('en-US', {
             day: 'numeric',
