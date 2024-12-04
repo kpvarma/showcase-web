@@ -131,7 +131,7 @@ const HomeMainSection = () => {
                 </Box>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   size="large"
                   component={Link}
                   to="/hireme"

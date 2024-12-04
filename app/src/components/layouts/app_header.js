@@ -89,7 +89,7 @@ export default function Header() {
             </Box>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center', }}>
-            <Button color="primary" variant="contained" size="small" href="/hireme"> Hire Me </Button>
+            <Button color="secondary" variant="contained" size="small" href="/hireme"> Hire Me </Button>
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: {xs: 'flex', md: 'none'}, gap: 1 }}>
@@ -147,7 +147,7 @@ export default function Header() {
                     '&:hover': { color: '#0275da' },
                   }} > Test Page </MenuItem>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem><Button color="primary" variant="contained" fullWidth href="/hireme"> Hire Me </Button></MenuItem>
+                <MenuItem><Button color="primary.main" variant="contained" fullWidth href="/hireme"> Hire Me </Button></MenuItem>
               </Box>
             </Drawer>
           </Box>
