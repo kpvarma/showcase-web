@@ -5,10 +5,10 @@ import { Box, Typography, Button, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // Graphics
-import image1 from '../../assets/images/programmers-desk-mirror.jpg';
-import image2 from '../../assets/images/programmers-desk-mirror.jpg';
-import image3 from '../../assets/images/programmers-desk-mirror.jpg';
-import image4 from '../../assets/images/programmers-desk-mirror.jpg';
+import image1 from '../../assets/images/machine-learning.png';
+import image2 from '../../assets/images/data-science.png';
+import image3 from '../../assets/images/devops.png';
+import image4 from '../../assets/images/data-analysis.png';
 
 const HomeAboutMeSection = () => {
   const theme = useTheme();
@@ -30,12 +30,16 @@ const HomeAboutMeSection = () => {
       {/* Collage Section */}
       <Box
         sx={{
+          minHeight: isMobile ? "60vh" : "40vh",
+          width: "100%",
           flex: 1,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-          marginBottom: isMobile ? 4 : 0,
+          mt: isMobile ? 4 : 0,
+          mb: isMobile ? 4 : 0,
+          
         }}
       >
         {/* Image Frame 1 - Big */}
@@ -44,13 +48,14 @@ const HomeAboutMeSection = () => {
           src={image1}
           alt="Collage Image 1"
           sx={{
-            width: "50%",
+            backgroundColor: "#fff",
+            width: "60%",
             height: "auto",
             position: "absolute",
-            top: 0,
-            left: isMobile ? "10%" : "30%",
+            top: isMobile ? 4 : 4,
+            left: isMobile ? "10%" : "0%",
             transform: "rotate(-5deg)",
-            zIndex: 4,
+            zIndex: 2,
             borderRadius: "12px",
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
           }}
@@ -61,13 +66,14 @@ const HomeAboutMeSection = () => {
           src={image2}
           alt="Collage Image 2"
           sx={{
-            width: "35%",
+            backgroundColor: "#dfdfdf",
+            width: "55%",
             height: "auto",
             position: "absolute",
-            bottom: isMobile ? "10%" : "20%",
-            right: isMobile ? "5%" : "25%",
-            transform: "rotate(5deg)",
-            zIndex: 3,
+            top: isMobile ? 125 : 4,
+            right: isMobile ? "0%" : "5%",
+            transform: "rotate(30deg)",
+            zIndex: 2,
             borderRadius: "12px",
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
           }}
@@ -78,13 +84,14 @@ const HomeAboutMeSection = () => {
           src={image3}
           alt="Collage Image 3"
           sx={{
-            width: "25%",
+            backgroundColor: "#fff",
+            width: "55%",
             height: "auto",
             position: "absolute",
-            top: "30%",
-            left: "5%",
-            transform: "rotate(-10deg)",
-            zIndex: 2,
+            bottom: isMobile ? 115 : 2,
+            left: isMobile ? "10%" : "10%",
+            transform: "rotate(0deg)",
+            zIndex: 1,
             borderRadius: "12px",
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
           }}
@@ -95,13 +102,14 @@ const HomeAboutMeSection = () => {
           src={image4}
           alt="Collage Image 4"
           sx={{
-            width: "25%",
+            backgroundColor: "#fff",
+            width: "40%",
             height: "auto",
             position: "absolute",
-            bottom: "10%",
-            left: isMobile ? "50%" : "10%",
-            transform: "rotate(10deg)",
-            zIndex: 1,
+            bottom: isMobile ? 0 : 4,
+            right: isMobile ? "0%" : "0%",
+            transform: "rotate(20deg)",
+            zIndex: 2,
             borderRadius: "12px",
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
           }}

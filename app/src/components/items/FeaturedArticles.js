@@ -63,7 +63,7 @@ const FeaturedArticles = () => {
   return (
     <Box
       sx={{
-        display: { xs: 'none', sm: 'flex' },
+        display: { xs: 'flex', sm: 'flex' },
         flexDirection: 'column',
         gap: 2,
         height: '100%',

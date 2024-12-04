@@ -24,9 +24,11 @@ const HireMeSection = () => {
     <Box 
       sx={{ 
         width: "100%", 
-        height: "80vh", 
+        // height: "80vh", 
         position: "relative", 
-        py: 8, 
+        // py: 8, 
+        // paddingTop: 2,
+        marginTop: 8,
         // backgroundImage: `url(${aboutMeImage})`,
         // backgroundSize: "cover",
         // backgroundPosition: "center",
@@ -34,21 +36,8 @@ const HireMeSection = () => {
         // backgroundColor: "rgba(255, 255, 255, 0.9)"
       }}
     >
-      {/* Overlay */}
-      <Box
-        sx={{
-          display: "none",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)", // Overlay for darkening background
-          zIndex: 1,
-        }}
-      />
       <Container
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingTop: 20}}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingBottom: 6}}
       >
         <Typography variant="h1" sx={{ color: "text.primary", mb: 4, maxWidth: "80%" }}>
           Ready to&nbsp;
