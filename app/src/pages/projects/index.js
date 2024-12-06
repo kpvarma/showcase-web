@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 // UI Imports
 import Grid from '@mui/material/Grid';
@@ -14,6 +13,7 @@ import { useTheme } from '@mui/material/styles';
 
 // Page Component Imports
 import ProjectCard from '../../components/items/ProjectCard';
+import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
 import { allProjects } from '../../../.contentlayer/generated/index.mjs';
@@ -44,10 +44,11 @@ export default function ProjectIndex() {
 
   return (
     <div>
-      <Helmet>
-        <title>Projects | Varma Labs - My experiment with tech</title>
-        <meta name="description" content="" />
-      </Helmet>
+      <MetaTags
+        title={`Projects`}
+        description={'kpvarma.com | My Projects - where I experiment with the latest technologies and share my learnings.'}
+        url={'/projects'}
+      />
       <Typography variant="h1" sx={{ color: "text.primary" }} gutterBottom>
         Projects
       </Typography>

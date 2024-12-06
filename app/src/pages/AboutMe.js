@@ -1,207 +1,239 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 
-import { Box, Typography, Button, Grid, Chip } from '@mui/material';
+import { Box, Paper, Typography, Button, Grid, Container, Stack } from '@mui/material';
+import { Link } from "react-router-dom";
 import LogoCollection from "../components/items/LogoCollection"
+import ThreeBoxContent from "../components/items/ThreeBoxContent"
 
-const skills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "React",
-  "Wordpress",
-  "PHP",
-  "SASS",
-  "GIT",
-  "Github",
-  "Responsive Design",
-  "SEO",
-  "Terminal",
+// Components
+import MetaTags from '../components/layouts/meta_tags'
+
+const whiteLogos1 = [
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560628e8573c43893fe0ace_Sydney-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f4d520d0517ae8e8ddf13_Bern-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f46794c159024c1af6d44_Montreal-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e891fa22f89efd7477a_TerraLight.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560a09d1f6337b1dfed14ab_colorado-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f5caa77bf7d69fb78792e_Ankara-white.svg',
+];
+
+const darkLogos1 = [
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560628889c3bdf1129952dc_Sydney-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f4d4d8b829a89976a419c_Bern-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f467502f091ccb929529d_Montreal-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e911fa22f2203d7514c_TerraDark.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560a0990f3717787fd49245_colorado-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f5ca4e548b0deb1041c33_Ankara-black.svg',
+];
+
+const whiteLogos2 = [
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560628e8573c43893fe0ace_Sydney-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f4d520d0517ae8e8ddf13_Bern-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f46794c159024c1af6d44_Montreal-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e891fa22f89efd7477a_TerraLight.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560a09d1f6337b1dfed14ab_colorado-white.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f5caa77bf7d69fb78792e_Ankara-white.svg',
+];
+
+const darkLogos2 = [
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560628889c3bdf1129952dc_Sydney-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f4d4d8b829a89976a419c_Bern-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f467502f091ccb929529d_Montreal-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e911fa22f2203d7514c_TerraDark.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/6560a0990f3717787fd49245_colorado-black.svg',
+  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/655f5ca4e548b0deb1041c33_Ankara-black.svg',
+];
+
+const sections = [
+  {
+    title: "Checkout My Works",
+    description:
+      "Check out some of my work in the <b>Projects</b> section, where I showcase demos of my <b>machine learning</b>, <b>data science</b> projects, and <b>web utilities</b>, along with insights into <b>client projects</b>.",
+    button: { text: "Browse Projects", variant: "outlined", color: "primary", size: "large", link: "/projects" },
+  },
+  {
+    title: "Read My Articles",
+    description:
+      "I also like sharing content related to the stuff that I have learned over the years in <b>Web Development</b> so it can help other people of the <b>Dev Community</b>.",
+    button: { text: "Read Articles", variant: "outlined", color: "primary", size: "large", link: "/articles" },
+  },
+  {
+    title: "Find me Online",
+    description:
+      "Feel free to <b>Connect</b> or <b>Follow me</b> on my <b>Linkedin</b> and <b>Github</b> where I post useful content related to Web Development and Programming.",
+    button: [{ text: "LinkedIn", variant: "contained", color: "secondary", size: "large", link: "https://www.linkedin.com/in/krishnaprasadvarma" }, 
+             { text: "Github", variant: "outlined", color: "primary", size: "large", link: "https://www.github.com/kpvarma" }, 
+             { text: "Kaggle", variant: "outlined", color: "secondary", size: "large", link: "https://www.kaggle.com/kpvarma27" }],
+  },
+
+  // <Button variant="contained" color="secondary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="/projects"></Button>
 ];
 
 export default function AboutMe() {
   return (
     <div>
-      <LogoCollection/>
-      <Helmet>
-        <title>About Me | Varma Labs - My experiement with tech</title>
-        <meta name="description" content='' />
-      </Helmet>
-      <Box sx={{ padding: "40px", maxWidth: "1200px", margin: "0 auto" }}>
-        <Grid container spacing={4}>
-          {/* About Me Section */}
-          <Grid item xs={12} md={6}>
-            <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold" }}>
-              Get to know me!
+      <MetaTags
+        title={`About Me`}
+        description={''}
+        url={'/aboutme'}
+      />
+      
+      {/* Heading */}
+      <Box 
+        sx={{ 
+          width: "100%", 
+          // height: "80vh", 
+          position: "relative", 
+          // py: 8, 
+          // paddingTop: 2,
+          // marginTop: 0,
+        }}
+      >
+        <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingBottom: 6}}>
+          <Typography variant="h1" sx={{ color: "text.primary", mb: 4, maxWidth: "80%" }}>
+            Get to&nbsp;
+            <Typography component="span" variant="h1" color="primary.main" sx={{ fontWeight: "inherit" }}>
+              Know Me.
             </Typography>
-            <Typography
-              variant="body1"
+          </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary", mb: 4, maxWidth: "80%" }}>
+            Let's create something amazing together! Click the button below to learn more about me and my work or to hire me.
+          </Typography>
+        </Container>
+      </Box>
+
+      {/* Skills Section 1 */}
+      <Box sx={{ padding: 0, maxWidth: "100%", margin: "0 auto" }}>
+        <Grid container spacing={0}>
+          {/* Skills Section 1 */}
+          <Grid item xs={12} md={6} sx={{pl: "0px !important", my: 5}}>
+            <Paper
+              elevation={1}
               sx={{
-                lineHeight: 1.8,
-                fontSize: "1rem",
-                color: "#555",
-                marginBottom: 2,
+                position: "relative",
+                padding: 2,
+                // backgroundColor: "primary",
+                // border: "1px solid #f1f1f1",
+                borderRadius: "4px",
+                overflowX: "auto",
+                fontFamily: '"Fira Code", "Roboto Mono", monospace',
               }}
             >
-              I'm a <b>Frontend Focused Web Developer</b> building and managing
-              the Front-end of Websites and Web Applications that lead to the
-              success of the overall product. Check out some of my work in the{" "}
-              <b>Projects</b> section.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                lineHeight: 1.8,
-                fontSize: "1rem",
-                color: "#555",
-                marginBottom: 2,
-              }}
-            >
-              I also like sharing content related to the stuff that I have learned
-              over the years in <b>Web Development</b> so it can help other
-              people of the Dev Community. Feel free to Connect or Follow me on
-              my{" "}
-              <a
-                href="#"
-                style={{ color: "#4c6ef5", textDecoration: "underline" }}
-              >
-                Linkedin
-              </a>{" "}
-              and{" "}
-              <a
-                href="#"
-                style={{ color: "#4c6ef5", textDecoration: "underline" }}
-              >
-                Instagram
-              </a>{" "}
-              where I post useful content related to Web Development and
-              Programming.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                lineHeight: 1.8,
-                fontSize: "1rem",
-                color: "#555",
-                marginBottom: 3,
-              }}
-            >
-              I'm open to <b>Job</b> opportunities where I can contribute, learn,
-              and grow. If you have a good opportunity that matches my skills and
-              experience, then don't hesitate to <b>contact</b> me.
-            </Typography>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#6200EA",
-                color: "#fff",
-                fontWeight: "bold",
-                textTransform: "none",
-                "&:hover": {
-                  backgroundColor: "#5300C5",
-                },
-              }}
-            >
-              Contact
-            </Button>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: "1rem", color: "#555", marginBottom: 2, }}>
+                I’m a Backend-Focused Developer with expertise in <b>Ruby</b>, <b>Python</b>, and <b>Node.js</b>, complemented by practical skills in Full-Stack Development using modern frameworks like <b>React.js</b> and <b>Vue.js</b>, alongside <b>HTML</b>, <b>CSS</b>, and <b>JavaScript</b>.
+              </Typography>
+            </Paper>
           </Grid>
 
-          {/* Skills Section */}
-          <Grid item xs={12} md={6}>
-            <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
-              My Skills
-            </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-              {skills.map((skill) => (
-                <Chip
-                  key={skill}
-                  label={skill}
-                  sx={{
-                    fontSize: "0.875rem",
-                    fontWeight: "bold",
-                    padding: "8px 12px",
-                    backgroundColor: "#f4f4f4",
-                    color: "#333",
-                    "&:hover": {
-                      backgroundColor: "#e0e0e0",
-                    },
-                  }}
-                />
-              ))}
-            </Box>
+          {/* Skills Logos 1 */}
+          <Grid item xs={12} md={6} sx={{pl: {xs: "0px !important"}}}>
+            <LogoCollection 
+              whiteLogos={whiteLogos1} 
+              darkLogos={darkLogos1} 
+            />
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ padding: 4, textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
-        <Typography variant="h3" gutterBottom>
-          About Me
-        </Typography>
-        <Typography variant="body1" paragraph>
-          I’m a passionate developer and data science enthusiast with expertise in crafting 
-          innovative solutions using modern technologies. My journey spans across developing 
-          applications, exploring machine learning models, and solving complex problems.
-        </Typography>
 
-        {/* Skills Section */}
-        <Box sx={{ marginTop: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            My Skills
-          </Typography>
-          <Grid container spacing={2} justifyContent="center">
-            {[
-              'Python',
-              'JavaScript',
-              'React',
-              'Node.js',
-              'Ruby',
-              'Machine Learning',
-              'Data Analysis',
-              'TensorFlow',
-              'Keras',
-              'SQL',
-              'Docker',
-              'Git',
-            ].map((skill) => (
-              <Grid item key={skill}>
-                <Chip label={skill} color="primary" variant="outlined" />
-              </Grid>
-            ))}
+      {/* Skills Section 2 */}
+      <Box sx={{ padding: 0, maxWidth: "100%", margin: "0 auto" }}>
+        <Grid container spacing={0}>
+          {/* Skills Logos 2 */}
+          <Grid item xs={12} md={6} sx={{pl: {xs: "0px !important"}}}>
+            <LogoCollection 
+              whiteLogos={whiteLogos1} 
+              darkLogos={darkLogos1} 
+            />
+          </Grid>
+
+          {/* Skills Section 2 */}
+          <Grid item xs={12} md={6} sx={{pl: "0px !important", my: 5}}>
+            <Paper
+              elevation={1}
+              sx={{
+                position: "relative",
+                padding: 2,
+                // backgroundColor: "primary",
+                // border: "1px solid #f1f1f1",
+                borderRadius: "4px",
+                overflowX: "auto",
+                fontFamily: '"Fira Code", "Roboto Mono", monospace',
+              }}
+            >
+              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: "1rem", color: "#555", marginBottom: 2, }}>
+                I have a strong background in leveraging <b>AWS</b> services to design scalable, efficient, and secure cloud solutions. 
+                My experience extends beyond development into <b>Data Science</b>, where I utilize my knowledge of <b>machine learning algorithms</b> and data analysis to solve complex problems and derive meaningful insights.
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <ThreeBoxContent sections={sections}/>
+      
+      {/* Projects and articles */}
+      <Box sx={{ padding: 0, maxWidth: "100%", mt: 20 }}>
+        <Typography variant="h4" sx={{ color: "text.primary", textAlign: "center" }}>
+          Checkout My Works
+        </Typography>
+        <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+          <Grid container spacing={0}>
+            {/* Projects Section */}
+            <Grid item xs={12} md={6} sx={{pl: "0px !important", my: 5, p: "5px 10px"}}>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: "1rem", color: "#555", marginBottom: 2, textAlign: 'center' }}>
+                Check out some of my work in the <b>Projects</b> section, where I showcase demos of my <b>machine learning</b>, <b>data science</b> projects, and <b>web utilities</b>, along with insights into <b>client projects</b>, complete with screenshots and videos.
+              </Typography>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ maxWidth: {xs: "600px", sm: "100%"}, justifyContent: "center" }} >
+                <Button variant="contained" color="secondary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="/projects">
+                  Browse Projects
+                </Button>
+              </Stack>
+            </Grid>
+
+            {/* Articles Section */}
+            <Grid item xs={12} md={6} sx={{pl: {xs: "0px !important"}, my: 5, p: "5px 10px"}}>
+              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: "1rem", color: "#555", marginBottom: 2, textAlign: 'center' }}>
+              I also like sharing content related to the stuff that I have learned over the years in Web Development so it can help other people of the Dev Community.
+              </Typography>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ maxWidth: {xs: "600px", sm: "100%"}, justifyContent: "center" }} >
+                <Button variant="outlined" color="primary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="/articles">
+                  Read Articles
+                </Button>
+              </Stack>
+            </Grid>
           </Grid>
         </Box>
+      </Box>
 
-        {/* Links Section */}
-        <Box sx={{ marginTop: 6 }}>
-          <Typography variant="h4" gutterBottom>
-            Find Me Online
+      {/* Social Links Section */}
+      <Box  sx={{  width: "100%",  height: "60vh",  position: "relative", mt: 20 }}>
+        <Container
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingBottom: 6}}
+        >
+          <Typography variant="h4" sx={{ color: "text.primary", mb: 4, maxWidth: "80%" }}>
+            Find me Online
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-            <Button
-              variant="contained"
-              color="info"
-              href="https://www.linkedin.com/in/yourprofile"
-              target="_blank"
-            >
+          <Typography variant="body1" sx={{ color: "text.secondary", mb: 4, maxWidth: "80%" }}>
+          Feel free to Connect or Follow me on my Linkedin and Instagram where I post useful content related to Web Development and Programming.
+          </Typography>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            sx={{ maxWidth: {xs: "600px", sm: "100%"}, justifyContent: "center" }}
+          >
+            <Button variant="contained" color="secondary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="https://www.linkedin.com/in/krishnaprasadvarma" target="_blank">
               LinkedIn
             </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              href="https://github.com/yourprofile"
-              target="_blank"
-            >
+            <Button variant="outlined" color="secondary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="https://github.com/kpvarma" target="_blank">
               GitHub
             </Button>
-            <Button
-              variant="contained"
-              color="success"
-              href="https://www.kaggle.com/yourprofile"
-              target="_blank"
-            >
+            <Button variant="outlined" color="primary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="https://www.kaggle.com/kpvarma27" target="_blank">
               Kaggle
             </Button>
-          </Box>
-        </Box>
+          </Stack>
+        </Container>
       </Box>
+
     </div>
   );
 }

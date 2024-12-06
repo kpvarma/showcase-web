@@ -37,7 +37,7 @@ export default function Header() {
 
   // Function to check if the current path matches a given pattern
   const isActive = (pattern) => {
-    const regex = new RegExp(pattern, 'i'); // 'i' for case-insensitive match
+    const regex = new RegExp(pattern);
     return regex.test(location.pathname);
   };
   
@@ -70,7 +70,7 @@ export default function Header() {
             >
               <img
                 src={logo}
-                alt="Varma Labs Logo"
+                alt="kpvarma.com Logo"
                 style={{
                   margin: '0px',
                   padding: '2px',

@@ -53,7 +53,7 @@ function Skill({ skills }) {
         {skills.map((skill, index) => (
           <Chip
             key={index}
-            label={skill}
+            label={typeof skill === 'string' ? skill : skill.name}
             sx={{
               backgroundColor: '#f0f0f0', // Light gray background for the badge
               color: '#333', // Dark text

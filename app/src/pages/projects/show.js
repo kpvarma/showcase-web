@@ -1,7 +1,6 @@
 // General Imports
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 
 // UI Imports
 import Typography from '@mui/material/Typography';
@@ -11,6 +10,7 @@ import Chip from '@mui/material/Chip';
 // Page Component Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
 import ProjectCover from '../../components/items/ProjectCover';
+import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
 import { allProjects } from '../../../.contentlayer/generated/index.mjs';
@@ -52,10 +52,12 @@ export default function ProjectShow() {
 
   return (
     <div>
-      <Helmet>
-        <title>{project.title || 'VarmaLabs - My experiement with the tech'}</title>
-        <meta name="description" content={project.summary || 'A platform where I experiment with the latest technologies and share my learnings.'} />
-      </Helmet>
+      <MetaTags
+        title={project.title}
+        description={project.summary}
+        url={'/articles/{article.slug}'}
+        image={project.cover_image}
+      />
       <Box sx={{ padding: 2 }}>
 
         <ProjectCover project={project}/>

@@ -1,7 +1,6 @@
 // General Imports
 import * as React from 'react';
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 // UI Imports
 import Grid from '@mui/material/Grid';
@@ -12,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 // Page Component Imports
 import ArticleCard from '../../components/items/ArticleCard';
+import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
 import { allArticles } from '../../../.contentlayer/generated/index.mjs';
@@ -42,10 +42,11 @@ export default function ArticlesIndex() {
 
   return (
     <div>
-      <Helmet>
-        <title>Articles | Varma Labs - My experiement with tech</title>
-        <meta name="description" content='' />
-      </Helmet>
+      <MetaTags
+        title={`Articles`}
+        description={'kpvarma.com | My Articles - where I experiment with the latest technologies and share my learnings.'}
+        url={'/articles'}
+      />
       <Box sx={{ maxWidth: '1200px', margin: '0 left', padding: '16px' }}>
         {/* Heading and Description */}
         <Box sx={{ mb: 3 }}>
