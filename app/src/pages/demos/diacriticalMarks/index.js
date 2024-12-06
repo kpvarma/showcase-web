@@ -146,7 +146,7 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
           </Grid>
 
           {/* Output Section */}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ pl: {xs: '0px !important', md: '16px !important'} }}>
             <Paper
               elevation={3}
               sx={{
@@ -203,7 +203,7 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
         </Grid>
       </Box>
 
-      <Typography variant="h4" sx={{ textAlign: 'center', mb: 4 }}>
+      <Typography variant="h4" sx={{ textAlign: 'center', mb: 4, mt: {xs:6} }}>
         Translation and Tokens Viewer
       </Typography>
       <DebugTokensViewer inputText={inputText} />

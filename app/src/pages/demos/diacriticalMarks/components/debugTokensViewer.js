@@ -16,7 +16,7 @@ const DebugTokensViewer = ({ inputText }) => {
         flexDirection: { xs: 'column', md: 'row' },
         gap: 2,
         mt: 2,
-        mb: 20
+        mb: 20,
       }}
     >
       {/* Left Side: List of Items */}
@@ -40,14 +40,12 @@ const DebugTokensViewer = ({ inputText }) => {
               selected={item === selectedItem}
               onClick={() => setSelectedItem(item)}
               sx={{
-                backgroundColor: 'white', // Set white background
+                backgroundColor: item === selectedItem ? 'rgb(204, 230, 255)' : 'white', // Light blue background for selected
+                border: item === selectedItem ? '1px solid #90caf9' : '1px solid transparent', // Light border for selected
                 mb: 2,
-                '&.Mui-selected': {
-                  backgroundColor: 'primary.light',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                  },
+                borderRadius: 1, // Add rounded corners
+                '&:hover': {
+                  backgroundColor: item === selectedItem ? 'rgb(204, 230, 255)' : 'rgb(204, 230, 255)', // Hover effect
                 },
               }}
             >
@@ -76,7 +74,7 @@ const DebugTokensViewer = ({ inputText }) => {
           Transliteration and Tokens
         </Typography>
         {selectedItem ? (
-          <DebugTokens sentence={selectedItem} showChipsInitialState={true}/>
+          <DebugTokens sentence={selectedItem} showChipsInitialState={true} />
         ) : (
           <Typography variant="body1" color="text.secondary">
             Enter input above to transliterate and view the tokens here.
