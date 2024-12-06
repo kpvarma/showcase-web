@@ -5,16 +5,11 @@ import {
   Typography,
   Button,
   Container,
-  Link as MuiLink,
   Stack,
-  TextField,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
-// Graphics
-import aboutMeImage from "../../assets/images/programmers-desk-mirror.jpg";
 
 const HireMeSection = () => {
   const theme = useTheme(); // Access theme for responsive behavior
@@ -46,12 +41,16 @@ const HireMeSection = () => {
           </Typography>
         </Typography>
         <Typography variant="body1" sx={{ color: "text.secondary", mb: 4, maxWidth: "80%" }}>
+          I’m open to exciting job opportunities where I can contribute, learn, and grow. 
+          <br></br>
+          If you have a role that aligns with my skills and experience, don’t hesitate to get in touch!
+          <br></br>
           Let's create something amazing together! Click the button below to learn more about me and my work or to hire me.
         </Typography>
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={2}
-          sx={{ maxWidth: "600px", justifyContent: "center" }}
+          sx={{ maxWidth: {xs: "600px", sm: "100%"}, justifyContent: "center" }}
         >
           <Button variant="outlined" color="text.secondary" size="large" sx={{ whiteSpace: "nowrap" }} component={Link} to="/aboutme">
             Read more About Me

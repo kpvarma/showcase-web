@@ -20,6 +20,7 @@ import AboutMe from './pages/AboutMe';
 import HireMe from './pages/HireMe';
 import TestPage from './pages/TestPage';
 import ScrollToTop from './components/elements/scroll-to-top.js';
+import RomanizeScriptsWithDiacriticalMarks from './pages/demos/diacriticalMarks/index.js'
 
 const App = () => (
   <AppTheme>
@@ -41,6 +42,9 @@ const App = () => (
         <Route path="/aboutme" element={<AboutMe />} />
         <Route path="/hireme" element={<HireMe />} />
         <Route path="/testpage" element={<TestPage />} />
+        
+        {/* Demo Routes */}
+        <Route path="/demos/romanize_scripts_with_diacritical_marks" element={<RomanizeScriptsWithDiacriticalMarks />} />
       </Routes>
     </Container>
     <Footer /> {/* Add the footer component */}

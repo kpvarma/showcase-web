@@ -1,7 +1,6 @@
 // General Imports
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 
 // UI Imports
 import Typography from '@mui/material/Typography';
@@ -11,6 +10,7 @@ import Chip from '@mui/material/Chip';
 // Page Component Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
 import MuiComponents from '../../components/elements/mdx-mui-components';
+import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
 import { allArticles } from '../../../.contentlayer/generated/index.mjs';
@@ -60,10 +60,12 @@ export default function ArticleShow() {
 
   return (
     <div>
-      <Helmet>
-        <title>{article.title || 'VarmaLabs - My experiement with the tech'}</title>
-        <meta name="description" content={article.summary || 'A platform where I experiment with the latest technologies and share my learnings.'} />
-      </Helmet>
+      <MetaTags
+        title={article.title}
+        description={article.summary}
+        url={'/articles/{article.slug}'}
+        image={article.cover_image}
+      />
       <Box sx={{ padding: 2 }}>
         <Typography variant="h2" gutterBottom sx={{ color: "text.primary" }}>
           {article.title}

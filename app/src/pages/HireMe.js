@@ -55,7 +55,7 @@ export default function Contact() {
   return (
     <div>
       <Helmet>
-        <title>Hire Me | Varma Labs - My experiement with tech</title>
+        <title>Hire Me | kpvarma.com - My experiement with tech</title>
         <meta name="description" content='' />
       </Helmet>
       <Box id="contact" sx={{ padding: "70px 20px" }}>

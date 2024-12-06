@@ -76,7 +76,7 @@ export default function Footer() {
               >
                 <img
                   src={logo}
-                  alt="Varma Labs Logo"
+                  alt="kpvarma.com Logo"
                   style={{
                     margin: '3px',
                     padding: '3px',
@@ -235,7 +235,7 @@ export default function Footer() {
           >
             <img
               src={logo}
-              alt="Varma Labs Logo"
+              alt="kpvarma.com Logo"
               style={{
                 margin: '3px',
                 padding: '3px',
