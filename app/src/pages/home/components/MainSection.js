@@ -72,7 +72,6 @@ const HomeMainSection = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      fontSize: "1rem",
                       lineHeight: 1.5,
                       color:"text.primary",
                     }}
@@ -87,7 +86,7 @@ const HomeMainSection = () => {
                   size="large"
                   component={Link}
                   to="/hireme"
-                  sx={{ marginTop: 1 }}
+                  sx={{ marginTop: 4 }}
                 >
                   Discuss with Me
                 </Button>
@@ -120,7 +119,6 @@ const HomeMainSection = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      fontSize: "1rem",
                       lineHeight: 1.5,
                       color:"text.primary"
                     }}
@@ -135,7 +133,7 @@ const HomeMainSection = () => {
                   size="large"
                   component={Link}
                   to="/hireme"
-                  sx={{ marginTop: 1}}
+                  sx={{ marginTop: 4}}
                 >
                   Hire Me
                 </Button>

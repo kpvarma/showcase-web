@@ -34,7 +34,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
-
+  
   // Function to check if the current path matches a given pattern
   const isActive = (pattern) => {
     const regex = new RegExp(pattern);
@@ -82,10 +82,10 @@ export default function Header() {
             </Link>
           
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" size="small" href="/projects" sx={{ color: isActive("^/projects(/[^/]+)?$") ? '#0275da' : 'gray', fontWeight: isActive("^/projects(/[^/]+)?$") ? 'bold' : 'normal', }} > Projects </Button>
-              <Button variant="text" size="small" href="/articles" sx={{ color: isActive("^/articles(/[^/]+)?$") ? '#0275da' : 'gray', fontWeight: isActive("^/articles(/[^/]+)?$") ? 'bold' : 'normal', }}> Articles </Button>
-              <Button variant="text" size="small" href="/aboutme" sx={{ color: isActive("^/aboutme") ? '#0275da' : 'gray', fontWeight: isActive("^/aboutme") ? 'bold' : 'normal', }} > About Me </Button>
-              <Button variant="text" size="small" href="/testpage" sx={{ color: isActive("^/testpage") ? '#0275da' : 'gray', fontWeight: isActive("^/testpage") ? 'bold' : 'normal', }} > Test Page </Button>
+              <Button variant="text" size="small" href="/projects" sx={{ fontSize: '0.9em', color: isActive("^/projects(/[^/]+)?$") ? 'primary.main' : 'gray', fontWeight: isActive("^/projects(/[^/]+)?$") ? 'bold' : 'normal', }} > Projects </Button>
+              <Button variant="text" size="small" href="/articles" sx={{ fontSize: '0.9em', color: isActive("^/articles(/[^/]+)?$") ? 'primary.main' : 'gray', fontWeight: isActive("^/articles(/[^/]+)?$") ? 'bold' : 'normal', }}> Articles </Button>
+              <Button variant="text" size="small" href="/aboutme" sx={{ fontSize: '0.9em', color: isActive("^/aboutme") ? 'primary.main' : 'gray', fontWeight: isActive("^/aboutme") ? 'bold' : 'normal', }} > About Me </Button>
+              <Button variant="text" size="small" href="/testpage" sx={{ fontSize: '0.9em', color: isActive("^/testpage") ? 'primary.main' : 'gray', fontWeight: isActive("^/testpage") ? 'bold' : 'normal', }} > Test Page </Button>
             </Box>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center', }}>
@@ -120,34 +120,34 @@ export default function Header() {
                 </Box>
                 <MenuItem component={Link} to="/projects" onClick={toggleDrawer(false)} // Close the menu
                   sx={{
-                    color: isActive("^/projects(/[^/]+)?$") ? '#0275da' : 'gray',
+                    color: isActive("^/projects(/[^/]+)?$") ? 'primary.main' : 'gray',
                     fontWeight: isActive("^/projects(/[^/]+)?$") ? 'bold' : 'normal',
                     textDecoration: 'none',
-                    '&:hover': { color: '#0275da' },
+                    '&:hover': { color: 'primary.main' },
                   }} > Projects </MenuItem>
                 <MenuItem component={Link} to="/articles" onClick={toggleDrawer(false)} // Close the menu
                   sx={{
-                    color: isActive("^/articles(/[^/]+)?$") ? '#0275da' : 'gray',
+                    color: isActive("^/articles(/[^/]+)?$") ? 'primary.main' : 'gray',
                     fontWeight: isActive("^/articles(/[^/]+)?$") ? 'bold' : 'normal',
                     textDecoration: 'none',
-                    '&:hover': { color: '#0275da' },
+                    '&:hover': { color: 'primary.main' },
                   }} > Articles </MenuItem>
                 <MenuItem component={Link} to="/aboutme" onClick={toggleDrawer(false)} // Close the menu
                   sx={{
-                    color: isActive("^/aboutme$") ? '#0275da' : 'gray',
+                    color: isActive("^/aboutme$") ? 'primary.main' : 'gray',
                     fontWeight: isActive("^/aboutme$") ? 'bold' : 'normal',
                     textDecoration: 'none',
-                    '&:hover': { color: '#0275da' },
+                    '&:hover': { color: 'primary.main' },
                   }} > About Me </MenuItem>
                 <MenuItem component={Link} to="/testpage" onClick={toggleDrawer(false)} // Close the menu
                   sx={{
-                    color: isActive("^/testpage$") ? '#0275da' : 'gray',
+                    color: isActive("^/testpage$") ? 'primary.main' : 'gray',
                     fontWeight: isActive("^/testpage$") ? 'bold' : 'normal',
                     textDecoration: 'none',
-                    '&:hover': { color: '#0275da' },
+                    '&:hover': { color: 'primary.main' },
                   }} > Test Page </MenuItem>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem><Button color="primary.main" variant="contained" fullWidth href="/hireme"> Hire Me </Button></MenuItem>
+                <MenuItem><Button color="secondary" variant="contained" fullWidth href="/hireme"> Hire Me </Button></MenuItem>
               </Box>
             </Drawer>
           </Box>

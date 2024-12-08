@@ -11,7 +11,6 @@ const logoStyle = {
   height: '80px', // Fixed height
   objectFit: 'contain', // Maintain aspect ratio
   margin: '0 auto',
-  transition: 'filter 0.3s ease-in-out', // Smooth transition for grayscale effect
 };
 
 function LogoSlider({ title, logos, rows = 1, interval = 5000 }) {
@@ -26,7 +25,7 @@ function LogoSlider({ title, logos, rows = 1, interval = 5000 }) {
   }
 
   return (
-    <Box id="logoCollection" sx={{ py: 4 }}>
+    <Box id="logoCollection">
       {title && (
         <Typography
           component="p"
@@ -60,8 +59,8 @@ function LogoSlider({ title, logos, rows = 1, interval = 5000 }) {
             transform: 'translateY(-50%)',
           },
         }}
-        NextIcon={<ArrowForwardIosIcon fontSize="medium" sx={{ color: "#d7d7d7"}}/>} // Smaller arrow for mobile
-        PrevIcon={<ArrowBackIosNewIcon fontSize="medium" sx={{ color: "#d7d7d7"}} />} // Smaller arrow for mobile
+        NextIcon={<ArrowForwardIosIcon fontSize="medium" sx={{ color: "#d7d7d7" }} />}
+        PrevIcon={<ArrowBackIosNewIcon fontSize="medium" sx={{ color: "#d7d7d7" }} />}
       >
         {slides.map((slide, slideIndex) => (
           <Box key={slideIndex} sx={{ py: { xs: 1, sm: 2 } }}>
@@ -88,12 +87,7 @@ function LogoSlider({ title, logos, rows = 1, interval = 5000 }) {
                   <img
                     src={logo}
                     alt={`Logo number ${slideIndex * logosPerSlide + index + 1}`}
-                    style={{
-                      ...logoStyle,
-                      filter: 'grayscale(100%)', // Apply grayscale by default
-                    }}
-                    onMouseOver={(e) => (e.target.style.filter = 'none')} // Remove grayscale on hover
-                    onMouseOut={(e) => (e.target.style.filter = 'grayscale(100%)')} // Apply grayscale on mouse out
+                    style={logoStyle} // Display image as is
                   />
                 </Grid>
               ))}

@@ -4,7 +4,7 @@ const defaultTheme = createTheme();
 
 const customShadows = [...defaultTheme.shadows];
 
-export const brand = {
+export const brandOriginal = {
   50: 'hsl(210, 100%, 95%)',
   100: 'hsl(210, 100%, 92%)',
   200: 'hsl(210, 100%, 80%)',
@@ -15,6 +15,34 @@ export const brand = {
   700: 'hsl(210, 100%, 35%)',
   800: 'hsl(210, 100%, 16%)',
   900: 'hsl(210, 100%, 21%)',
+};
+
+export const brandDarkBlue = {
+  //2958B8
+  50: 'hsl(215, 53%, 95%)',  // Lightest
+  100: 'hsl(215, 53%, 90%)',
+  200: 'hsl(215, 53%, 80%)',
+  300: 'hsl(215, 53%, 65%)', 
+  400: '#4A78D4',            // Slightly lighter than main
+  500: '#2958B8',            // Primary color (main)
+  600: '#2349A0',            // Darker shade
+  700: '#1B3A80',            // Even darker
+  800: '#142A60',
+  900: '#0C1A40',            // Darkest
+};
+
+// Peacock Blue
+export const brand = {
+  50: 'hsl(195, 53%, 95%)',  // Lightest shade
+  100: 'hsl(195, 53%, 90%)',
+  200: 'hsl(195, 53%, 80%)',
+  300: 'hsl(195, 53%, 65%)',
+  400: '#006F9C',            // Slightly lighter
+  500: '#004D73',            // Main (Peacock Blue)
+  600: '#003E5E',            // Darker shade
+  700: '#00314B',            // Even darker
+  800: '#002238',
+  900: '#001322',            // Darkest shade
 };
 
 export const gray = {
@@ -69,7 +97,7 @@ export const red = {
   900: 'hsl(0, 93%, 6%)',
 };
 
-export const getDesignTokens = (mode) => {
+export const getDesignTokensOriginal = (mode) => {
   customShadows[1] =
     mode === 'dark'
       ? 'hsla(220, 30%, 5%, 0.7) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.8) 0px 8px 16px -5px'
@@ -131,6 +159,244 @@ export const getDesignTokens = (mode) => {
           main: green[500],
           dark: green[700],
         }),
+      },
+      grey: {
+        ...gray,
+      },
+      divider: mode === 'dark' ? alpha(gray[700], 0.6) : alpha(gray[300], 0.4),
+      background: {
+        default: 'hsl(0, 0%, 99%)',
+        paper: 'hsl(220, 35%, 97%)',
+        ...(mode === 'dark' && { default: gray[900], paper: 'hsl(220, 30%, 7%)' }),
+      },
+      text: {
+        primary: gray[800],
+        secondary: gray[600],
+        warning: orange[400],
+        ...(mode === 'dark' && {
+          primary: 'hsl(0, 0%, 100%)',
+          secondary: gray[400],
+        }),
+      },
+      action: {
+        hover: alpha(gray[200], 0.2),
+        selected: `${alpha(gray[200], 0.3)}`,
+        ...(mode === 'dark' && {
+          hover: alpha(gray[600], 0.2),
+          selected: alpha(gray[600], 0.3),
+        }),
+      },
+    },
+    typography: {
+      fontFamily: 'Inter, sans-serif',
+      h1: {
+        fontSize: defaultTheme.typography.pxToRem(48),
+        fontWeight: 600,
+        lineHeight: 1.2,
+        letterSpacing: -0.5,
+      },
+      h2: {
+        fontSize: defaultTheme.typography.pxToRem(36),
+        fontWeight: 600,
+        lineHeight: 1.2,
+      },
+      h3: {
+        fontSize: defaultTheme.typography.pxToRem(30),
+        lineHeight: 1.2,
+      },
+      h4: {
+        fontSize: defaultTheme.typography.pxToRem(24),
+        fontWeight: 600,
+        lineHeight: 1.5,
+      },
+      h5: {
+        fontSize: defaultTheme.typography.pxToRem(20),
+        fontWeight: 600,
+      },
+      h6: {
+        fontSize: defaultTheme.typography.pxToRem(18),
+        fontWeight: 600,
+      },
+      subtitle1: {
+        fontSize: defaultTheme.typography.pxToRem(18),
+      },
+      subtitle2: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+        fontWeight: 500,
+      },
+      body1: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+      },
+      body2: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+        fontWeight: 400,
+      },
+      caption: {
+        fontSize: defaultTheme.typography.pxToRem(12),
+        fontWeight: 400,
+      },
+    },
+    shape: {
+      borderRadius: 8,
+    },
+    shadows: customShadows,
+  };
+};
+
+export const getDesignTokensDarkBlue = (mode) => {
+  customShadows[1] =
+    mode === 'dark'
+      ? 'hsla(220, 30%, 5%, 0.7) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.8) 0px 8px 16px -5px'
+      : 'hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px';
+
+  return {
+    palette: {
+      mode,
+      primary: {
+        light: brand[200],      // Light shade of primary
+        main: brand[500],       // Main primary color
+        dark: brand[700],       // Dark shade
+        contrastText: '#FFFFFF',
+      },
+      info: {
+        light: brand[200],
+        main: brand[400],
+        dark: brand[600],
+        contrastText: gray[50],
+      },
+      warning: {
+        light: orange[300],
+        main: orange[400],
+        dark: orange[800],
+      },
+      error: {
+        light: red[300],
+        main: red[400],
+        dark: red[800],
+      },
+      success: {
+        light: green[300],
+        main: green[400],
+        dark: green[800],
+      },
+      grey: {
+        ...gray,
+      },
+      divider: mode === 'dark' ? alpha(gray[700], 0.6) : alpha(gray[300], 0.4),
+      background: {
+        default: 'hsl(0, 0%, 99%)',
+        paper: 'hsl(220, 35%, 97%)',
+        ...(mode === 'dark' && { default: gray[900], paper: 'hsl(220, 30%, 7%)' }),
+      },
+      text: {
+        primary: gray[800],
+        secondary: gray[600],
+        warning: orange[400],
+        ...(mode === 'dark' && {
+          primary: 'hsl(0, 0%, 100%)',
+          secondary: gray[400],
+        }),
+      },
+      action: {
+        hover: alpha(gray[200], 0.2),
+        selected: `${alpha(gray[200], 0.3)}`,
+        ...(mode === 'dark' && {
+          hover: alpha(gray[600], 0.2),
+          selected: alpha(gray[600], 0.3),
+        }),
+      },
+    },
+    typography: {
+      fontFamily: 'Inter, sans-serif',
+      h1: {
+        fontSize: defaultTheme.typography.pxToRem(48),
+        fontWeight: 600,
+        lineHeight: 1.2,
+        letterSpacing: -0.5,
+      },
+      h2: {
+        fontSize: defaultTheme.typography.pxToRem(36),
+        fontWeight: 600,
+        lineHeight: 1.2,
+      },
+      h3: {
+        fontSize: defaultTheme.typography.pxToRem(30),
+        lineHeight: 1.2,
+      },
+      h4: {
+        fontSize: defaultTheme.typography.pxToRem(24),
+        fontWeight: 600,
+        lineHeight: 1.5,
+      },
+      h5: {
+        fontSize: defaultTheme.typography.pxToRem(20),
+        fontWeight: 600,
+      },
+      h6: {
+        fontSize: defaultTheme.typography.pxToRem(18),
+        fontWeight: 600,
+      },
+      subtitle1: {
+        fontSize: defaultTheme.typography.pxToRem(18),
+      },
+      subtitle2: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+        fontWeight: 500,
+      },
+      body1: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+      },
+      body2: {
+        fontSize: defaultTheme.typography.pxToRem(14),
+        fontWeight: 400,
+      },
+      caption: {
+        fontSize: defaultTheme.typography.pxToRem(12),
+        fontWeight: 400,
+      },
+    },
+    shape: {
+      borderRadius: 8,
+    },
+    shadows: customShadows,
+  };
+};
+
+export const getDesignTokens = (mode) => {
+  customShadows[1] =
+    mode === 'dark'
+      ? 'hsla(220, 30%, 5%, 0.7) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.8) 0px 8px 16px -5px'
+      : 'hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px';
+
+  return {
+    palette: {
+      mode,
+      primary: {
+        light: brand[200],      // Light shade of primary
+        main: brand[500],       // Main Peacock Blue
+        dark: brand[700],       // Dark shade
+        contrastText: '#FFFFFF', // High contrast for readability
+      },
+      info: {
+        light: brand[200],
+        main: brand[400],
+        dark: brand[600],
+        contrastText: gray[50],
+      },
+      warning: {
+        light: orange[300],
+        main: orange[400],
+        dark: orange[800],
+      },
+      error: {
+        light: red[300],
+        main: red[400],
+        dark: red[800],
+      },
+      success: {
+        light: green[300],
+        main: green[400],
+        dark: green[800],
       },
       grey: {
         ...gray,
@@ -356,9 +622,11 @@ export const typography = {
   },
   body1: {
     fontSize: defaultTheme.typography.pxToRem(14),
+    // fontSize: "1.0rem",
   },
   body2: {
     fontSize: defaultTheme.typography.pxToRem(14),
+    // fontSize: "1.0rem",
     fontWeight: 400,
   },
   caption: {

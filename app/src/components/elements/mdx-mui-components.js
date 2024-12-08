@@ -17,9 +17,10 @@ const MuiComponents = {
   p: memo((props) => (
     <Typography
       {...props}
+      variant="body1"
       component="p"
       sx={{
-        fontSize: '1rem',
+        // fontSize: '1rem',
         lineHeight: 1.5,
         marginBottom: 2,
         marginTop: 2,
@@ -106,6 +107,7 @@ const MuiComponents = {
     <Typography
       {...props}
       component="ul"
+      variant="body1"
       sx={{
         color: 'text.primary',
         paddingLeft: 3,
@@ -118,6 +120,7 @@ const MuiComponents = {
   ol: memo((props) => (
     <Typography
       {...props}
+      variant="body1"
       component="ol"
       sx={{
         color: 'text.primary',
@@ -131,8 +134,8 @@ const MuiComponents = {
   li: memo((props) => (
     <Typography
       {...props}
-      component="li"
       variant="body1"
+      component="li"
       sx={{
         marginBottom: 1,
         fontSize: '1rem',
@@ -169,6 +172,7 @@ const MuiComponents = {
   code: memo((props) => (
     <CodeBlock
       {...props}
+      variant="body1"
       sx={{
         // backgroundColor: '#282C34',
         color: '#FFFFFF',

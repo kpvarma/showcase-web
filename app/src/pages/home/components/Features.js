@@ -5,8 +5,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 // Components
-import FeaturedProjects from './FeaturedProjects';
-import FeaturedArticles from './FeaturedArticles';
+import FeaturedProjects from '../../../components/items/FeaturedProjects';
+import FeaturedArticles from '../../../components/items/FeaturedArticles';
 
 export default function Features() {
   return (
