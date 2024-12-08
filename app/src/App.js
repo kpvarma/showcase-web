@@ -11,7 +11,7 @@ import Header from './components/layouts/app_header.js';
 import Footer from './components/layouts/app_footer.js';
 
 // Page Imports
-import Home from './pages/Home';
+import Home from './pages/home/index.js';
 import ProjectIndex from './pages/projects/index';
 import ProjectShow from './pages/projects/show';
 import ArticleIndex from './pages/articles/index';

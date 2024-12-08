@@ -9,6 +9,7 @@ import Chip from '@mui/material/Chip';
 
 // Page Component Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
+import MuiComponents from '../../components/elements/mdx-mui-components';
 import ProjectCover from '../../components/items/ProjectCover';
 import MetaTags from '../../components/layouts/meta_tags'
 
@@ -19,6 +20,11 @@ const defaultLayout = 'PostLayout';
 const layouts = {
   PostLayout: (props) => <div {...props} />, // Add your PostLayout component here
   PostSimple: (props) => <div {...props} />, // Add your PostSimple component here
+};
+
+// Extend mdx-mui-components with custom components
+const components = {
+  ...MuiComponents
 };
 
 export default function ProjectShow() {
@@ -67,13 +73,13 @@ export default function ProjectShow() {
 
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, marginTop: 1 }}>
           {project.skills.map((skill, index) => (
-            <Chip key={index} label={skill} color="primary" />
+            <Chip key={index} label={skill} color="text.primary" />
           ))}
         </Box>
 
-        <Box sx={{ marginTop: 2}}>
+        <Box sx={{ marginTop: 10 }}>
           <Layout content={project} toc={project.toc}>
-            <MDXLayoutRenderer code={project.body.code} components={{}} />
+            <MDXLayoutRenderer code={project.body.code} components={components} />
           </Layout>
         </Box>
       </Box>

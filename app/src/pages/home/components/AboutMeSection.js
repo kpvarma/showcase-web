@@ -5,10 +5,10 @@ import { Box, Typography, Button, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // Graphics
-import image1 from '../../assets/images/machine-learning.png';
-import image2 from '../../assets/images/data-science.png';
-import image3 from '../../assets/images/devops.png';
-import image4 from '../../assets/images/data-analysis.png';
+import image1 from '../../../assets/images/machine-learning.png';
+import image2 from '../../../assets/images/data-science.png';
+import image3 from '../../../assets/images/devops.png';
+import image4 from '../../../assets/images/data-analysis.png';
 
 const HomeAboutMeSection = () => {
   const theme = useTheme();

@@ -87,7 +87,7 @@ export default function Footer() {
                 />
               </DefaultLink>
               <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-                An Engineer, crafting solutions through code. asd
+                An Engineer, crafting solutions through code.
               </Typography>
             </Box>
           </Box>
