@@ -25,6 +25,14 @@ const standAloneLetter = (char, { vowels, consonants, chillu, numerals, punctuat
   return vowels[char] || consonants[char] || chillu[char] || numerals[char] || punctuation[char];
 };
 
+function isSpecialCharacter(char) {
+  // Define a set of special characters to check against
+  const specialCharacters = ['\n', '\r', '\t', '\b', '\f', '\v'];
+
+  // Check if the character is in the list
+  return specialCharacters.includes(char);
+}
+
 // Tokenize input into meaningful chunks
 const letterTokenizer = (input, language) => {
   const {
@@ -37,6 +45,9 @@ const letterTokenizer = (input, language) => {
     numerals,
     punctuation,
   } = getLanguageMapping(language);
+
+  
+  console.log('Vowels: ' + JSON.stringify(vowels, null, 2));
 
   const tempStack = [];
   const tokens = [];
@@ -53,6 +64,7 @@ const letterTokenizer = (input, language) => {
     }
 
     if (
+      isSpecialCharacter(c) || 
       (standAloneLetter(p, { vowels, consonants, chillu, numerals, punctuation }) &&
         standAloneLetter(c, { vowels, consonants, chillu, numerals, punctuation })) ||
       (modifiers[p] && standAloneLetter(c, { vowels, consonants, chillu, numerals, punctuation })) ||

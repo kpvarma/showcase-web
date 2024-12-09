@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Grid,
-  Typography,
-  Paper,
-  Button,
-} from '@mui/material';
+import React, { useState, useRef } from 'react';
+import { Box, Grid, Typography, Paper, Button } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 import { transliterate } from './utils/transliterate';
 import DebugTokens from './components/debugTokens';
@@ -36,7 +31,15 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('malayalam');
-  const maxCharacters = 500; // Maximum characters allowed
+  const maxCharacters = 1000; // Maximum characters allowed
+
+  // Scroll to DebugTokensViewer when the button is clicked
+  const handleScrollToDebugTokens = () => {
+    const element = document.getElementById('debug-tokens-viewer');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const handleTransliterate = () => {
     setOutputText(transliterate(inputText, selectedLanguage));
@@ -58,17 +61,10 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
           minHeight: '90vh',
         }}
       >
-        <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 2 }}>
+        <Typography color="text.primary" variant="h4" sx={{textAlign: 'center', mb: 2 }}>
           Romanize Scripts With Diacritical Marks
         </Typography>
-        <Grid
-          container
-          spacing={4}
-          sx={{
-            maxWidth: '100%',
-            justifyContent: 'center',
-          }}
-        >
+        <Grid container spacing={4} sx={{ maxWidth: '100%', justifyContent: 'center', }} >
           {/* Input Section */}
           <Grid item xs={12} md={6} sx={{ pl: '0px !important' }}>
             <Paper
@@ -137,7 +133,7 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
                 onClick={handleTransliterate}
                 sx={{
                   width: { xs: '100%', sm: 'fit-content' },
-                  alignSelf: 'flex-start',
+                  alignSelf: 'flex-end',
                 }}
               >
                 Transliterate
@@ -148,7 +144,7 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
           {/* Output Section */}
           <Grid item xs={12} md={6} sx={{ pl: {xs: '0px !important', md: '16px !important'} }}>
             <Paper
-              elevation={3}
+              elevation={1}
               sx={{
                 padding: { xs: 3, sm: 4 },
                 display: 'flex',
@@ -168,17 +164,7 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
                 <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                   Transliteration Output
                 </Typography>
-                <Button
-                  startIcon={<ContentCopyIcon />}
-                  onClick={handleCopy}
-                  disabled={!outputText}
-                  sx={{
-                    mt: { xs: 2, sm: 0 },
-                    alignSelf: 'flex-end',
-                    backgroundColor: 'action.hover',
-                    ':hover': { backgroundColor: 'action.selected' },
-                  }}
-                >
+                <Button startIcon={<ContentCopyIcon />} onClick={handleCopy} disabled={!outputText} color="secondary" variant="text.secondary">
                   Copy
                 </Button>
               </Box>
@@ -187,39 +173,60 @@ const RomanizeScriptsWithDiacriticalMarks = () => {
                   minHeight: '250px',
                   maxHeight: '500px',
                   overflowY: 'auto',
-                  padding: 2,
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  borderRadius: 1,
-                  backgroundColor: '#fff',
+                  // padding: 2,
+                  // border: '1px solid',
+                  // borderColor: 'divider',
+                  // borderRadius: 1,
+                  backgroundColor: 'primary',
                   color: 'text.primary',
                   whiteSpace: 'pre-wrap',
                 }}
               >
-                {outputText || 'The transliterated text will appear here...'}
+                <textarea
+                  placeholder="Enter text here..."
+                  value={outputText || 'The transliterated text will appear here...'}
+                  onChange={(e) =>
+                    e.target.value.length <= maxCharacters && setInputText(e.target.value)
+                  }
+                  style={{
+                    width: '100%',
+                    minHeight: '250px',
+                    maxHeight: '500px',
+                    padding: '12px',
+                    borderRadius: '8px',
+                    border: '1px solid #ccc',
+                    resize: 'vertical',
+                  }}
+                />
               </Box>
+              <Typography variant="caption" sx={{ color: 'text.secondary', textAlign: 'center' }}>
+                click the button below to view each character tokens and its corresponding transliteration.
+              </Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                endIcon={<KeyboardDoubleArrowDownIcon />}
+                onClick={handleScrollToDebugTokens}
+                sx={{
+                  width: { xs: '100%', sm: 'fit-content' },
+                  alignSelf: 'flex-end',
+                }}
+              >
+                Debug Tokens
+              </Button>
             </Paper>
           </Grid>
         </Grid>
       </Box>
 
-      <Typography variant="h4" sx={{ textAlign: 'center', mb: 4, mt: {xs:6} }}>
+      <Typography id="debug-tokens-viewer" color="text.secondary" variant="h4" sx={{ textAlign: 'center', mb: 4, mt: {xs:6} }}>
         Translation and Tokens Viewer
       </Typography>
       <DebugTokensViewer inputText={inputText} />
 
       <Grid container spacing={1} sx={{ mt: 10, mb: 10, display: 'none' }}>
         {sampleSentences.map((sentence, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={6}
-            key={index}
-            sx={{
-              pl: index % 2 === 0 ? 0 : undefined, // Remove padding-left for the leftmost grid items
-            }}
-          >
+          <Grid item xs={12} sm={6} md={6} key={index} sx={{ pl: index % 2 === 0 ? 0 : undefined }}>
             <DebugTokens sentence={sentence} />
           </Grid>
         ))}

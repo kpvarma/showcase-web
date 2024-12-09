@@ -37,6 +37,9 @@ const sanskritMapping = {
     '॑': '^', // Udatta (Vedic intonation)
     '॒': '_', // Anudatta (Vedic intonation)
   },
+  chillu: {
+
+  },
   numerals: {
     '०': '0', '१': '1', '२': '2', '३': '3',
     '४': '4', '५': '5', '६': '6', '७': '7',

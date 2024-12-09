@@ -21,12 +21,12 @@ const DebugTokens = ({ sentence, showChipsInitialState=false }) => {
       }}
     >
       {/* Sentence */}
-      <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1, color: "primary.main" }}>
+      <Typography color="secondary" variant="body1" sx={{ fontWeight: 'bold', mb: 1, color: "primary.main" }}>
         {sentence}
       </Typography>
 
       {/* Transliterated Sentence */}
-      <Typography variant="body1" sx={{ mb: 1 }}>
+      <Typography color="secondary" variant="body1" sx={{ mb: 1 }}>
         {transliteratedTokens.join('')}
       </Typography>
 

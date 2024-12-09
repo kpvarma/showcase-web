@@ -40,12 +40,12 @@ const DebugTokensViewer = ({ inputText }) => {
               selected={item === selectedItem}
               onClick={() => setSelectedItem(item)}
               sx={{
-                backgroundColor: item === selectedItem ? 'rgb(204, 230, 255)' : 'white', // Light blue background for selected
-                border: item === selectedItem ? '1px solid #90caf9' : '1px solid transparent', // Light border for selected
+                backgroundColor: item === selectedItem ? 'rgb(14, 177, 255, 0.3)' : 'rgb(14, 177, 255, 0.05)', // Light blue background for selected
+                border: item === selectedItem ? '1px solid #adadad' : '1px solid #adadad', // Light border for selected
                 mb: 2,
                 borderRadius: 1, // Add rounded corners
                 '&:hover': {
-                  backgroundColor: item === selectedItem ? 'rgb(204, 230, 255)' : 'rgb(204, 230, 255)', // Hover effect
+                  backgroundColor: item === selectedItem ? 'rgb(14, 177, 255, 0.3)' : 'rgb(14, 177, 255, 0.3)', // Hover effect
                 },
               }}
             >

@@ -23,7 +23,7 @@ function Copyright() {
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
       <Link color="text.secondary" href="/">
-        VarmaLabs
+        kpvarma.com
       </Link>
       &nbsp;
       {new Date().getFullYear()}
@@ -99,7 +99,7 @@ export default function Footer() {
             }}
           >
             <Typography variant="body2" sx={{ fontWeight: 'medium', color: 'text.primary' }}>
-              VarmaLabs
+              kpvarma.com
             </Typography>
             <Link color="text.secondary" variant="body2" href="/projects">
               Projects
