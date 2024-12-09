@@ -1,24 +1,5 @@
-import malayalamMapping from '../mappings/malayalam';
-import sanskritMapping from '../mappings/sanskrit';
-import hindiMapping from '../mappings/hindi';
-import tamilMapping from '../mappings/tamil';
-
 // Mapping languages to their respective mappings
-const languageMappings = {
-  malayalam: malayalamMapping,
-  sanskrit: sanskritMapping,
-  hindi: hindiMapping,
-  tamil: tamilMapping,
-};
-
-// Helper: Dynamically load the mapping for the given language
-const getLanguageMapping = (language) => {
-  const mapping = languageMappings[language];
-  if (!mapping) {
-    throw new Error(`Mapping for language "${language}" not found.`);
-  }
-  return mapping;
-};
+import languageMapping from './languageMapping.js';
 
 // Check if a character is a standalone letter
 const standAloneLetter = (char, { vowels, consonants, chillu, numerals, punctuation }) => {
@@ -34,7 +15,7 @@ function isSpecialCharacter(char) {
 }
 
 // Tokenize input into meaningful chunks
-const letterTokenizer = (input, language) => {
+const letterTokenizer = (input, inputLanguage, outoutLanguage) => {
   const {
     vowels,
     consonants,
@@ -44,11 +25,9 @@ const letterTokenizer = (input, language) => {
     chillu,
     numerals,
     punctuation,
-  } = getLanguageMapping(language);
+  } = languageMapping(inputLanguage, outoutLanguage);
 
   
-  console.log('Vowels: ' + JSON.stringify(vowels, null, 2));
-
   const tempStack = [];
   const tokens = [];
   let p = null;
@@ -88,7 +67,7 @@ const letterTokenizer = (input, language) => {
 };
 
 // Transliterate tokens to Romanized text
-const transliterateToken = (tokens, language) => {
+const transliterateToken = (tokens, inputLanguage, outputLanguage) => {
   const {
     vowels,
     consonants,
@@ -98,7 +77,7 @@ const transliterateToken = (tokens, language) => {
     chillu,
     numerals,
     punctuation,
-  } = getLanguageMapping(language);
+  } = languageMapping(inputLanguage, outputLanguage);
 
   const trans_tokens = [];
   for (let token of tokens) {

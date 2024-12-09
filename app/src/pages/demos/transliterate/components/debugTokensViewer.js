@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
-import DebugTokens from '../components/debugTokens'; 
+import DebugTokens from './debugTokens'; 
 
-const DebugTokensViewer = ({ inputText }) => {
+const DebugTokensViewer = ({ inputText, inputLanguage, outputLanguage }) => {
   // Split the input text into lines
   const items = inputText.split('\n').filter((line) => line.trim() !== '');
 
@@ -74,7 +74,7 @@ const DebugTokensViewer = ({ inputText }) => {
           Transliteration and Tokens
         </Typography>
         {selectedItem ? (
-          <DebugTokens sentence={selectedItem} showChipsInitialState={true} />
+          <DebugTokens sentence={selectedItem} inputLanguage={inputLanguage} outputLanguage={outputLanguage} showChipsInitialState={true}/>
         ) : (
           <Typography variant="body1" color="text.secondary">
             Enter input above to transliterate and view the tokens here.

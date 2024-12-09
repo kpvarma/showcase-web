@@ -1,4 +1,4 @@
-const tamilMapping = {
+const tamilEnglishMapping = {
     vowels: {
       'அ': 'a', 'ஆ': 'ā', 'இ': 'i', 'ஈ': 'ī',
       'உ': 'u', 'ஊ': 'ū', 'எ': 'e', 'ஏ': 'ē',
@@ -40,4 +40,4 @@ const tamilMapping = {
     },
   };
   
-  export default tamilMapping;
+  export default tamilEnglishMapping;
