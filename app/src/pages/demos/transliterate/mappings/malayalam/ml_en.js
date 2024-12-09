@@ -1,4 +1,4 @@
-const malayalamMapping = {
+const malayalamEnglishMapping = {
     vowels: {
       'അ': 'a', 'ആ': 'ā', 'ഇ': 'i', 'ഈ': 'ī',
       'ഉ': 'u', 'ഊ': 'ū', 'ഋ': 'ṛi', 'ൠ': 'r̄ī',
@@ -40,4 +40,4 @@ const malayalamMapping = {
     },
   };
   
-  export default malayalamMapping;
+  export default malayalamEnglishMapping;

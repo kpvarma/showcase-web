@@ -1,4 +1,4 @@
-const hindiMapping = {
+const hindiEnglishMapping = {
     vowels: {
       'अ': 'a', 'आ': 'ā', 'इ': 'i', 'ई': 'ī',
       'उ': 'u', 'ऊ': 'ū', 'ऋ': 'ṛ', 'ॠ': 'r̄',
@@ -38,4 +38,4 @@ const hindiMapping = {
     },
   };
   
-  export default hindiMapping;
+  export default hindiEnglishMapping;

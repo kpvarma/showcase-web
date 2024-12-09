@@ -1,4 +1,4 @@
-const sanskritMapping = {
+const sanskritEnglishMapping = {
   vowels: {
     'अ': 'a', 'आ': 'ā', 'इ': 'i', 'ई': 'ī',
     'उ': 'u', 'ऊ': 'ū', 'ऋ': 'ṛ', 'ॠ': 'r̄',
@@ -50,4 +50,4 @@ const sanskritMapping = {
   }
 };
 
-export default sanskritMapping;
+export default sanskritEnglishMapping;

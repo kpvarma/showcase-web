@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Box, Typography, Paper, Chip } from '@mui/material';
 import { letterTokenizer, transliterateToken } from '../utils/letterTokenizer';
 
-const DebugTokens = ({ sentence, showChipsInitialState=false }) => {
+const DebugTokens = ({ sentence, inputLanguage, outputLanguage, showChipsInitialState=false }) => {
   const [showChips, setShowChips] = useState(showChipsInitialState);
 
   // Tokenize and transliterate the input sentence
-  const tokenizedLetters = letterTokenizer(sentence, 'malayalam');
-  const transliteratedTokens = transliterateToken(tokenizedLetters, 'malayalam');
+  const tokenizedLetters = letterTokenizer(sentence, inputLanguage, outputLanguage);
+  const transliteratedTokens = transliterateToken(tokenizedLetters, inputLanguage, outputLanguage);
 
   return (
     <Paper
