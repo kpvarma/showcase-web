@@ -11,15 +11,15 @@ import Header from './components/layouts/app_header.js';
 import Footer from './components/layouts/app_footer.js';
 
 // Page Imports
-import Home from './pages/home/index.js';
+import Home from './pages/home/index';
 import ProjectIndex from './pages/projects/index';
 import ProjectShow from './pages/projects/show';
 import ArticleIndex from './pages/articles/index';
 import ArticleShow from './pages/articles/show';
-import AboutMe from './pages/AboutMe';
+import AboutMe from './pages/about_me/index';
 import HireMe from './pages/HireMe';
 import TestPage from './pages/TestPage';
-import ScrollToTop from './components/elements/scroll-to-top.js';
+import ScrollToTop from './components/layouts/scroll-to-top.js';
 import RomanizeScriptsWithDiacriticalMarks from './pages/demos/diacriticalMarks/index.js'
 
 const App = () => (

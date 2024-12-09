@@ -27,7 +27,7 @@ export const transliterate = (input, language) => {
 
     // Step 2: Transliterate tokens using the mapping
     const transliteratedTokens = transliterateToken(tokenizedLetters, language);
-    console.log('transliteratedTokens:', transliteratedTokens);
+    // console.log('transliteratedTokens:', transliteratedTokens);
 
     // Step 3: Join the transliterated tokens to form the final string
     return transliteratedTokens.join('');

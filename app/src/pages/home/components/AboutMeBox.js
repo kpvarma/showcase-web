@@ -41,18 +41,7 @@ const AboutMeBox = () => {
           Transforming ideas into scalable, maintainable solutions through
           creative problem-solving and engineering excellence.
         </Typography>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#000",
-            color: "#fff",
-            fontWeight: "bold",
-            textTransform: "none",
-            "&:hover": {
-              backgroundColor: "#333",
-            },
-          }}
-        >
+        <Button variant="contained" color="secondary" >
           About me!
         </Button>
       </Box>

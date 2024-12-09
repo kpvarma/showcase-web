@@ -61,6 +61,7 @@ const Project = defineDocumentType(() => ({
     featured: { type: 'boolean' },
     layout: { type: 'string' },
     draft: { type: 'boolean' },
+    demo_url: {type: 'string'}
     
   },
   computedFields: {

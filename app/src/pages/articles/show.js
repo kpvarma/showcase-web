@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip';
 
 // Page Component Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import MuiComponents from '../../components/elements/mdx-mui-components';
+import MuiComponents from '../../components/layouts/mdx-mui-components';
 import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import

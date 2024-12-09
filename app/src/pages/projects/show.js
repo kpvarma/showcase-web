@@ -9,12 +9,15 @@ import Chip from '@mui/material/Chip';
 
 // Page Component Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import MuiComponents from '../../components/elements/mdx-mui-components';
-import ProjectCover from '../../components/items/ProjectCover';
+import MuiComponents from '../../components/layouts/mdx-mui-components';
+import ProjectCover from './components/ProjectCover';
 import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
 import { allProjects } from '../../../.contentlayer/generated/index.mjs';
+
+// MDX Components
+import MdxButton from '../../components/mdx/mdx_button'
 
 const defaultLayout = 'PostLayout';
 const layouts = {
@@ -24,7 +27,8 @@ const layouts = {
 
 // Extend mdx-mui-components with custom components
 const components = {
-  ...MuiComponents
+  ...MuiComponents,
+  MdxButton
 };
 
 export default function ProjectShow() {

@@ -34,13 +34,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
-  
+  const location = useLocation();
+
   // Function to check if the current path matches a given pattern
   const isActive = (pattern) => {
     const regex = new RegExp(pattern);
     return regex.test(location.pathname);
   };
-  
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -59,7 +60,6 @@ export default function Header() {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-          
             <Link
               to="/"
               style={{
@@ -80,19 +80,41 @@ export default function Header() {
                 }}
               />
             </Link>
-          
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" size="small" href="/projects" sx={{ fontSize: '0.9em', color: isActive("^/projects(/[^/]+)?$") ? 'primary.main' : 'gray', fontWeight: isActive("^/projects(/[^/]+)?$") ? 'bold' : 'normal', }} > Projects </Button>
-              <Button variant="text" size="small" href="/articles" sx={{ fontSize: '0.9em', color: isActive("^/articles(/[^/]+)?$") ? 'primary.main' : 'gray', fontWeight: isActive("^/articles(/[^/]+)?$") ? 'bold' : 'normal', }}> Articles </Button>
-              <Button variant="text" size="small" href="/aboutme" sx={{ fontSize: '0.9em', color: isActive("^/aboutme") ? 'primary.main' : 'gray', fontWeight: isActive("^/aboutme") ? 'bold' : 'normal', }} > About Me </Button>
-              <Button variant="text" size="small" href="/testpage" sx={{ fontSize: '0.9em', color: isActive("^/testpage") ? 'primary.main' : 'gray', fontWeight: isActive("^/testpage") ? 'bold' : 'normal', }} > Test Page </Button>
+
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 2 }}>
+              {['/projects', '/articles', '/aboutme', '/testpage'].map((path, idx) => (
+                <Button
+                  key={idx}
+                  variant="text"
+                  size="small"
+                  href={path}
+                  sx={{
+                    fontSize: '0.9em',
+                    color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
+                    fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
+                    border: isActive(`^${path}(/[^/]+)?$`) ? '1px solid' : 'none',
+                    borderColor: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'transparent',
+                    borderRadius: 1,
+                    padding: '4px 8px',
+                    '&:hover': {
+                      color: 'primary.main',
+                      border: '1px solid',
+                      borderColor: 'primary.main',
+                    },
+                  }}
+                >
+                  {path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                </Button>
+              ))}
             </Box>
           </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center', }}>
-            <Button color="secondary" variant="contained" size="small" href="/hireme"> Hire Me </Button>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
+            <Button color="secondary" variant="contained" size="small" href="/hireme">
+              Hire Me
+            </Button>
             <ColorModeIconDropdown />
           </Box>
-          <Box sx={{ display: {xs: 'flex', md: 'none'}, gap: 1 }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
             <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
@@ -108,46 +130,41 @@ export default function Header() {
               }}
             >
               <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <IconButton onClick={toggleDrawer(false)}>
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                <MenuItem component={Link} to="/projects" onClick={toggleDrawer(false)} // Close the menu
-                  sx={{
-                    color: isActive("^/projects(/[^/]+)?$") ? 'primary.main' : 'gray',
-                    fontWeight: isActive("^/projects(/[^/]+)?$") ? 'bold' : 'normal',
-                    textDecoration: 'none',
-                    '&:hover': { color: 'primary.main' },
-                  }} > Projects </MenuItem>
-                <MenuItem component={Link} to="/articles" onClick={toggleDrawer(false)} // Close the menu
-                  sx={{
-                    color: isActive("^/articles(/[^/]+)?$") ? 'primary.main' : 'gray',
-                    fontWeight: isActive("^/articles(/[^/]+)?$") ? 'bold' : 'normal',
-                    textDecoration: 'none',
-                    '&:hover': { color: 'primary.main' },
-                  }} > Articles </MenuItem>
-                <MenuItem component={Link} to="/aboutme" onClick={toggleDrawer(false)} // Close the menu
-                  sx={{
-                    color: isActive("^/aboutme$") ? 'primary.main' : 'gray',
-                    fontWeight: isActive("^/aboutme$") ? 'bold' : 'normal',
-                    textDecoration: 'none',
-                    '&:hover': { color: 'primary.main' },
-                  }} > About Me </MenuItem>
-                <MenuItem component={Link} to="/testpage" onClick={toggleDrawer(false)} // Close the menu
-                  sx={{
-                    color: isActive("^/testpage$") ? 'primary.main' : 'gray',
-                    fontWeight: isActive("^/testpage$") ? 'bold' : 'normal',
-                    textDecoration: 'none',
-                    '&:hover': { color: 'primary.main' },
-                  }} > Test Page </MenuItem>
+                {['/projects', '/articles', '/aboutme', '/testpage'].map((path, idx) => (
+                  <MenuItem
+                    key={idx}
+                    component={Link}
+                    to={path}
+                    onClick={toggleDrawer(false)}
+                    sx={{
+                      color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
+                      fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
+                      border: isActive(`^${path}(/[^/]+)?$`) ? '1px solid' : 'none',
+                      borderColor: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'transparent',
+                      borderRadius: 1,
+                      padding: '4px 8px',
+                      textDecoration: 'none',
+                      '&:hover': {
+                        color: 'primary.main',
+                        border: '1px solid',
+                        borderColor: 'primary.main',
+                      },
+                    }}
+                  >
+                    {path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                  </MenuItem>
+                ))}
                 <Divider sx={{ my: 3 }} />
-                <MenuItem><Button color="secondary" variant="contained" fullWidth href="/hireme"> Hire Me </Button></MenuItem>
+                <MenuItem>
+                  <Button color="secondary" variant="contained" fullWidth href="/hireme">
+                    Hire Me
+                  </Button>
+                </MenuItem>
               </Box>
             </Drawer>
           </Box>

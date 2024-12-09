@@ -27,6 +27,9 @@ const tamilMapping = {
     modifiers_two: {
       'ஂ': 'ṁ', 'ஃ': 'ḥ' // Anusvara and Visarga
     },
+    chillu: {
+
+    },
     numerals: {
       '௦': '0', '௧': '1', '௨': '2', '௩': '3',
       '௪': '4', '௫': '5', '௬': '6', '௭': '7',
