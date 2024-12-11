@@ -24,7 +24,7 @@ const malayalamEnglishMapping = {
       'ൊ': 'o', 'ോ': 'ō', 'ൌ': 'au', 'ൗ': 'au'
     },
     modifiers_two: {
-         'ം': 'ṁ', 'ഃ': 'ഃ',
+         'ം': 'ṁ', 'ഃ': 'ḥ',
       },
     chillu: {
       'ൽ': 'l', 'ൾ': 'ḷ', 'ൺ': 'ṇ',
