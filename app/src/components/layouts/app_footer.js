@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { Link as DefaultLink } from 'react-router-dom';
 
+// UI Imports
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FacebookIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
-import logo from '../../assets/logo.png';
 
+// Asset Imports
+import imageLibrary from '../../components/utils/image_library';
+
+// Component Imports
 import HireMeSection from './hire_me_footer';
 
 function Copyright() {
@@ -75,7 +76,7 @@ export default function Footer() {
                 }}
               >
                 <img
-                  src={logo}
+                  src={imageLibrary.getLogoImage()}
                   alt="kpvarma.com Logo"
                   style={{
                     margin: '3px',
@@ -234,7 +235,7 @@ export default function Footer() {
             }}
           >
             <img
-              src={logo}
+              src={imageLibrary.getLogoImage()}
               alt="kpvarma.com Logo"
               style={{
                 margin: '3px',

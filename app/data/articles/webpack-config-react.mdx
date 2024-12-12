@@ -1,0 +1,197 @@
+---
+title: "Webpack Configuration for Development and Production in React"
+summary: "A guide to setting up Webpack configurations for development and production environments in a React application, including optimizations for production builds."
+date: "2024-01-25"
+last_modified: "2024-12-06"
+thumb_image: "https://picsum.photos/800/450?random=2"
+cover_image: "https://picsum.photos/800/450?random=2"
+tags:
+  - webpack
+  - react
+  - javascript
+  - build tools
+featured: true
+layout: "PostLayout"
+draft: false
+---
+
+In this article, we will explore how to set up Webpack configurations for both development and production environments in a React application. We will look at how to handle static assets, optimize production builds, and separate concerns for an efficient workflow.
+
+---
+
+## Development vs Production
+
+### Key Differences
+
+| Feature                | Development                                      | Production                                      |
+|------------------------|--------------------------------------------------|------------------------------------------------|
+| **Source Maps**        | `inline-source-map` (fast debugging)             | `source-map` (smaller and production-ready)    |
+| **Code Optimization**  | Disabled (for speed)                             | Enabled (minification, tree-shaking)           |
+| **Mode**               | `development`                                   | `production`                                   |
+| **DevServer**          | Included for live reloading and HMR              | Excluded                                       |
+| **Output**             | Full bundle with debug info                     | Minimized bundle                               |
+
+---
+
+## Development Configuration
+
+Here is the development configuration for Webpack:
+
+```javascript
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'development', // Enable development mode
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif|svg|avif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: 'inline-source-map', // Enable fast source maps
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'), // Serve files from `public/`
+    },
+    historyApiFallback: true, // Enable React Router routing
+    hot: true,
+    port: 8080,
+  },
+};
+```
+
+---
+
+## Production Configuration
+
+Here is the production configuration for Webpack:
+
+```javascript
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+module.exports = {
+  mode: 'production', // Enable production optimizations
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.[contenthash].js', // Cache-busting with content hash
+    publicPath: '/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif|svg|avif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'], // CSS loaders
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      minify: { // Minify HTML
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+      },
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public'),
+          to: path.resolve(__dirname, 'dist'),
+          globOptions: {
+            ignore: ['**/index.html'], // Avoid copying the HTML template
+          },
+        },
+      ],
+    }),
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: 'source-map', // Production-ready source maps
+  optimization: {
+    minimize: true, // Enable minimization
+    minimizer: [
+      new TerserPlugin(), // Minify JavaScript
+      new CssMinimizerPlugin(), // Minify CSS
+    ],
+    splitChunks: {
+      chunks: 'all', // Code splitting for optimization
+    },
+  },
+};
+```
+
+---
+
+## Unified Configuration for Both Environments
+
+Use this configuration to dynamically switch between development and production builds:
+
+```javascript
+module.exports = (env) => {
+  const config = env.production ? require('./webpack.prod.js') : require('./webpack.dev.js');
+  return config;
+};
+```
+
+---
+
+## Build Commands in `package.json`
+
+Finally, update your `scripts` in `package.json`:
+
+```json
+{
+  "scripts": {
+    "start": "webpack serve --env production=false", // Development
+    "build": "webpack --env production=true"        // Production
+  }
+}
+```
+
+---
+
+With this setup, you can streamline your development workflow and ensure optimized production builds for your React application.
+
+---

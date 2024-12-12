@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+// UI Imports
 import { alpha, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -13,8 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import logo from '../../assets/logo.png';
 import ColorModeIconDropdown from '../../shared-theme/ColorModeIconDropdown';
+
+// Asset Imports
+import imageLibrary from '../../components/utils/image_library';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -69,7 +72,7 @@ export default function Header() {
               }}
             >
               <img
-                src={logo}
+                src={imageLibrary.getLogoImage()}
                 alt="kpvarma.com Logo"
                 style={{
                   margin: '0px',
@@ -82,7 +85,7 @@ export default function Header() {
             </Link>
 
             <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 2 }}>
-              {['/projects', '/articles', '/aboutme', '/testpage'].map((path, idx) => (
+              {['/projects', '/articles', '/aboutme'].map((path, idx) => (
                 <Button
                   key={idx}
                   variant="text"
@@ -135,7 +138,7 @@ export default function Header() {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                {['/projects', '/articles', '/aboutme', '/testpage'].map((path, idx) => (
+                {['/projects', '/articles', '/aboutme'].map((path, idx) => (
                   <MenuItem
                     key={idx}
                     component={Link}

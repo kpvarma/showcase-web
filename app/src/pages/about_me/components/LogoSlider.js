@@ -13,9 +13,8 @@ const logoStyle = {
   margin: '0 auto',
 };
 
-function LogoSlider({ title, logos, rows = 1, interval = 5000 }) {
+function LogoSlider({ title, logos, rows = 1, columns = 3, interval = 5000 }) {
   // Calculate the number of logos per slide
-  const columns = 3; // Fixed number of columns per row
   const logosPerSlide = rows * columns;
 
   // Group logos into slides based on the calculated number per slide
