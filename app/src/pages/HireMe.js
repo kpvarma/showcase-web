@@ -4,9 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Box, Grid, Typography, TextField, Button, Alert } from "@mui/material";
 import axios from "axios";
 
-import hireme1Image from "../assets/images/hireme3.png";
-import hireme2Image from "../assets/images/hireme1.png";
-import hireme3Image from "../assets/images/hireme2.png";
+import imageLibrary from '../components/utils/image_library';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -153,7 +151,7 @@ export default function Contact() {
                   <Grid item>
                     <Box
                       component="img"
-                      src={hireme1Image}
+                      src={imageLibrary.hireme3}
                       alt="HireMe"
                       sx={{
                         width: "100%",
@@ -165,7 +163,7 @@ export default function Contact() {
                   <Grid item>
                     <Box
                       component="img"
-                      src={hireme2Image}
+                      src={imageLibrary.hireme3}
                       alt="HireMe"
                       sx={{
                         width: "100%",
@@ -181,7 +179,7 @@ export default function Contact() {
               <Grid item xs={12} md={6} sx={{ display: "flex", alignItems: "stretch" }}>
                 <Box
                   component="img"
-                  src={hireme3Image}
+                  src={imageLibrary.hireme3}
                   alt="HireMe"
                   sx={{
                     width: "100%",

@@ -2,10 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 // Graphics
-import image1 from '../../../assets/images/machine-learning.png';
-import image2 from '../../../assets/images/data-science.png';
-import image3 from '../../../assets/images/devops.png';
-import image4 from '../../../assets/images/data-analysis.png';
+import imageLibrary from '../../../components/utils/image_library';
 
 const AboutMeCollage = ({ isMobile }) => {
   return (
@@ -25,7 +22,7 @@ const AboutMeCollage = ({ isMobile }) => {
       {/* Image Frame 1 - Big */}
       <Box
         component="img"
-        src={image1}
+        src={imageLibrary.machineLearning}
         alt="Collage Image 1"
         sx={{
           backgroundColor: "#fff",
@@ -43,7 +40,7 @@ const AboutMeCollage = ({ isMobile }) => {
       {/* Image Frame 2 - Medium */}
       <Box
         component="img"
-        src={image2}
+        src={imageLibrary.dataScience}
         alt="Collage Image 2"
         sx={{
           backgroundColor: "#dfdfdf",
@@ -61,7 +58,7 @@ const AboutMeCollage = ({ isMobile }) => {
       {/* Image Frame 3 - Small */}
       <Box
         component="img"
-        src={image3}
+        src={imageLibrary.devops}
         alt="Collage Image 3"
         sx={{
           backgroundColor: "#fff",
@@ -79,7 +76,7 @@ const AboutMeCollage = ({ isMobile }) => {
       {/* Image Frame 4 - Small */}
       <Box
         component="img"
-        src={image4}
+        src={imageLibrary.dataAnalysis}
         alt="Collage Image 4"
         sx={{
           backgroundColor: "#fff",

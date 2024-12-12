@@ -10,35 +10,10 @@ import LogoSlider from "./components/LogoSlider"
 import ThreeBoxContent from "./components/ThreeBoxContent"
 
 // Asset Imports
-import about_me_bg from '../../assets/images/coders_desk.png';
+import imageLibrary from '../../components/utils/image_library';
+import skillsLibrary from '../../components/utils/skills_library';
 
-import aws from '../../assets/skills/aws.png';
-import django from '../../assets/skills/django.png';
-import docker from '../../assets/skills/docker.png';
-import elasticsearch from '../../assets/skills/elasticsearch.png';
-import expressjs from '../../assets/skills/expressjs.png';
-import fastapi from '../../assets/skills/fastapi.png';
-import github from '../../assets/skills/github.png';
-import hadoop from '../../assets/skills/hadoop.png';
-import javascript from '../../assets/skills/javascript.png';
-import kafka from '../../assets/skills/kafka.png';
-import kubernetes from '../../assets/skills/kubernetes.png';
-import mongodb from '../../assets/skills/mongodb.png';
-import mysql from '../../assets/skills/mysql.png';
-import nextjs from '../../assets/skills/nextjs.png';
-import nodejs from '../../assets/skills/nodejs.png';
-import nuxtjs from '../../assets/skills/nuxtjs.png';
-import postgresql from '../../assets/skills/postgresql.png';
-import python from '../../assets/skills/python.png';
-import reactjs from '../../assets/skills/reactjs.png';
-import redis from '../../assets/skills/redis.png';
-import rubyOnRails from '../../assets/skills/ruby-on-rails.png';
-import ruby from '../../assets/skills/ruby.png';
-import spark from '../../assets/skills/spark.png';
-import vuejs from '../../assets/skills/vuejs.png';
-
-// Data
-const skills = [ruby, python, javascript, nodejs, reactjs, vuejs, rubyOnRails, django, fastapi, nextjs, nuxtjs, expressjs, docker, kubernetes, kafka, elasticsearch, aws, github, mysql, postgresql, mongodb, redis, hadoop, spark];
+const skills = skillsLibrary.list.map(skill => skill.url);
 
 const sections = [
   {
@@ -109,7 +84,7 @@ export default function AboutMe() {
                 }}
               >
                 <img
-                  src={about_me_bg}
+                  src={imageLibrary.about_me}
                   alt="About Me Abstract Background"
                   style={{
                     width: '100%', // Default for large screens
@@ -117,7 +92,7 @@ export default function AboutMe() {
                     height: 'auto',
                     borderRadius: '8px',
                     maxWidth: '60%', // Shrinks to 60% on mobile
-                    '@media (min-width: 600px)': {
+                    '@media (minWidth: 600px)': {
                       width: '100%', // 100% for larger screens
                     },
                   }}
@@ -193,7 +168,7 @@ export default function AboutMe() {
           </Grid>
           {/* Skills Logos */}
           <Grid item xs={12} md={6} sx={{pl: {xs: "0px !important"}, pt: "0px !important" }}>
-            <LogoSlider logos={skills} rows={4} interval={9000} />
+            <LogoSlider logos={skills} rows={5} columns={5} interval={9000} />
           </Grid>
         </Grid>
       </Box>

@@ -4,6 +4,7 @@
   "description": "A simple bookmark app on google extension",
   "main": "src/index.js",
   "scripts": {
+    "watch-content": "npx run nodemon --watch data --ext mdx --exec 'contentlayer2 build'",
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
     "build": "contentlayer2 build && webpack --mode production"
