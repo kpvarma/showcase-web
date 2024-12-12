@@ -28,7 +28,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${folder}/${imageName}`;
     } else {
-      return `http://assets.kpvarma.com/${imagesFolder}/${folder}/${imageName}`;
+      return `https://assets.kpvarma.com/${imagesFolder}/${folder}/${imageName}`;
     }
   };
   
@@ -40,7 +40,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${logoFileName}`;
     } else {
-      return `http://assets.kpvarma.com/${imagesFolder}/${logoFileName}`;
+      return `https://assets.kpvarma.com/${imagesFolder}/${logoFileName}`;
     }
   };
   
@@ -53,7 +53,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${fileName}`;
     } else {
-      return `http://assets.kpvarma.com/${imagesFolder}/${fileName}`;
+      return `https://assets.kpvarma.com/${imagesFolder}/${fileName}`;
     }
   };
   
