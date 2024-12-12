@@ -46,7 +46,7 @@ const skills_mapping = {
       return `${skillsFolder}/${fileName}`;
     } else {
       // Use the remote URL for production
-      return `http://assets.kpvarma.com/${skillsFolder}/${fileName}`;
+      return `https://assets.kpvarma.com/${skillsFolder}/${fileName}`;
     }
   };
   
