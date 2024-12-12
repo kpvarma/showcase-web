@@ -28,7 +28,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${folder}/${imageName}`;
     } else {
-      return `https://assets.kpvarma.com/${folder}/${imageName}`;
+      return `https://assets.kpvarma.com/${imagesFolder}/${folder}/${imageName}`;
     }
   };
   
