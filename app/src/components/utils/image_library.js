@@ -17,7 +17,7 @@ const image_mapping = {
     devops: 'displays/devops.png',
     dataAnalysis: 'displays/data-analysis.png',
 
-    hireme1: 'displays/hireme2.png',
+    hireme1: 'displays/hireme1.png',
     hireme2: 'displays/hireme2.png',
     hireme3: 'displays/hireme3.png',
   };
@@ -30,7 +30,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${folder}/${imageName}`;
     } else {
-      return `${s3URl}/${imagesFolder}/${folder}/${imageName}`;
+      return `${s3URl}${imagesFolder}/${folder}/${imageName}`;
     }
   };
   
@@ -42,7 +42,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${logoFileName}`;
     } else {
-      return `${s3URl}/${imagesFolder}/${logoFileName}`;
+      return `${s3URl}${imagesFolder}/${logoFileName}`;
     }
   };
   
@@ -55,7 +55,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${fileName}`;
     } else {
-      return `${s3URl}/${imagesFolder}/${fileName}`;
+      return `${s3URl}${imagesFolder}/${fileName}`;
     }
   };
   
