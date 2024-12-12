@@ -1,3 +1,12 @@
+// module.exports = (env = {}) => {
+//   if (env.production === undefined) {
+//     throw new Error("Please specify --env production=true or --env production=false");
+//   }
+
+//   const config = env.production ? require('./webpack.config.prod.js') : require('./webpack.config.dev.js');
+//   return config;
+// };
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -6,7 +15,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/', // Ensure all assets are served from the root
+    publicPath: '/public', // Ensure all assets are served from the root
   },
   module: {
     rules: [

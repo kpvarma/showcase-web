@@ -4,9 +4,10 @@
   "description": "A simple bookmark app on google extension",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
-    "start-prod": "webpack serve --open",
-    "build": "contentlayer2 build && webpack --mode production"
+    "watch-content": "nodemon --watch data --ext mdx --exec 'contentlayer2 build'",
+    "start": "webpack serve --env production=false --hot --open --host 0.0.0.0 --port 8080",
+    "start-prod": "serve dist",
+    "build": "contentlayer2 build && webpack --env production=true"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",
@@ -17,6 +18,7 @@
     "@mui/material": "^6.1.9",
     "axios": "^0.24.0",
     "contentlayer2": "^0.5.3",
+    "copy-webpack-plugin": "^12.0.2",
     "markdown-to-jsx": "^7.x.x",
     "pliny": "^0.4.0",
     "prismjs": "^1.29.0",
@@ -39,6 +41,7 @@
     "css-loader": "^6.10.0",
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.7",
+    "serve": "^14.2.4",
     "style-loader": "^3.3.4",
     "webpack": "^5.90.2",
     "webpack-cli": "^5.0.0",
