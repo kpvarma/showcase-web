@@ -1,5 +1,7 @@
 // utils/imageLibrary.js
 const imagesFolder = '/images'
+// const s3URl = https://assets.kpvarma.com
+const s3URl = 'https://s3.us-east-1.amazonaws.com/assets.kpvarma.com'
 
 const image_mapping = {
     // Mapping of image keys to file names
@@ -28,7 +30,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${folder}/${imageName}`;
     } else {
-      return `https://assets.kpvarma.com/${imagesFolder}/${folder}/${imageName}`;
+      return `${s3URl}/${imagesFolder}/${folder}/${imageName}`;
     }
   };
   
@@ -40,7 +42,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${logoFileName}`;
     } else {
-      return `https://assets.kpvarma.com/${imagesFolder}/${logoFileName}`;
+      return `${s3URl}/${imagesFolder}/${logoFileName}`;
     }
   };
   
@@ -53,7 +55,7 @@ const image_mapping = {
     if (process.env.NODE_ENV === "development") {
       return `${imagesFolder}/${fileName}`;
     } else {
-      return `https://assets.kpvarma.com/${imagesFolder}/${fileName}`;
+      return `${s3URl}/${imagesFolder}/${fileName}`;
     }
   };
   
