@@ -119,8 +119,11 @@ const TransliterateDocument = () => {
           minHeight: '90vh',
         }}
       >
-        <Typography color="text.primary" variant="h4" sx={{textAlign: 'center', mb: 2 }}>
-          Transliterate Document in Indian Languages
+        <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
+          Transliterate Document in &nbsp;
+          <Typography component="span" variant="h2" color="primary.main" sx={{ fontWeight: "inherit", p: "0px !important" }}>
+            Indian Languages
+          </Typography>
         </Typography>
         <Typography color="text.primary" variant="body1" sx={{ textAlign: 'center', maxWidth: '70%' }}>
           This tool allows you to transliterate text from one Indian language to another or to English with diacritical marks. 

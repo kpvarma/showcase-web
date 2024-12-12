@@ -63,45 +63,26 @@ export default function Header() {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <Link
-              to="/"
-              style={{
-                color: '#00bcd4',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-              }}
-            >
-              <img
-                src={imageLibrary.getLogoImage()}
-                alt="kpvarma.com Logo"
-                style={{
-                  margin: '0px',
-                  padding: '2px',
-                  height: 'auto',
-                  width: 'auto',
-                  maxHeight: '36px',
-                }}
-              />
+            <Link to="/" style={{ color: '#00bcd4', textDecoration: 'none', fontWeight: 'bold',}} >
+              <img src={imageLibrary.getLogoImage()} alt="kpvarma.com Logo" style={{ margin: '0px', padding: '2px', height: 'auto', width: 'auto', maxHeight: '36px',}} />
             </Link>
 
             <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 2 }}>
               {['/projects', '/articles', '/aboutme'].map((path, idx) => (
                 <Button
-                  key={idx}
-                  variant="text"
-                  size="small"
-                  href={path}
+                  key={idx} variant="text" size="small" href={path}
                   sx={{
                     fontSize: '0.9em',
                     color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
                     fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
-                    border: isActive(`^${path}(/[^/]+)?$`) ? '1px solid' : 'none',
+                    border: isActive(`^${path}(/[^/]+)?$`) ? '0px solid' : 'none',
                     borderColor: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'transparent',
                     borderRadius: 1,
-                    padding: '4px 8px',
+                    m: '0px 5px',
+                    padding: '4px 12px',
                     '&:hover': {
                       color: 'primary.main',
-                      border: '1px solid',
+                      border: '0px solid',
                       borderColor: 'primary.main',
                     },
                   }}
@@ -122,16 +103,7 @@ export default function Header() {
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
-            <Drawer
-              anchor="top"
-              open={open}
-              onClose={toggleDrawer(false)}
-              PaperProps={{
-                sx: {
-                  top: 'var(--template-frame-height, 0px)',
-                },
-              }}
-            >
+            <Drawer anchor="top" open={open} onClose={toggleDrawer(false)} PaperProps={{ sx: { top: 'var(--template-frame-height, 0px)', }, }}>
               <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <IconButton onClick={toggleDrawer(false)}>

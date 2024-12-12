@@ -49,27 +49,22 @@ export default function ProjectIndex() {
         description={'kpvarma.com | My Projects - where I experiment with the latest technologies and share my learnings.'}
         url={'/projects'}
       />
-      <Typography variant="h1" sx={{ color: "text.primary" }} gutterBottom>
-        Projects
+
+      {/* Heading and Description */}
+      <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
+        Browse&nbsp;
+        <Typography component="span" variant="h2" color="primary.main" sx={{ fontWeight: "inherit", p: "0px !important" }}>
+          Projects
+        </Typography>
       </Typography>
       <Typography sx={{ color: "text.primary" }} >From Concepts to Code: My Experimental Projects</Typography>
 
       {/* Filter Section */}
-      <Box sx={{ marginTop: 2 }}>
+      <Box sx={{ mt: 4 }}>
         {isMobile ? (
           // Show dropdown on mobile
-          <Select
-            value={selectedSkill}
-            onChange={(e) => filterProjects(e.target.value)}
-            fullWidth
-            displayEmpty
-            sx={{
-              backgroundColor: '#f9f9f9',
-              borderRadius: 1,
-              marginBottom: 2,
-              padding: '8px',
-            }}
-          >
+          <Select value={selectedSkill} onChange={(e) => filterProjects(e.target.value)} fullWidth displayEmpty 
+                  sx={{ backgroundColor: '#f9f9f9', borderRadius: 1, marginBottom: 2, padding: '8px', }}>
             {skills.map((skill) => (
               <MenuItem key={skill} value={skill}>
                 {skill}
@@ -79,79 +74,33 @@ export default function ProjectIndex() {
         ) : (
           // Show chips on larger screens
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: 1,
-              flexWrap: 'wrap',
-            }}
+            sx={{ display: 'flex', flexDirection: 'row', gap: 1, flexWrap: 'wrap', }}
           >
             {skills.map((skill) => (
-              <Chip
-                key={skill}
-                label={skill}
-                clickable
-                onClick={() => filterProjects(skill)}
+              <Chip key={skill} label={skill} clickable onClick={() => filterProjects(skill)}
                 color={selectedSkill === skill ? 'primary' : 'default'}
-                sx={{
-                  fontSize: '1rem',
-                  minHeight: '36px',
-                  padding: '0 16px',
-                  lineHeight: '36px',
-                  borderRadius: '24px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              />
+                sx={{ fontSize: '1rem', minHeight: '36px', padding: '0 16px', lineHeight: '36px',
+                  borderRadius: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',}} />
             ))}
           </Box>
         )}
       </Box>
 
       {/* Rendering Projects */}
-      <Grid container  spacing={0} rowSpacing={2} sx={{ marginTop: 2 }}>
+      <Grid container  spacing={0} rowSpacing={2} sx={{ mt: 2, mb: 10 }}>
         {filteredProjects.map((project, index) => {
           if (index < 2) {
             // First two projects
             return (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={6}
-                lg={6}
-                key={project.slug}
-                sx={{ pl: index === 0 ? '0px !important' : undefined }}
-              >
-                <ProjectCard
-                  project={project}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
-                  focusedCardIndex={-1}
-                  cardIndex={index} // Pass the current index
-                />
+              <Grid item xs={12} sm={6} md={6} lg={6} key={project.slug} sx={{ pl: index === 0 ? '0px !important' : undefined }}>
+                <ProjectCard project={project} onFocus={() => {}} onBlur={() => {}} focusedCardIndex={-1} cardIndex={index} />
               </Grid>
             );
           } else {
             // Remaining projects
             return (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={4}
-                key={project.slug}
-                sx={{ pl: (index - 2) % 3 === 0 ? '0px !important' : undefined }}
-              >
-                <ProjectCard
-                  project={project}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
-                  focusedCardIndex={-1}
-                  cardIndex={index} // Pass the current index
-                />
+              <Grid item xs={12} sm={6} md={4} lg={4} key={project.slug} sx={{ pl: (index - 2) % 3 === 0 ? '0px !important' : undefined }}>
+                <ProjectCard project={project} onFocus={() => {}} onBlur={() => {}} focusedCardIndex={-1} cardIndex={index} />
               </Grid>
             );
           }
