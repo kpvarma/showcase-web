@@ -23,6 +23,7 @@ const FeaturedProjects = () => {
           {
             featuredProjects.map((project, index) => (
               <ProjectCard
+                key={project.slug || index}
                 project={project}
                 onFocus={() => {}}
                 onBlur={() => {}}

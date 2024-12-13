@@ -48,75 +48,71 @@ const StyledTypography = styled(Typography)({
 
 // Skill Component
 function Skill({ skills }) {
-    return (
-      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-        {skills.map((skill, index) => (
-          <Chip
-            key={index}
-            label={typeof skill === 'string' ? skill : skill.name}
-            sx={{
-              backgroundColor: '#f0f0f0', // Light gray background for the badge
-              color: '#333', // Dark text
-              fontSize: '0.75rem', // Smaller font size
-              fontWeight: 'bold',
-              padding: '4px 8px',
-              borderRadius: '16px', // Rounded edges for the badge
-            }}
-          />
-        ))}
-      </Box>
-    );
-  }
+  return (
+    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+      {skills.map((skill, index) => (
+        <Chip
+          key={index}
+          label={skill} // Directly use the skill string
+          sx={{
+            backgroundColor: '#f0f0f0', // Light gray background for the badge
+            color: '#333', // Dark text
+            fontSize: '0.75rem', // Smaller font size
+            fontWeight: 'bold',
+            padding: '4px 8px',
+            borderRadius: '16px', // Rounded edges for the badge
+          }}
+        />
+      ))}
+    </Box>
+  );
+}
 
 Skill.propTypes = {
-  skills: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired, // Expect array of strings
 };
 
 // ProjectCard Component
 export default function ProjectCard({
-    project,
-    onFocus,
-    onBlur,
-    focusedCardIndex = -1, // Default value
-    cardIndex,
-  }) {
-    return (
-      <Link to={`/projects/${project.slug}`} style={{ textDecoration: 'none' }}>
-        <StyledCard
-          variant="outlined"
-          onFocus={() => onFocus(cardIndex)}
-          onBlur={onBlur}
-          tabIndex={0}
-          className={focusedCardIndex === cardIndex ? 'Mui-focused' : ''}
-          sx={{marginLeft: 1, marginRight: 1}}
-        >
-          <CardMedia
-            component="img"
-            alt={project.title}
-            image={project.thumb_image}
-            sx={{
-              aspectRatio: '16 / 9',
-              borderBottom: '1px solid',
-              borderColor: 'divider',
-            }}
-          />
-          <StyledCardContent>
-            <Typography gutterBottom variant="h6" component="div">
-              {project.title}
-            </Typography>
-            <StyledTypography variant="body2" color="text.secondary" gutterBottom>
-              {project.summary}
-            </StyledTypography>
-            <Skill skills={project.skills} />
-          </StyledCardContent>
-        </StyledCard>
-      </Link>
-    );
-  }
+  project,
+  onFocus,
+  onBlur,
+  focusedCardIndex = -1, // Default value
+  cardIndex,
+}) {
+  return (
+    <Link to={`/projects/${project.slug}`} style={{ textDecoration: 'none' }}>
+      <StyledCard
+        variant="outlined"
+        onFocus={() => onFocus(cardIndex)}
+        onBlur={onBlur}
+        tabIndex={0}
+        className={focusedCardIndex === cardIndex ? 'Mui-focused' : ''}
+        sx={{ marginLeft: 1, marginRight: 1 }}
+      >
+        <CardMedia
+          component="img"
+          alt={project.title}
+          image={project.thumb_image}
+          sx={{
+            aspectRatio: '16 / 9',
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+          }}
+        />
+        <StyledCardContent>
+          <Typography gutterBottom variant="h6" component="div">
+            {project.title}
+          </Typography>
+          <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+            {project.summary}
+          </StyledTypography>
+          <Skill skills={project.skills} />
+        </StyledCardContent>
+      </StyledCard>
+    </Link>
+  );
+}
 
 ProjectCard.propTypes = {
   project: PropTypes.shape({
@@ -124,14 +120,9 @@ ProjectCard.propTypes = {
     summary: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     last_modified: PropTypes.string,
-    skills: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired, // Updated to expect array of strings
     thumb_image: PropTypes.string.isRequired,
     cover_image: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     layout: PropTypes.string,
     draft: PropTypes.bool,
     featured: PropTypes.bool,

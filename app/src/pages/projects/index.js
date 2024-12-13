@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // UI Imports
 import Grid from '@mui/material/Grid';
@@ -30,17 +30,34 @@ export default function ProjectIndex() {
     ...new Set(allProjects.flatMap((project) => project.skills)),
   ];
 
-  const filterProjects = (skill) => {
+  const filterProjects = (skill='All') => {
     setSelectedSkill(skill);
-
-    if (skill === 'All') {
-      setFilteredProjects(allProjects); // Reset to all projects
-    } else {
-      setFilteredProjects(
-        allProjects.filter((project) => project.skills.includes(skill))
-      );
-    }
+  
+    // Ignoring all drafts
+    let filteredProjects = allProjects.filter((project) => project.draft === false);
+  
+    // Filtering by skill
+    filteredProjects = skill === 'All' 
+      ? filteredProjects 
+      : filteredProjects.filter((project) => project.skills.includes(skill));
+  
+    // Sorting: Featured first, then by reverse chronological order
+    filteredProjects = filteredProjects.sort((a, b) => {
+      if (a.featured !== b.featured) {
+        return a.featured ? -1 : 1; // Featured projects come first
+      }
+      const dateA = new Date(a.last_modified || a.date);
+      const dateB = new Date(b.last_modified || b.date);
+      return dateB - dateA; // Newest projects come first
+    });
+  
+    // Updating the state
+    setFilteredProjects(filteredProjects);
   };
+
+  useEffect(() => {
+    filterProjects('All'); // Call the filtering function on page load
+  }, []); // Empty dependency array ensures it runs only once
 
   return (
     <div>
