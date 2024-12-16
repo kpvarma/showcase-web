@@ -1,0 +1,232 @@
+---
+title: "Simplifying SSH Connections with Named Hosts"
+summary: "Learn how to streamline SSH connections by configuring the ~/.ssh/config file and using named hosts."
+date: "2022-11-02"
+last_modified: "2023-04-14"
+thumb_image: "simplifying-ssh-connections.png"
+cover_image: "simplifying-ssh-connections.png"
+tags:
+  - SSH
+  - Configuration
+featured: true
+layout: "PostLayout"
+draft: false
+---
+
+Connecting to servers via SSH can be tedious, especially when managing multiple accounts and authentication methods. Typing lengthy commands each time is cumbersome and error-prone. 
+By configuring the <LabelHighlight>~/.ssh/config</LabelHighlight> file and using named hosts, you can streamline your workflow and simplify SSH connections.
+
+This article will guide you through the process of setting up the <LabelHighlight>~/.ssh/config</LabelHighlight> file and demonstrate how to log in to remote servers effortlessly using SSH.
+
+---
+
+## Why Use SSH Config?
+
+Manually typing connection commands is error-prone and time-consuming. With an SSH config file, you can:
+- Use named hosts for quick conn
+ections.
+- Avoid repeating details like usernames, hostnames, and private key paths.
+
+
+## Steps to Set Up Your SSH Config
+
+### Step 1. Create the <LabelHighlight>~/.ssh/config</LabelHighlight> File
+
+The <LabelHighlight>~/.ssh/config</LabelHighlight> file is located in your user's home directory. 
+If the file does not exist, create it using the touch command a text editor.
+
+Run these commands to create the file and set the correct permissions:
+
+```text
+$ touch ~/.ssh/config
+$ chmod 600 ~/.ssh/config
+```
+
+Ensure that the file has the correct permissions to protect your SSH configuration. 
+Use your favourite editor. <LabelHighlight>nano</LabelHighlight> or <LabelHighlight>vim</LabelHighlight> or <LabelHighlight>vi</LabelHighlight> to edit the file.
+
+
+Open it in your favorite editor:
+
+```text
+$ vi ~/.ssh/config
+```
+
+---
+
+### Step 2. Define Named Hosts
+
+The <LabelHighlight>~/.ssh/config</LabelHighlight> file uses a simple syntax to define named hosts and their corresponding connection settings. 
+Each named host consists of parameters defined within a block, like below:
+
+Use this syntax to add a named host:
+```text
+Host server1
+    HostName example.com
+    User username
+    Port 22
+    IdentityFile ~/.ssh/id_rsa
+```
+
+- <LabelHighlight>Host</LabelHighlight>: The alias you’ll use to connect (e.g., <LabelHighlight>ssh server1</LabelHighlight>).
+- <LabelHighlight>HostName</LabelHighlight>: The server’s IP or domain name.
+- <LabelHighlight>User</LabelHighlight>: Your SSH username.
+- <LabelHighlight>Port</LabelHighlight>: The SSH port (default: 22).
+- <LabelHighlight>IdentityFile</LabelHighlight>: Path to your private key.
+
+---
+
+### Step 3. Additional Options
+
+To define a named host, specify a unique name after the "Host" keyword. This name will be used to reference the specific host when connecting via SSH. In the above example, the name of the host is server1. This allows you to connect to this Host via ssh using just this name ssh server1. SSH will automatically read your configuration from this file and form the appropriate command with parameters to execute.
+
+- **Multiple Aliases**: Use multiple names for the same host:
+```text
+Host alias1 alias2
+    HostName example.com
+```
+- **Authentication Methods**:
+  - <LabelHighlight>publickey</LabelHighlight>: Default and secure.
+  - <LabelHighlight>password</LabelHighlight>: Prompts for a password.
+  - <LabelHighlight>keyboard-interactive</LabelHighlight>: Supports additional authentication layers.
+
+---
+
+### Step 4. Example Configuration
+
+Within each host block, you can set various parameters to define the connection details for that particular host. Some commonly used parameters include:
+
+1. <b>HostName</b>: Specifies the IP address or domain name of the remote server. You could also give multiple names separated with space. These will work like aliases.
+2. <b>User</b>: Specifies the username to be used for authentication.
+3. <b>Port</b>: Specifies the port number for the SSH connection. Default is 22.
+4. <b>IdentityFile</b>: Specifies the path to the private key file for authentication. If not specified, SSH will try to use the default <LabelHighlight>id_rsa</LabelHighlight> file.
+5. <b>PreferredAuthentications</b>: allows you to specify the preferred authentication methods in the order of preference. The most popular options are <LabelHighlight>publickey</LabelHighlight> <LabelHighlight>password</LabelHighlight> <LabelHighlight>keyboard-interactive</LabelHighlight>. <LabelHighlight>publickey</LabelHighlight> is the default and most secure authentication method. It uses SSH key pairs for authentication. If you have set up SSH keys on both the client and server, using this option ensures that SSH attempts public key-based authentication first. password option allows password-based authentication. When using this method, SSH will prompt you for the password associated with the specified username on the remote server. <LabelHighlight>keyboard-interactive</LabelHighlight> provides a more flexible authentication method that can support a variety of mechanisms, including password authentication and additional challenges. It can be used for systems that require an extra layer of authentication beyond passwords or SSH keys.
+
+### Step 5. Connecting to Named Hosts
+
+Once you have defined named hosts in your <LabelHighlight>~/.ssh/config</LabelHighlight> file, connecting to them becomes simple. 
+Open your terminal and type ssh <LabelHighlight>host_name</LabelHighlight> to initiate an SSH connection. 
+For example, to connect to server1, you would type <LabelHighlight>ssh server1</LabelHighlight>. 
+If you have configured all the necessary parameters correctly, you will be prompted for your password or asked to select the appropriate private key for authentication.
+
+Use the <LabelHighlight>Host</LabelHighlight> alias to connect:
+```text
+$ ssh server1
+$ ssh personal_github
+$ ssh aws_server1
+```
+
+---
+
+## Additional tips
+
+<b>Tip 1</b>: To save time, you can set up password-less authentication using SSH keys. This eliminates the need to enter a password or select a key each time you connect. Be sure to keep your private key secure and protected.
+
+<b>Tip 2</b>: You can use wildcards and patterns in the Host field to match multiple hosts with similar configurations. For example, Host *.example.com will match any host under the example.com domain.
+
+<b>Tip 3</b>: The UseKeychain directive in the SSH configuration file (~/.ssh/config) is specific to macOS systems. When set to yes, it instructs SSH to use the user's keychain to store and retrieve SSH keys for authentication.
+Here's what the UseKeychain directive does:
+
+1. <b>Keychain Integration</b>: The macOS Keychain is a secure storage system that stores various types of sensitive information, including passwords and encryption keys. When UseKeychain is set to yes, SSH will attempt to store the user's private SSH keys in the Keychain, so that they can be automatically retrieved and used for authentication when connecting to SSH servers.
+2. <b>Password Persistence</b>: Additionally, when using password-based authentication, UseKeychain allows SSH to store the user's SSH password in the Keychain. This feature enables the automatic retrieval of passwords, avoiding the need to enter them every time an SSH connection is established.
+
+---
+
+## Examples
+
+Multiple Host Alias names: We can gave multiple names for a host. In the below example we gave 3 names to the same server aws_virginia_server, SV241 andmyblog.com, you can later connect to it using ssh aws_virginia_server or ssh SV241 or ssh myblog.com.
+
+```
+Host aws_virginia_server SV241 myblog.com
+    HostName example.com
+    User username
+    Port 22
+    IdentityFile ~/.ssh/id_rsa
+```
+
+Below will prompt you to enter the password for the username
+```
+Host myserver
+    HostName example.com
+    User username
+    PreferredAuthentications password
+```
+
+###  A more practical config file
+
+I have 2 github account and see how I have configured them. I also connect to multiple servers. See how I have configured mutiple aws servers in the below example.
+
+``` text
+Host github.com
+    IdentityFile ~/.ssh/id_rsa
+
+# Krishna1 Github Account
+Host krishna1_github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_krishna1
+
+# Krishna1 Github Account
+Host krishna2_github
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_krishna2
+    UseKeychain yes
+
+# ------------
+# AWS Servers
+# ------------
+
+# Client 1 (Ireland Region)
+# https://app.myproject.com/
+Host client1 myproject app.myproject.com
+    HostName 34.243.18.223
+    User deployer
+    IdentityFile ~/.ssh/id_rsa_aws_client_1
+    UseKeychain yes
+
+# Client 2 (Ireland Region)
+# https://www.client2website.com/
+Host client2 client2website www.client2website.com
+    HostName 72.124.72.176
+    User deployer
+    IdentityFile ~/.ssh/id_rsa_aws_client_2
+    UseKeychain yes
+```
+
+Here is how I use it:
+
+``` bash
+# Check if the configuration and key is working. 
+
+# Below uses ~/.ssh/id_rsa as configured
+$ ssh -T git@github.com
+
+# Below will sign into the krishna1 github account 
+# and uses ~/.ssh/id_rsa_krishna1
+$ ssh -T git@krishna1github.com
+
+# Below will sign into the krishna2 github account 
+# and uses ~/.ssh/id_rsa_krishna2
+$ ssh -T git@krishna2github.com
+
+# Pull from the github repository (1st account)
+$ git clone https://krishna1_github/example/repo.git
+
+# Pull from the github repository (2nd account)
+$ git clone https://krishna2_github/example/repo.git
+
+# Connect to Client 1 AWS Server
+$ ssh client1 # OR
+$ ssh myproject # OR
+$ ssh app.myproject.com
+
+# Connect to Client 2 AWS Server
+$ ssh client2 # OR
+$ ssh client2website # OR
+$ ssh www.client2website.com
+```
+
+## Conclusion
+
+Configuring the <LabelHighlight>~/.ssh/config</LabelHighlight> file with named hosts can significantly simplify your SSH connections, especially when dealing with multiple servers. I hope the steps mentioned above helped you to streamline your SSH workflow, save time, and reduce the chances of errors while connecting to remote servers.

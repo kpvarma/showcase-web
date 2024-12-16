@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+
+// UI Imports
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import PropTypes from 'prop-types';
+
+// Asset Imports
+import imageLibrary from '../../components/utils/image_library';
 
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -93,7 +98,7 @@ export default function ProjectCard({
         <CardMedia
           component="img"
           alt={project.title}
-          image={project.thumb_image}
+          image={imageLibrary.getProjectImage(project.thumb_image)}
           sx={{
             aspectRatio: '16 / 9',
             borderBottom: '1px solid',

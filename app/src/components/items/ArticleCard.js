@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+
+// UI Imports
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import PropTypes from 'prop-types';
+import ArticleTags from './Tags'
+
+// Asset Imports
+import imageLibrary from '../../components/utils/image_library';
 
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -46,32 +50,6 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-// Tags Component
-function Tags({ tags }) {
-  return (
-    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', marginTop: 4 }}>
-      {tags.map((tag, index) => (
-        <Chip
-          key={index}
-          label={tag}
-          sx={{
-            backgroundColor: '#f0f0f0', // Light gray background for the badge
-            color: '#333', // Dark text
-            fontSize: '0.75rem', // Smaller font size
-            fontWeight: 'bold',
-            padding: '4px 8px',
-            borderRadius: '16px', // Rounded edges for the badge
-          }}
-        />
-      ))}
-    </Box>
-  );
-}
-
-Tags.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
 // Helper Function for Formatting
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -109,7 +87,7 @@ export default function ArticleCard({
         <CardMedia
           component="img"
           alt={article.title}
-          image={article.thumb_image}
+          image={imageLibrary.getArticleImage(article.thumb_image)}
           sx={{
             aspectRatio: '16 / 9',
             borderBottom: '1px solid',
@@ -131,7 +109,7 @@ export default function ArticleCard({
               Last Modified: {new Date(article.date_modified).toLocaleDateString()}
             </Typography>
           )}
-          <Tags tags={article.tags} sx={{ marginTop: '20px' }} />
+          <ArticleTags tags={article.tags} sx={{ marginTop: '20px' }} />
         </StyledCardContent>
       </StyledCard>
     </Link>

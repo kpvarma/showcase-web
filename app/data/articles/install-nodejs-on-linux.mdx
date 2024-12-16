@@ -1,20 +1,37 @@
 ---
-title: "How to Install Node.js on Linux (Updated for 2023)"
+title: "How to Install Node.js"
 summary: "Learn how to install Node.js on Linux step-by-step, including updating your package list, installing dependencies, importing the GPG key, and verifying your installation."
 date: "2023-04-03"
 last_modified: "2023-04-03"
-thumb_image: "https://picsum.photos/800/450?random=2"
-cover_image: "https://picsum.photos/800/450?random=2"
+thumb_image: "install-nodejs-on-linux.png"
+cover_image: "install-nodejs-on-linux.png"
 tags:
   - Node.js
-  - Linux
   - Installation
-  - Tutorial
-  - Software Setup
 featured: true
 layout: "PostLayout"
 draft: false
 ---
+
+# Installing Node.js on Mac OSx
+
+Install <LabelHighlight>Homebrew</LabelHighlight> package manager by entering the command 
+
+``` bash
+/bin/bash -c “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Install <LabelHighlight>Node.js</LabelHighlight> by running the command 
+
+``` bash
+brew install node
+```
+
+Verify that <LabelHighlight>Node.js</LabelHighlight> is installed by typing the following in the terminal
+
+``` bash
+“node -v
+```
 
 # Installing Node.js on Linux
 
@@ -55,7 +72,7 @@ The Node.js GPG (GNU Privacy Guard) key ensures the authenticity of Node.js down
 
 With the GPG key imported, install Node.js by running:
 
-```code
+``` bash
 sudo apt-get install -y nodejs
 ```
 
@@ -63,7 +80,7 @@ sudo apt-get install -y nodejs
 
 After installation, confirm that Node.js is installed by checking the version:
 
-```code
+``` bash
 node -v
 ```
 
@@ -71,7 +88,7 @@ node -v
 
 If you plan to build native modules for Node.js, install the build tools:
 
-```code
+``` bash
 sudo apt-get install -y build-essential
 ```
 

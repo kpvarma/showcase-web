@@ -20,7 +20,7 @@ const MuiComponents = {
       variant="body1"
       component="p"
       sx={{
-        // fontSize: '1rem',
+        fontSize: '1rem',
         lineHeight: 1.5,
         marginBottom: 2,
         marginTop: 2,
@@ -146,45 +146,54 @@ const MuiComponents = {
   )),
 
   // Tables with styling
-  table: memo((props) => (
-    <Table
-      {...props}
-      sx={{
-        marginBottom: 2,
-        marginTop: 2,
-        border: '1px solid #ddd',
-        '& th, & td': {
-          padding: 1.5,
-          textAlign: 'left',
-        },
-      }}
-    />
-  )),
-  tr: memo((props) => <TableRow {...props} />),
-  td: memo(({ align, ...props }) => <TableCell align={align || undefined} {...props} />),
-  tbody: memo((props) => <TableBody {...props} />),
-  th: memo(({ align, ...props }) => (
-    <TableCell align={align || undefined} sx={{ fontWeight: 'bold', backgroundColor: '#f9f9f9' }} {...props} />
-  )),
-  thead: memo((props) => <TableHead {...props} />),
+table: memo((props) => (
+  <Table
+    {...props}
+    sx={(theme) => ({
+      marginBottom: 2,
+      marginTop: 2,
+      border: `1px solid ${theme.palette.divider}`, // Use theme's divider color
+      '& th, & td': {
+        padding: 1.5,
+        textAlign: 'left',
+        borderBottom: `1px solid ${theme.palette.divider}`, // Add row borders
+      },
+      backgroundColor: theme.palette.background.paper, // Adapt to light/dark mode
+      color: theme.palette.text.primary, // Adapt text color
+      borderRadius: '8px', // Add rounded corners for better aesthetics
+      overflow: 'hidden', // Ensure content stays inside
+    })}
+  />
+)),
 
-  // CodeBlock with improved styling
-  code: memo((props) => (
-    <CodeBlock
-      {...props}
-      variant="body1"
-      sx={{
-        // backgroundColor: '#282C34',
-        color: '#FFFFFF',
-        padding: 2,
-        borderRadius: '4px',
-        fontFamily: '"Fira Code", "Roboto Mono", monospace',
-        fontSize: '0.875rem',
-        overflowX: 'auto',
-        marginBottom: 2,
-      }}
-    />
-  )),
+tr: memo((props) => <TableRow {...props} />),
+
+td: memo(({ align, ...props }) => (
+  <TableCell
+    align={align || undefined}
+    sx={(theme) => ({
+      color: theme.palette.text.primary,
+    })}
+    {...props}
+  />
+)),
+
+tbody: memo((props) => <TableBody {...props} />),
+
+th: memo(({ align, ...props }) => (
+  <TableCell
+    align={align || undefined}
+    sx={(theme) => ({
+      fontWeight: 'bold',
+      backgroundColor: theme.palette.action.hover, // Subtle background for header cells
+      color: theme.palette.text.primary,
+      borderBottom: `1px solid ${theme.palette.divider}`,
+    })}
+    {...props}
+  />
+)),
+
+thead: memo((props) => <TableHead {...props} />),
 
   // Divider for horizontal rule
   hr: memo(() => (
@@ -218,6 +227,26 @@ const MuiComponents = {
         color: '#333',
       }}
     />
+  )),
+
+  // CodeBlock with improved styling
+  code: CodeBlock,
+  
+  // Label highlight component
+  LabelHighlight: memo(({ children, color = '#016f9c', backgroundColor = 'rgb(255 255 255)', fontWeight = 'bold', ...props }) => (
+    <span
+      {...props}
+      style={{
+        color: color,
+        backgroundColor: backgroundColor,
+        fontWeight: fontWeight,
+        borderRadius: '4px',
+        padding: '2px 4px',
+        fontFamily: 'Roboto, Arial, sans-serif',
+      }}
+    >
+      {children}
+    </span>
   )),
 };
 

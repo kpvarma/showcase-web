@@ -1,0 +1,141 @@
+---
+title: "Utility Docker Images"
+summary: "Utility Docker Images"
+date: "2023-04-03"
+last_modified: "2023-04-03"
+thumb_image: "utility-docker-images-nodejs.png"
+cover_image: "utility-docker-images-nodejs.png"
+tags:
+  - Node.js
+  - Docker
+  - Utilities
+featured: true
+layout: "PostLayout"
+draft: false
+---
+
+## What are utility docker containers?
+
+Docker utility containers are containers that are used to provide specific utility functions, rather than running applications or services. These containers can be used to perform a variety of tasks, such as monitoring, logging, debugging, and more.
+
+## Some examples of docker utility containers include:
+
+1. <b>Logspout</b> — a utility container that collects logs from all containers running on a Docker host and forwards them to a log aggregator.
+2. <b>Sysdig</b> — a container that provides system-level monitoring and troubleshooting capabilities for containers and hosts.
+3. <b>Nginx Proxy</b> — a container that provides reverse proxy and load balancing capabilities for web services.
+4. <b>Consul</b> — a container that provides service discovery and configuration management capabilities for distributed systems.
+5. <b>Docker Registry</b> — a container that provides a centralized location for storing and distributing Docker images.
+
+Overall, Docker utility containers can be incredibly useful for simplifying the management and operation of containerized environments. By using these containers, users can easily add new functionality to their Docker environments without having to manually install and configure additional software.
+
+## Why use a docker utility container to create a new node.js application?
+
+Using a utility container to create a Node.js application has several benefits, including:
+
+1. <b>Simplified development</b>: By using a utility container, developers can easily set up a development environment that includes all the necessary dependencies and tools needed to build and test their applications. This can help to reduce the time and effort required to get up and running with a new Node.js project.
+2. <b>Consistent environment</b>: Docker utility containers provide a consistent environment for development and deployment, which can help to reduce the likelihood of errors and issues that can arise from differences in software versions and configurations across different environments.
+3. <b>Isolation</b>: Docker containers provide isolation for the Node.js application, which helps to prevent conflicts with other applications running on the same host machine. This can be especially useful when running multiple applications on the same server.
+
+## Prerequisite
+
+You’ll want to make sure you have the following components installed on your machine:
+
+* Docker (Desktop download here, or here for Apple M1 chips)
+* VSCode
+
+## Lets Dive In
+
+Clone the utility-docker-images repository. This is a one-time task. Once this is set up, you could use the same utility container for creating multiple node.js applications.
+
+``` bash
+$ git clone git@github.com:kpvarma/utility-docker-images.git
+$ cd utility-docker-images
+```
+
+Build the docker image for node_utility
+
+``` bash
+$ docker-compose build node_utility
+```
+
+Starting the Node Utility
+
+Start the node_utility service in a container
+
+``` bash
+$ docker-compose run — rm node_utility init
+```
+
+Replace the name new_app or new_api with what you like.
+
+You will now see the node project files created in the node/new_app folder
+
+You could now install any npm you need. whatever you type after node_utility is passed as the argument to the npm command running inside the docker utility container. Check the CMD command in Dockerfile to learn how this is done.
+
+``` bash
+# for e.g to install Express.js, do like below:
+$ docker-compose run --rm node_utility install express
+
+# Install multiple libraries
+$ docker-compose run --rm node_utility install mongoose nodemon dotenv
+```
+
+Alternatively, you could edit the node/new_app/package.json and add your desired dependencies and do an npm install in one go.
+
+``` bash
+$ docker-compose run — rm node_utility install
+```
+
+Add Dockerfile and docker-compose.yml
+
+``` bash
+touch node/new_app/Dockerfile
+touch node/new_app/docker-compose.yml
+```
+
+Copy the content below to the newly created Dockerfile
+
+``` bash
+FROM node
+
+# Update and install required dependencies
+RUN apt-get update && apt-get install -y build-essential && apt-get clean
+
+# Create a directory for the application
+RUN mkdir /app
+WORKDIR /app
+
+COPY package.json /app
+RUN npm install
+
+# Expose a port
+EXPOSE 8002
+```
+
+Copy the content below to the newly created Dockerfile
+
+``` bash
+version: '3.9'
+services:
+  nodejs:
+    build:
+      context: ./nodejs/image
+    image: new_node_app:latest
+    container_name: new_node_app
+    command: ["/bin/bash"]
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file:
+      - ./nodejs/image/nodejs.env
+    volumes:
+      - ./nodejs/lessons:/app/lessons/
+volumes:
+  nodejs_lessons:
+```
+
+You can now move the node/new_app folder outside of this folder where ever you wish and keep developing it.
+
+``` bash
+$ mv node/new_app ~/Projects/2023/new_project_name
+```
