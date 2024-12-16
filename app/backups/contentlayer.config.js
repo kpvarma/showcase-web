@@ -1,9 +1,4 @@
-import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeHighlight from 'rehype-highlight';
-import { visit } from 'unist-util-visit';
+import { defineDocumentType, makeSource } from '@contentlayer/source-files';
 
 const computedFields = {
   slug: {
@@ -31,8 +26,7 @@ const Project = defineDocumentType(() => ({
     date: { type: 'date', required: true },
     last_modified: { type: 'date' },
     skills: { type: 'list', of: { type: 'string' }, required: true },
-    tags: { type: 'list', of: { type: 'string' }, default: [] },
-    
+
     cover_image: { type: 'string', required: true },
     thumb_image: { type: 'string', required: true },
 
@@ -66,26 +60,11 @@ const Article = defineDocumentType(() => ({
   computedFields,
 }));
 
-export const rehypeDefaultLanguage = (defaultLanguage = 'text') => {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      if (node.tagName === 'code' && !node.properties.className) {
-        node.properties.className = [`language-${defaultLanguage}`];
-      }
-    });
-  };
-};
-
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Project, Article],
   mdx: {
-    remarkPlugins: [remarkGfm], // Enables tables and GFM
-    rehypePlugins: [
-      rehypeSlug,
-      rehypeAutolinkHeadings,
-      [rehypeDefaultLanguage, 'text'], // Fallback to plain text for code blocks without a language
-      rehypeHighlight,
-    ],
+    remarkPlugins: [],
+    rehypePlugins: [],
   },
 });

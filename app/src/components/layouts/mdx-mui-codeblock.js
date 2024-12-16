@@ -1,128 +1,85 @@
-import React, { memo, useCallback, useMemo, useState, useEffect } from "react";
-import Prism from "prismjs";
-import components from "prismjs/components";
-import "prismjs/themes/prism.css"; // Use a theme you like
-import { Box, Paper, IconButton, Tooltip } from "@mui/material";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import React, { useState } from 'react';
 
-const nativeLanguages = components.languages;
-const nativePairs = Object.assign(
-  ...Object.entries(nativeLanguages).map(([key, value]) => ({
-    [key]: { key, lang: value },
-  }))
-);
+// Import Material-UI for the copy icon
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-const pairs = Object.assign(
-  ...Object.entries(nativePairs)
-    .filter(([key, value]) => value.lang.alias)
-    .map(([key, value]) => {
-      const alias = Array.isArray(value.lang.alias)
-        ? value.lang.alias
-        : [value.lang.alias];
-      return Object.assign(...alias.map((a) => ({ [a]: value })));
-    }),
-  nativePairs
-);
+const CodeBlock = ({ children, className = '', metastring }) => {
+  const [copied, setCopied] = useState(false);
 
-const importLang = async (language) => {
-  const { key, lang } = pairs[language];
-  if (!key) {
-    return;
-  }
-  if (lang.require) {
-    const req = Array.isArray(lang.require) ? lang.require : [lang.require];
-    await Promise.all(req.map((language) => importLang(language)));
-  }
-  await import(`prismjs/components/prism-${key}`);
-};
+  const handleCopy = () => {
+    const codeToCopy = Array.isArray(children)
+      ? children.join('').trim()
+      : (children || '').toString().trim();
 
-const CodeBlock = ({ children, className }) => {
-  const language = useMemo(
-    () => (className ? className.replace(/language-/, "") : ""),
-    [className]
-  );
-  const { key } = useMemo(() => pairs[language] || {}, [language]);
-  const canBeHighlighted = useMemo(() => Boolean(key), [key]);
-  const [isReady, setIsReady] = useState(!canBeHighlighted);
-  const [copySuccess, setCopySuccess] = useState(false);
+    navigator.clipboard.writeText(codeToCopy);
+    setCopied(true);
 
-  useEffect(() => {
-    let isCanceled = false;
-    setIsReady(!canBeHighlighted);
-    if (canBeHighlighted) {
-      (async () => {
-        await importLang(language);
-        if (isCanceled) return;
-        setIsReady(true);
-      })();
-    }
-    return () => {
-      isCanceled = true;
-    };
-  }, [canBeHighlighted, language]);
-
-  const html = useMemo(() => {
-    if (!isReady || !canBeHighlighted) {
-      return Prism.util.encode(children);
-    }
-    return Prism.highlight(children, Prism.languages[language], language);
-  }, [canBeHighlighted, children, isReady, language]);
-
-  const createMarkup = useCallback(() => ({ __html: html }), [html]);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(children.trim()).then(
-      () => {
-        setCopySuccess(true);
-        setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
-      },
-      () => {
-        setCopySuccess(false);
-      }
-    );
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  // Extract language and highlighted lines
+  const language = className.replace('language-', '');
+  const highlightLines = metastring
+    ? metastring
+        .split('highlightLines=')[1]
+        ?.replace(/"/g, '')
+        .split(',')
+        .map((line) => parseInt(line, 10))
+    : [];
+
   return (
-    <Box sx={{ my: 2 }}>
-      <Paper
-        elevation={3}
-        sx={{
-          position: "relative",
-          padding: 2,
-          backgroundColor: "text.secondary",
-          // border: "1px solid #f1f1f1",
-          borderRadius: "4px",
-          overflowX: "auto",
-          fontFamily: '"Fira Code", "Roboto Mono", monospace',
+    <div style={{ position: 'relative', marginBottom: '1rem' }}>
+      {/* Preformatted code block */}
+      <pre
+        className={className}
+        data-highlight-lines={highlightLines.join(',')} // Custom attribute for highlighting
+        style={{ padding: '1rem', overflowX: 'auto', position: 'relative' }}
+      >
+        <code>{children}</code>
+      </pre>
+
+      {/* Copy Button */}
+      <button
+        onClick={handleCopy}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          backgroundColor: '#007acc',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          padding: '5px 10px',
+          cursor: 'pointer',
+          fontSize: '0.875rem',
         }}
       >
-        {/* Copy Button */}
-        <Tooltip title={copySuccess ? "Copied!" : "Copy to clipboard"} arrow>
-          <IconButton
-            size="small"
-            onClick={copyToClipboard}
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              backgroundColor: copySuccess ? "#4caf50" : "#fff",
-              "&:hover": {
-                backgroundColor: copySuccess ? "#66bb6a" : "#f0f0f0",
-              },
-            }}
-          >
-            <ContentCopyIcon fontSize="small" />
-          </IconButton>
-        </Tooltip>
+        <ContentCopyIcon style={{ fontSize: '1rem' }} />
+        {copied ? 'Copied!' : 'Copy'}
+      </button>
 
-        {/* Code Block */}
-        <code
-          className={`language-${language}`}
-          dangerouslySetInnerHTML={createMarkup()}
-        />
-      </Paper>
-    </Box>
+      {/* Language Tag
+      {language && (
+        <span
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            right: '10px',
+            fontSize: '0.75rem',
+            color: '#888',
+            backgroundColor: '#f5f5f5',
+            borderRadius: '4px',
+            padding: '2px 5px',
+          }}
+        >
+          {language}
+        </span>
+      )} */}
+    </div>
   );
 };
 
-export default memo(CodeBlock);
+export default CodeBlock;

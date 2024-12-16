@@ -19,6 +19,14 @@ import ColorModeIconDropdown from '../../shared-theme/ColorModeIconDropdown';
 // Asset Imports
 import imageLibrary from '../../components/utils/image_library';
 
+const buttons = {
+  "/": "Home",
+  "/projects": "Projects",
+  "/articles": "Articles",
+  "/aboutme": "About Me",
+};
+
+
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -68,11 +76,14 @@ export default function Header() {
             </Link>
 
             <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 2 }}>
-              {['/projects', '/articles', '/aboutme'].map((path, idx) => (
+              {Object.entries(buttons).map(([path, text], idx) => (
                 <Button
-                  key={idx} variant="text" size="small" href={path}
+                  key={idx}
+                  variant="text"
+                  size="small"
+                  href={path}
                   sx={{
-                    fontSize: '0.9em',
+                    fontSize: '1.0em',
                     color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
                     fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
                     border: isActive(`^${path}(/[^/]+)?$`) ? '0px solid' : 'none',
@@ -87,7 +98,7 @@ export default function Header() {
                     },
                   }}
                 >
-                  {path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                  {text}
                 </Button>
               ))}
             </Box>
@@ -110,13 +121,14 @@ export default function Header() {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                {['/projects', '/articles', '/aboutme'].map((path, idx) => (
+                {Object.entries(buttons).map(([path, text], idx) => (
                   <MenuItem
                     key={idx}
                     component={Link}
                     to={path}
                     onClick={toggleDrawer(false)}
                     sx={{
+                      fontSize: '1.0em',
                       color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
                       fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
                       border: isActive(`^${path}(/[^/]+)?$`) ? '1px solid' : 'none',
@@ -131,7 +143,7 @@ export default function Header() {
                       },
                     }}
                   >
-                    {path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+                    {text}
                   </MenuItem>
                 ))}
                 <Divider sx={{ my: 3 }} />

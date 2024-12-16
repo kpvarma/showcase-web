@@ -91,7 +91,7 @@ export default function AboutMe() {
                     maxWidth: '100%', // Prevent exceeding container
                     height: 'auto',
                     borderRadius: '8px',
-                    maxWidth: '60%', // Shrinks to 60% on mobile
+                    maxWidth: '100%', // Shrinks to 60% on mobile
                     '@media (minWidth: 600px)': {
                       width: '100%', // 100% for larger screens
                     },
@@ -168,7 +168,7 @@ export default function AboutMe() {
           </Grid>
           {/* Skills Logos */}
           <Grid item xs={12} md={6} sx={{pl: {xs: "0px !important"}, pt: "0px !important" }}>
-            <LogoSlider logos={skills} rows={5} columns={5} interval={9000} />
+            <LogoSlider logos={skills} rows={4} columns={4} interval={9000} />
           </Grid>
         </Grid>
       </Box>

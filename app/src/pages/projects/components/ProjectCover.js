@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 
+// Asset Imports
+import imageLibrary from '../../../components/utils/image_library';
+
 const ProjectCover = ({project}) => {
     const default_image = "https://via.placeholder.com/800x400.png?text=Interactive+MDX";
     return (
@@ -17,7 +20,7 @@ const ProjectCover = ({project}) => {
     >
         {/* Cover Image */}
         <img
-            src={project.cover_image || default_image}
+            src={imageLibrary.getProjectImage(project.cover_image || default_image)}
             alt={project.title}
             style={{ width: "100%", height: "100%", objectFit: "cover", filter: project.draft ? "grayscale(80%)" : "none" }}
         />  {/* Apply grayscale for drafts */}

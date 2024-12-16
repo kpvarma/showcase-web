@@ -10,7 +10,7 @@ const image_mapping = {
     coders_desk: "backgrounds/coders_desk.png",
 
     // Display Images (Displayed on various pages)
-    about_me: "displays/about_me.png",
+    about_me: "displays/about_me.avif",
 
     machineLearning: 'displays/machine-learning.png',
     dataScience: 'displays/data-science.png',

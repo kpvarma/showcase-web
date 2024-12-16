@@ -19,6 +19,9 @@ import { allProjects } from '../../../.contentlayer/generated/index.mjs';
 // MDX Components
 import MdxButton from '../../components/mdx/mdx_button'
 
+// Asset Imports
+import imageLibrary from '../../components/utils/image_library';
+
 const defaultLayout = 'PostLayout';
 const layouts = {
   PostLayout: (props) => <div {...props} />, // Add your PostLayout component here
@@ -66,7 +69,7 @@ export default function ProjectShow() {
         title={project.title}
         description={project.summary}
         url={'/articles/{article.slug}'}
-        image={project.cover_image}
+        image={imageLibrary.getProjectImage(project.cover_image)}
       />
       <Box sx={{ padding: 2 }}>
 
@@ -77,7 +80,7 @@ export default function ProjectShow() {
 
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, marginTop: 1 }}>
           {project.skills.map((skill, index) => (
-            <Chip key={index} label={skill} color="text.primary" />
+            <Chip key={index} label={skill} color="primary" />
           ))}
         </Box>
 
