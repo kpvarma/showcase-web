@@ -6,23 +6,20 @@ last_modified: "2024-12-05"
 thumb_image: "transliterating-indian-languages.png"
 cover_image: "transliterating-indian-languages.png"
 skills:
-  - Diacritical Marks
-  - Transliteration
-  - Linguistics
-  - React
+  - ReactJS
   - JavaScript
 tags:
-  - Git
-  - Configuration
+  - Linguistics
+  - Diacritical Marks
+  - Transliteration
 featured: true
 draft: false
 layout: "PostLayout"
 demo_url: '/demos/transliterate'
 ---
 
-# Transliteration Made Easy
-
 This tool showcases a robust **JavaScript-based transliteration tool** that converts (transliterate) **Indian scripts** into **each other** and also to **english with diacritical marks**, offering an accurate representation of phonetic elements in the original language.
+
 ---
 
 ## Key Features
@@ -32,26 +29,93 @@ This tool showcases a robust **JavaScript-based transliteration tool** that conv
 - **Interactive Application**: Easily integrated into React-based applications for dynamic user experiences.
 - **Preservation of Nuances**: Handles diacritical marks to maintain the richness of Malayalam pronunciation.
 
-This currently support the following:
-* Malayalam to English with Diacritical Marks
-* Malayalam to Sanskrit
-* Malayalam to Hindi
-* Malayalam to Tamil
+This currently supports the following:
 
-* Sanskrit to English with Diacritical Marks
-* Sanskrit to Malayalam
-* Sanskrit to Hindi
-* Sanskrit to Tamil
+| **From / To**            | **English (Diacritical)** | **Malayalam** | **Sanskrit** | **Hindi** | **Tamil** |
+|---------------------------|--------------------------|---------------|-------------|-----------|-----------|
+| **Malayalam**            | ✅                        | -             | ✅           | ✅         | ✅         |
+| **Sanskrit**             | ✅                        | ✅            | -           | ✅         | ✅         |
+| **Tamil**                | ✅                        | ✅            | ✅           | ✅         | -         |
+| **Hindi**                | ✅                        | ✅            | ✅           | -         | ✅         |
 
-* Tamil to English with Diacritical Marks
-* Tamil to Sanskrit
-* Tamil to Hindi
-* Tamil to Malayalam
+---
 
-* Hindi to English with Diacritical Marks
-* Hindi to Sanskrit
-* Hindi to Malayalam
-* Hindi to Tamil
+## Examples
+
+| **Original (Sanskrit)**                                | **English (Diacritical)**            | **Malayalam**                       | **Tamil**                          | **Hindi**                          |
+|-------------------------------------------------------|--------------------------------------|------------------------------------|-----------------------------------|-----------------------------------|
+| ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि। धियो यो नः प्रचोदयात्। | oṃ bhūrbhuvaḥ svaḥ tatsaviturvareṇyaṃ bhargo devasya dhīmahi dhiyo yo naḥ pracodayāt. | ഓം ഭൂർഭുവഃ സ്വഃ തത്സവിതുര്വരേണ്യം ഭർഗോ ദേവസ്യ ധീമഹി ധിയോ യോ നഃ പ്രചോദയാത്। | ஓம் பூர்புவ: ஸ்வ: தத்ஸவிதுர்வரேண்யம் பர்கோ தேவஸ்ய தீமஹி தியோ யோ ந: ப்ரசோதயாத்। | ओं भूर्भुवः स्वः तस्सवितुर्वरेण्यम् भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्। |
+| असतो मा सद्गमय। तमसो मा ज्योतिर्गमय। मृत्योर्मामृतं गमय। | asato mā sadgamaya, tamaso mā jyotirgamaya, mṛtyormāmṛtaṃ gamaya. | അസതോ മാ സദ്ഗമയ। തമസോ മാ ജ്യോതിർഗമയ। മൃത്യോർമാമൃതം ഗമയ। | அஸதோ மா ஸத்கமய। தமஸோ மா ஜ்யோதிர்கமய। ம்ருத்யோர்மாம்ருதம் கமய। | असतो मा सद्गमय। तमसो मा ज्योतिर्गमय। मृत्योर्मामृतं गमय। |
+| ॐ शान्तिः शान्तिः शान्तिः।                         | oṃ śāntiḥ śāntiḥ śāntiḥ.            | ഓം ശാന്തിഃ ശാന്തിഃ ശാന്തിഃ।           | ஓம் சாந்தி: சாந்தி: சாந்தி:।           | ओं शान्तिः शान्तिः शान्तिः।           |
+
+## Language Transliteration Mappings
+
+### Vowels
+| **Sanskrit** | **Hindi** | **Malayalam** | **Tamil** | **English** |
+|--------------|-----------|---------------|-----------|-------------|
+| अ            | अ         | അ              | அ          | a           |
+| आ            | आ         | ആ             | ஆ          | ā           |
+| इ            | इ         | ഇ              | இ          | i           |
+| ई            | ई         | ഈ             | ஈ          | ī           |
+| उ            | उ         | ഉ              | உ          | u           |
+| ऊ            | ऊ         | ഊ             | ஊ          | ū           |
+| ऋ            | ऋ         | ഋ              | -          | ṛi          |
+| ॠ            | ॠ         | ൠ             | -          | r̄ī          |
+| ए            | ए         | എ              | எ          | e           |
+| ऐ            | ऐ         | ഏ             | ஏ          | ē           |
+| ओ            | ओ         | ഒ              | ஒ          | o           |
+| औ            | औ         | ഓ             | ஓ          | ō           |
+
+---
+
+### Consonants
+| **Sanskrit** | **Hindi** | **Malayalam** | **Tamil** | **English** |
+|--------------|-----------|---------------|-----------|-------------|
+| क            | क         | ക              | க          | k           |
+| ख            | ख         | ഖ             | ஖          | kh          |
+| ग            | ग         | ഗ              | ஗          | g           |
+| घ            | घ         | ഘ             | ஘          | gh          |
+| ङ            | ङ         | ങ              | ங          | ṅg          |
+| च            | च         | ച              | ச          | c           |
+| ज            | ज         | ജ              | ஜ          | j           |
+| त            | त         | ത              | த          | t           |
+| प            | प         | പ              | ப          | p           |
+| म            | म         | മ              | ம          | m           |
+| य            | य         | യ              | ய          | y           |
+| र            | र         | ര              | ர          | r           |
+
+---
+
+### Numerals
+| **Sanskrit** | **Hindi** | **Malayalam** | **Tamil** | **English** |
+|--------------|-----------|---------------|-----------|-------------|
+| ०            | ०         | ൦              | ௦          | 0           |
+| १            | १         | ൧              | ௧          | 1           |
+| २            | २         | ൨              | ௨          | 2           |
+| ३            | ३         | ൩              | ௩          | 3           |
+| ४            | ४         | ൪              | ௪          | 4           |
+| ५            | ५         | ൫              | ௫          | 5           |
+| ६            | ६         | ൬              | ௬          | 6           |
+| ७            | ७         | ൭              | ௭          | 7           |
+| ८            | ८         | ൮              | ௮          | 8           |
+| ९            | ९         | ൯              | ௯          | 9           |
+
+
+## What are Diacritical Marks?
+
+**Diacritical marks**, also known simply as **diacritics**, are small symbols added to letters to modify their pronunciation, tone, or meaning. They play a crucial role in languages that use the Latin, Cyrillic, and other scripts, providing clarity to how a word is spoken or interpreted.
+
+For example:
+
+- The **acute accent** (´) in *é* indicates stress or a specific vowel sound, as in the French word **résumé**.  
+- The **tilde** (~) in *ñ* changes the pronunciation, as seen in the Spanish word **señor**.  
+- In transliteration of Indian languages (e.g., Sanskrit, Malayalam), diacritics like **macrons** (ā, ī) and **dots** (ṛ, ṭ) are used to preserve accurate phonetic representations.
+
+Diacritical marks are essential for **phonetic precision** and are widely used in **transliteration systems**, allowing accurate representation of sounds across different scripts and languages. 
+
+For example, in **IAST (International Alphabet of Sanskrit Transliteration)**, diacritics help maintain the richness of Indian scripts like Devanagari when converting them to Roman script.
+
+By adding these subtle marks, diacritics ensure that nuances in **pronunciation, tone, and meaning** are not lost when a language is written or transliterated.
 
 ---
 
@@ -74,6 +138,6 @@ Experience the power of transliteration by clicking the buttons below to try the
 You may either enter the text or copy paste it for transliteration or upload the document in text format.
 
 <MdxButton text="Try Translating a Text " url="/demos/transliterate" target="_self" />
-<MdxButton text="Try Uploading a Document" url="/demos/transliterate_documents" target="_self" />
+<MdxButton text="Try Uploading a Document" url="/demos/transliterate_document" target="_self" />
 
 Explore the tool in action and see how you can implement it in your own applications!
