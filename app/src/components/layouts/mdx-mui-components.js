@@ -140,7 +140,6 @@ const MuiComponents = {
         marginBottom: 1,
         fontSize: '1rem',
         color: 'text.primary',
-        color: '#555',
       }}
     />
   )),
@@ -224,7 +223,7 @@ thead: memo((props) => <TableHead {...props} />),
         // margin: '0 auto',
         // padding: '0 16px',
         // maxWidth: '800px',
-        color: '#333',
+        color: 'primary',
       }}
     />
   )),
