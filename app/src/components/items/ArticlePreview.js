@@ -1,26 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// UI Imports
 import { Box, Typography } from '@mui/material';
-import ArticleTags from '../../components/items/Tags'
 import { Link } from 'react-router-dom';
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
+// Page Component Imports
+import ArticleTags from './Tags'
+import { getTimeAgo } from '../utils/date_format';
 
-  const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'short' });
-  const year = date.getFullYear();
-
-  const daySuffix = (n) => {
-    const s = ['th', 'st', 'nd', 'rd'];
-    const v = n % 100;
-    return s[(v - 20) % 10] || s[v] || s[0];
-  };
-
-  return `${day}${daySuffix(day)} ${month} ${year}`;
-}
-
-function ArticlePreview({ article }) {
+function ArticlePreview({ article, paddingBottom=4 }) {
   return (
     <Box
       sx={{
@@ -30,7 +19,7 @@ function ArticlePreview({ article }) {
         // boxShadow: 1,
         // borderRadius: 2,
         // backgroundColor: 'background.paper',
-        mb: 4,
+        mb: paddingBottom,
       }}
     >
       <Link to={`/articles/${article.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -42,13 +31,10 @@ function ArticlePreview({ article }) {
         {article.summary}
       </Typography>
       <Typography variant="caption" color="text.secondary">
-        Published: {formatDate(article.date)}
+        Score: {article.score} &nbsp;
+        Published {getTimeAgo(article.date)}
+        {article.last_modified && ` and last modified ${getTimeAgo(article.last_modified)}`}
       </Typography>
-      {article.date_modified && (
-        <Typography variant="caption" color="text.secondary">
-          Last Modified: {new Date(article.date_modified).toLocaleDateString()}
-        </Typography>
-      )}
       <Box sx={{ mt: 0 }}>
         <ArticleTags tags={article.tags} />
       </Box>
@@ -61,7 +47,7 @@ ArticlePreview.propTypes = {
     title: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    date_modified: PropTypes.string,
+    last_modified: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,

@@ -8,7 +8,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+
+// Page Component Imports
 import ArticleTags from './Tags'
+import { getTimeAgo } from '../../components/utils/date_format';
 
 // Asset Imports
 import imageLibrary from '../../components/utils/image_library';
@@ -102,13 +105,9 @@ export default function ArticleCard({
             {article.summary}
           </StyledTypography>
           <Typography variant="body2" color="text.secondary">
-            Published: {formatDate(article.date)}
+            Published {getTimeAgo(article.date)}
+            {article.last_modified && ` and last modified ${getTimeAgo(article.last_modified)}`}
           </Typography>
-          {article.date_modified && (
-            <Typography variant="caption" color="text.secondary">
-              Last Modified: {new Date(article.date_modified).toLocaleDateString()}
-            </Typography>
-          )}
           <ArticleTags tags={article.tags} sx={{ marginTop: '20px' }} />
         </StyledCardContent>
       </StyledCard>

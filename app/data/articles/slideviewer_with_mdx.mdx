@@ -1,0 +1,156 @@
+---
+title: "Integrating SlideViewer Component with MDX"
+summary: "Learn how to use a custom React SlideViewer component within your MDX files to display image carousels with thumbnails."
+date: "2023-09-21"
+last_modified: "2024-03-29"
+thumb_image: "https://picsum.photos/800/450?random=2"
+cover_image: "slideviewer-component-with-mdx.png"
+tags:
+  - Slide Viewer
+  - Demo
+  - Draft
+featured: false
+draft: false
+layout: "PostLayout"
+---
+
+Enhance your articles with visually engaging image galleries by integrating the <LabelHighlight>SlideViewer</LabelHighlight> component. This component enables you to add a responsive image carousel with clickable thumbnails directly in your MDX files, making it perfect for showcasing slides, presentations, or image collections.
+
+The SlideViewer is highly customizable, responsive, and works seamlessly on both desktop and mobile devices. Let’s dive into its implementation and usage.
+
+# What is the SlideViewer Component?
+
+The SlideViewer component is a custom React component designed to display an image carousel with thumbnails. It uses the
+
+## SlideViewer Component Code
+
+Here is the React implementation of the <LabelHighlight>SlideViewer</LabelHighlight> component:
+
+## Demo
+
+import SlideViewer from "../../src/components/mdx/slide_viewer"
+
+<SlideViewer images={[
+  "https://picsum.photos/800/450?random=1",
+  "https://picsum.photos/800/450?random=2",
+  "https://picsum.photos/800/450?random=3",
+  "https://picsum.photos/800/450?random=4",
+  "https://picsum.photos/800/450?random=5",
+  "https://picsum.photos/800/450?random=6",
+  "https://picsum.photos/800/450?random=7",
+  "https://picsum.photos/800/450?random=8",
+  "https://picsum.photos/800/450?random=9",
+  "https://picsum.photos/800/450?random=10",
+]} />
+
+### SlideViewer.js
+
+```jsx
+import React, { useState } from "react";
+import Carousel from "react-material-ui-carousel";
+import { Box, Grid, Typography, Stack } from "@mui/material";
+
+export default function SlideViewer({ images }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleThumbnailClick = (index) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <Box sx={{ width: "100%", display: "flex", maxHeight: "60vh" }}>
+      {/* Thumbnails on the Left */}
+      <Box
+        sx={{
+          display: {xs: "none", sm: "block"},
+          width: "20%",
+          overflowY: "auto",
+          borderRight: "1px solid #ddd",
+          padding: 1,
+          "&::-webkit-scrollbar": { width: "5px" },
+        }}
+      >
+        <Stack spacing={1}>
+          {images.map((img, index) => (
+            <Box
+              key={index}
+              onClick={() => handleThumbnailClick(index)}
+              sx={{
+                cursor: "pointer",
+                border:
+                  index === currentIndex ? "2px solid #1976d2" : "2px solid transparent",
+                borderRadius: "5px",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={img}
+                alt={`Thumbnail ${index}`}
+                style={{ width: "100%", height: "80px", objectFit: "cover" }}
+              />
+            </Box>
+          ))}
+        </Stack>
+      </Box>
+
+      {/* Main Slide on the Right */}
+      <Box sx={{ flex: 1, padding: 2 }}>
+        <Carousel
+          index={currentIndex}
+          autoPlay={false}
+          navButtonsAlwaysVisible
+          onChange={(now) => setCurrentIndex(now)}
+          animation="slide"
+          indicators={false}
+        >
+          {images.map((img, index) => (
+            <Box
+              key={index}
+              sx={{
+                width: "100%",
+                // height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={img}
+                alt={`Slide ${index}`}
+                style={{ width: "100%", objectFit: "contain" }}
+              />
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+    </Box>
+  );
+}
+```
+
+---
+
+## Using the Component in MDX
+
+To use the <LabelHighlight>SlideViewer</LabelHighlight> in your MDX file, you must first register it in your <LabelHighlight>components</LabelHighlight> object.
+
+### Register the Component
+
+```javascript
+import SlideViewer from './components/SlideViewer';
+
+const components = {
+  ...MuiComponents,
+  SlideViewer,
+};
+```
+
+---
+
+### Final Output
+
+The <LabelHighlight>SlideViewer</LabelHighlight> will display:
+1. **Thumbnails**: Scrollable on mobile, displayed vertically on desktop.
+2. **Main Slide**: A responsive image carousel that adapts to the screen size.
+
+This provides a seamless user experience for showcasing slides, presentations, or image galleries.

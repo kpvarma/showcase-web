@@ -13,7 +13,7 @@ import { useTheme } from '@mui/material/styles';
 
 // Page Component Imports
 // import ArticleCard from '../../components/items/ArticleCard';
-import ArticlePreview from './preview';
+import ArticlePreview from '../../components/items/ArticlePreview';
 import MetaTags from '../../components/layouts/meta_tags'
 
 // Content Import
@@ -33,28 +33,21 @@ export default function ArticlesIndex() {
     ...new Set(allArticles.filter((article) => article.draft === false).flatMap((article) => article.tags)),
   ];
 
-  const filterArticles = (tag='All') => {
+  const filterArticles = (tag = 'All') => {
     setSelectedTag(tag);
   
-    // Ignoring all drafts
-    let filteredArticles = allArticles.filter((article) => article.draft === false);
+    // Step 1: Ignore all drafts
+    let filteredArticles = allArticles.filter((article) => !article.draft);
   
-    // Filtering by tag
-    filteredArticles = tag === 'All' 
-      ? filteredArticles 
-      : filteredArticles.filter((article) => article.tags.includes(tag));
+    // Step 2: Filter by tag
+    if (tag !== 'All') {
+      filteredArticles = filteredArticles.filter((article) => article.tags.includes(tag));
+    }
+
+    // Step 3: Sort by score (featured status and then by reverse chronological order)
+    filteredArticles = filteredArticles.sort((a, b) => b.score - a.score);
   
-    // Sorting: Featured first, then by reverse chronological order
-    filteredArticles = filteredArticles.sort((a, b) => {
-      if (a.featured !== b.featured) {
-        return a.featured ? -1 : 1; // Featured articles come first
-      }
-      const dateA = new Date(a.last_modified || a.date);
-      const dateB = new Date(b.last_modified || b.date);
-      return dateB - dateA; // Newest articles come first
-    });
-  
-    // Updating the state
+    // Step 4: Update the state
     setFilteredArticles(filteredArticles);
   };
 

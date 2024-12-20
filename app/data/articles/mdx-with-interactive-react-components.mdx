@@ -1,79 +1,325 @@
 ---
-title: "Interactive MDX Example"
-summary: "An example MDX file demonstrating the use of React components."
-date: "2024-11-28"
-last_modified: "2024-11-29"
-thumb_image: "https://picsum.photos/800/450?random=1"
-cover_image: "https://picsum.photos/800/450?random=1"
+title: "Using Interactive Custom Components with MDX"
+summary: "Learn how to enhance your MDX content with interactive custom components to make your articles more engaging and dynamic."
+date: "2023-07-23"
+last_modified: "2024-03-19"
+thumb_image: "interactive-react-components.png"
+cover_image: "interactive-react-components.png"
 tags:
+  - MDX
+  - ReactJS
   - Markdown
-featured: false
+featured: true
 layout: "PostLayout"
-draft: true
+draft: false
 ---
 
-# Welcome to the Interactive MDX Example
-
-This MDX file demonstrates how you can combine **Markdown** with **React components** to create rich, interactive documents.
-
----
-
-## Embedded React Component
-
-Here is a simple React counter component:
-
-{/* # <Counter /> */}
+MDX allows you to combine Markdown with JSX, enabling the integration of React components directly within your content. This opens up a world of possibilities for creating interactive and dynamic articles. 
+In this guide, we'll explore how to use custom components in MDX and provide practical examples to get you started.
 
 ---
 
-## JS Code Block Example
+## What Are Custom Components in MDX?
+
+Custom components in MDX are React components that you can embed in your Markdown content. These components allow you to:
+- Add interactivity (e.g., buttons, toggles).
+- Visualize data dynamically (e.g., charts, tables).
+- Enhance user experience with reusable UI elements.
+
+---
+
+## Install Dependencies
+
+Ensure you have the necessary dependencies for MDX and React:
+```bash
+npm install @mdx-js/react react react-dom
+```
+
+import TabsComponent from "../../src/components/mdx/tabs_renderer";
+import SimpleButton from "../../src/components/mdx/simple_button"
+import ToggleButton from "../../src/components/mdx/toggle_button"
+import MdxCounterDemo from "../../src/components/mdx/counter_demo"
+import AudioPlayer from "../../src/components/mdx/audio_player"
+
+## Example 1: A Simple Button Component
+
+### Demo
+
+Here is an example of using a simple button in MDX
+
+Here’s a simple button:
+
+<SimpleButton label="Click Me" onClick={() => alert('Button Clicked!')} />
+
+## Usage
+
+Now copy the following to your mdx file to view the button.
+Make sure the path is correct for the import to work.
+
+``` javascript
+import SimpleButton from "./components/mdx/SimpleButton"
+
+<SimpleButton label="Click Me" onClick={() => alert('Button Clicked!')} />
+```
+
+### Simple Button Component
+
+Copy the following to <LabelHighlight>SimpleButton.jsx</LabelHighlight> file in your components directory.
+
+``` javascript
+// components/mdx/SimpleButton.jsx
+import React from 'react';
+
+const SimpleButton = ({ label, onClick }) => (
+  <button onClick={onClick} style={{ padding: '10px 20px', fontSize: '16px' }}>
+    {label}
+  </button>
+);
+
+export default SimpleButton;
+```
+
+## Example 2: A Simple Toggle Button Component
+
+Here is an example of how you can use a simple toggle button in your MDX content.
+
+### Demo
+
+Here’s a toggle button:
+
+<ToggleButton label="Feature Status" />
+
+### Usage
+
+Copy the following in your MDX file view the toggle button in action.
+
+``` javascript
+import ToggleButton from './components/mdx/ToggleButton';
+
+# Toggle Example
+
+Switch the toggle to change the state:
+<ToggleButton label="Feature Status" />
+```
+
+### Toggle Component
+
+Create a <LabelHighlight>ToggleButton.jsx</LabelHighlight> component:
+
+``` javascript
+import React, { useState } from 'react';
+
+export const ToggleButton = ({ label }) => {
+  const [isOn, setIsOn] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsOn(!isOn)}>
+        {isOn ? 'Turn Off' : 'Turn On'}
+      </button>
+      <p>{label}: {isOn ? 'ON' : 'OFF'}</p>
+    </div>
+  );
+};
+```
+
+## Example 3: A custom counter
+
+### Demo
+
+Here is an example of an interactive counter component. 
+
+
+
+<MdxCounterDemo></MdxCounterDemo>
+
+### Usage 
+
+You can import a jsx file in your mdx file like this:
+
+``` javascript
+import MdxCounterDemo from './components/mdx/CounterDemo';
+
+<MdxCounterDemo></MdxCounterDemo>
+```
+
+### The Counter Component
+
+Here is how you can create the counter component:
+
+In <LabelHighlight>CounterDemo.jsx</LabelHighlight>, define a simple React component:
+``` javascript
+// components/MdxCounterDemo.jsx
+import React, { useState } from 'react';
+import { Button, Box, TextField, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
+const MdxCounterDemo = () => {
+  // State for the counter and increment/decrement value
+  const [counter, setCounter] = useState(0);
+  const [step, setStep] = useState(1);
+
+  // Access the current theme
+  const theme = useTheme();
+
+  // Handlers for button actions
+  const handleReset = () => setCounter(0);
+  const handleIncrement = () => setCounter((prev) => Math.min(prev + step, 1000));
+  const handleDecrement = () => setCounter((prev) => Math.max(prev - step, 0));
+
+  // Handler for step input change
+  const handleStepChange = (event) => {
+    const value = Math.max(1, Math.min(10, Number(event.target.value))); // Ensure value is between 1 and 10
+    setStep(value);
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 2,
+        padding: 2,
+        border: `1px solid ${theme.palette.divider}`,
+        borderRadius: '8px',
+        maxWidth: '300px',
+        margin: '0 auto',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[2],
+      }}
+    >
+      {/* Display the current counter */}
+      <Typography
+        component="div"
+        variant="h4"
+        sx={{
+          fontWeight: 'bold',
+          marginBottom: 2,
+          color: "text.primary",
+        }}
+      >
+        Counter: {counter}
+      </Typography>
+
+      {/* Input for step value */}
+      <TextField
+        label="Step"
+        type="number"
+        inputProps={{ min: 1, max: 10 }}
+        value={step}
+        onChange={handleStepChange}
+        sx={{
+          minWidth: '100px',
+          '& .MuiInputBase-input': {
+            color: "text.primary",
+          },
+          '& .MuiInputLabel-root': {
+            color: "text.primary",
+          },
+        }}
+      />
+
+      {/* Buttons for counter actions */}
+      <Box sx={{ display: 'flex', gap: 1 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleReset}
+          sx={{
+            padding: '8px 16px',
+            backgroundColor: theme.palette.primary.main,
+            '&:hover': {
+              backgroundColor: theme.palette.primary.dark,
+            },
+          }}
+        >
+          Reset
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={handleIncrement}
+          sx={{
+            padding: '8px 16px',
+            backgroundColor: theme.palette.success.main,
+            '&:hover': {
+              backgroundColor: theme.palette.success.dark,
+            },
+          }}
+        >
+          +
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleDecrement}
+          sx={{
+            padding: '8px 16px',
+            backgroundColor: theme.palette.error.main,
+            '&:hover': {
+              backgroundColor: theme.palette.error.dark,
+            },
+          }}
+        >
+          -
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
+export default MdxCounterDemo;
+```
+
+### Example 4: A Custom Audio Player Component
+
+Here is an example of how you can use a custom audio player component in your MDX content by passing the URL of an MP3 file.
+
+#### Demo
+
+Here’s an audio player:
+
+<AudioPlayer url="https://actions.google.com/sounds/v1/weather/thunderstorm_long.ogg" />
+
+#### Usage
+
+Copy the following in your MDX file to view the audio player in action.
 
 ```javascript
-function exampleFunction() {
-  console.log("This is a code block example!");
-}
+import AudioPlayer from './components/mdx/AudioPlayer';
+
+# Audio Player Example
+
+Here’s an audio player:
+<AudioPlayer url="https://actions.google.com/sounds/v1/weather/thunderstorm_long.ogg" />
 ```
 
-## Ruby Code Block Example
+#### Audio Player Component
 
-```ruby
-class Example
-  def print(val)
-    puts val
-  end
-end
+Create a <LabelHighlight>AudioPlayer.jsx</LabelHighlight> component:
+
+```javascript
+import React from 'react';
+
+export const AudioPlayer = ({ url }) => {
+  return (
+    <audio controls style={{ width: '100%' }}>
+      <source src={url} type="audio/ogg" />
+      Your browser does not support the audio element.
+    </audio>
+  );
+};
 ```
 
-## Form Example
+## Tips for Working with Custom Components
 
-MDX supports forms as well. Below is a small form that takes your input and displays it:
-
-{/* <FormExample /> */}
-
----
-
-## Chart Integration
-
-You can include interactive charts directly within your MDX files. Here's an example using a hypothetical `BarChart` component:
-
-{/* <BarChart
-  data={[
-    { name: "January", value: 40 },
-    { name: "February", value: 30 },
-    { name: "March", value: 50 },
-  ]}
-/> */}
+- **Prop Passing**: Pass props to customize components dynamically.
+- **Styling**: Use CSS or libraries like TailwindCSS to style components.
+- **Reusable Components**: Create generic components to use across multiple MDX files.
 
 ---
 
-## Live Code Demo
+## Conclusion
 
-Use the `CodeDemo` component to show live code examples:
-
-{/* <CodeDemo code={`<button onClick={() => alert('Hello!')}>Click Me!</button>`} /> */}
-
----
-
-### How to Use These Components
-
-All of these components are React components that you define in your project. You can pass props to them, manage state, and make them fully interactive.
+Integrating custom components with MDX bridges the gap between static content and interactivity. Whether you're building documentation, blogs, or learning platforms, MDX with React components enables you to deliver richer and more engaging content. Start experimenting with your own components and take your MDX articles to the next level!
