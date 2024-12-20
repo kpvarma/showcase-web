@@ -37,7 +37,7 @@ export const brand = {
   100: 'hsl(195, 53%, 90%)',
   200: 'hsl(195, 53%, 80%)',
   300: 'hsl(195, 53%, 65%)',
-  400: '#006F9C',            // Slightly lighter
+  400: '#05a5e6',            // Slightly lighter
   500: '#004D73',            // Main (Peacock Blue)
   600: '#003E5E',            // Darker shade
   700: '#00314B',            // Even darker
@@ -108,7 +108,7 @@ export const getDesignTokensOriginal = (mode) => {
       mode,
       primary: {
         light: brand[200],
-        main: mode === 'light' ? '#0275da' : brand[400],
+        main: mode === 'light' ? '#0275da' : "#05a5e6",
         dark: brand[700],
         contrastText: brand[50],
         ...(mode === 'dark' && {

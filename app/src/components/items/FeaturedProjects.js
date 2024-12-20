@@ -11,8 +11,12 @@ import ProjectCard from '../../components/items/ProjectCard';
 import { allProjects } from '../../../.contentlayer/generated/index.mjs';
 
 const FeaturedProjects = () => {
-    const featuredProjects = allProjects.filter(project => project.featured).slice(0, 5);
 
+    let featuredProjects = allProjects
+                                .filter(project => project.featured)
+                                .filter((article) => !article.draft) // Step 1: Ignore all drafts
+                                .sort((a, b) => b.score - a.score) // Sort by score in descending order
+                                .slice(0, 5);
     return (
       <Box sx={{width: '100%'}}>
         <Carousel

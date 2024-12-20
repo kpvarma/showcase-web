@@ -134,10 +134,27 @@ This approach ensures that the tool is lightweight, fast, and capable of handlin
 
 ## Try It Now
 
-Experience the power of transliteration by clicking the buttons below to try the live demo:
+Experience the power of transliteration by clicking the buttons below to try the live demo:  
 You may either enter the text or copy paste it for transliteration or upload the document in text format.
 
-<MdxButton text="Try Translating a Text " url="/demos/transliterate" target="_self" />
-<MdxButton text="Try Uploading a Document" url="/demos/transliterate_document" target="_self" />
+import { Button } from '@mui/material';
+
+<Button 
+  variant="contained" 
+  color="primary" 
+  href="/demos/transliterate" 
+  target="_self" 
+  style={{ marginRight: '10px' }}
+>
+  Try Translating a Text
+</Button>
+<Button 
+  variant="contained" 
+  color="secondary" 
+  href="/demos/transliterate_document" 
+  target="_self"
+>
+  Try Uploading a Document
+</Button>
 
 Explore the tool in action and see how you can implement it in your own applications!
