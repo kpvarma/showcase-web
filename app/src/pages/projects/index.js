@@ -26,34 +26,27 @@ export default function ProjectIndex() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const filterProjects = (skill='All', tag='All') => {
+  const filterProjects = (tag = 'All', skill = 'All') => {
     setSelectedSkill(skill);
     setSelectedTag(tag);
   
-    // Ignoring all drafts
-    let filteredProjects = allProjects.filter((project) => project.draft === false);
-  
-    // Filtering by skill
+    // Step 1: Ignore all drafts
+    let filteredProjects = allProjects.filter((article) => !article.draft);
+    
+    // Step 2: Filter by tag
+    if (tag !== 'All') {
+      filteredProjects = filteredProjects.filter((article) => article.tags.includes(tag));
+    }
+
+    // Step 3: Filtering by skill
     filteredProjects = skill === 'All' 
       ? filteredProjects 
       : filteredProjects.filter((project) => project.skills.includes(skill));
-    
-    // Filtering by tag
-    filteredProjects = tag === 'All' 
-    ? filteredProjects 
-    : filteredProjects.filter((project) => project.tags.includes(tag));
+
+    // Step 3: Sort by score (featured status and then by reverse chronological order)
+    filteredProjects = filteredProjects.sort((a, b) => b.score - a.score);
   
-    // Sorting: Featured first, then by reverse chronological order
-    filteredProjects = filteredProjects.sort((a, b) => {
-      if (a.featured !== b.featured) {
-        return a.featured ? -1 : 1; // Featured projects come first
-      }
-      const dateA = new Date(a.last_modified || a.date);
-      const dateB = new Date(b.last_modified || b.date);
-      return dateB - dateA; // Newest projects come first
-    });
-  
-    // Updating the state
+    // Step 4: Update the state
     setFilteredProjects(filteredProjects);
   };
 
