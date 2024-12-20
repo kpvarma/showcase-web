@@ -4,7 +4,7 @@
   "description": "A simple bookmark app on google extension",
   "main": "src/index.js",
   "scripts": {
-    "watch-content": "nodemon --watch data --ext mdx --exec \"npx contentlayer2 build\"",
+    "watch-content": "nodemon --watch data --ext mdx --exec \"rm -rf .contentlayer && npx contentlayer2 build\"",
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
     "build": "contentlayer2 build && webpack --mode production"
@@ -19,11 +19,13 @@
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.9",
     "axios": "^0.24.0",
+    "chart.js": "^4.4.7",
     "contentlayer2": "^0.5.3",
     "highlight.js": "^11.11.0",
     "markdown-to-jsx": "^7.x.x",
     "pliny": "^0.4.0",
     "react": "^18.0.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
     "react-material-ui-carousel": "^3.4.2",
@@ -57,5 +59,17 @@
     "node": ">=22.11.0"
   },
   "author": "Krishna Prasad Varma",
-  "license": "MIT"
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

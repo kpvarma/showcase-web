@@ -18,6 +18,20 @@ const computedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFilePath,
   },
+  score: {
+    type: 'number',
+    resolve: (doc) => {
+      const featuredScore = doc.featured ? 1 : 0;
+
+      const lastModified = new Date(doc.last_modified);
+      const now = new Date();
+      const daysSinceLastModified = doc.last_modified
+        ? Math.floor((now - lastModified) / (1000 * 60 * 60 * 24)) // Convert milliseconds to days
+        : 0;
+
+      return featuredScore + (1 / (daysSinceLastModified + 1));
+    },
+  },
 };
 
 const Project = defineDocumentType(() => ({
@@ -33,8 +47,8 @@ const Project = defineDocumentType(() => ({
     skills: { type: 'list', of: { type: 'string' }, required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     
-    cover_image: { type: 'string', required: true },
     thumb_image: { type: 'string', required: true },
+    cover_image: { type: 'string' },
 
     featured: { type: 'boolean' },
     layout: { type: 'string' },
@@ -57,7 +71,7 @@ const Article = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' }, default: [] },
 
     thumb_image: { type: 'string', required: true },
-    cover_image: { type: 'string', required: true },
+    cover_image: { type: 'string' },
 
     featured: { type: 'boolean' },
     layout: { type: 'string' },

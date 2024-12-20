@@ -1,26 +1,41 @@
 // General Imports
-import * as React from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 // UI Imports
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Link from '@mui/material/Link';
 
 // Page Component Imports
+import MetaTags from '../../components/layouts/meta_tags'
+import ProjectCover from './components/ProjectCover';
+
+// MDX Imports
 import { MDXLayoutRenderer } from 'pliny/mdx-components';
 import MuiComponents from '../../components/layouts/mdx-mui-components';
-import ProjectCover from './components/ProjectCover';
-import MetaTags from '../../components/layouts/meta_tags'
-
-// Content Import
-import { allProjects } from '../../../.contentlayer/generated/index.mjs';
-
-// MDX Components
-import MdxButton from '../../components/mdx/mdx_button'
 
 // Asset Imports
 import imageLibrary from '../../components/utils/image_library';
+
+// Stylesheet Imports
+// import 'highlight.js/styles/atom-one-dark.css';
+// import 'highlight.js/styles/atom-one-light.css';
+// import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/github-dark.css';
+// import 'highlight.js/styles/solarized-dark.css';
+// import 'highlight.js/styles/default.css';
+// import 'highlight.js/styles/vs.css';
+// import 'highlight.js/styles/vs2015.css';
+// import '../../stylesheets/overrides.css'
+
+// Content Import
+import { allProjects } from '../../../.contentlayer/generated/index.mjs';
+let liveProjects = allProjects.filter((project) => project.draft === false);
 
 const defaultLayout = 'PostLayout';
 const layouts = {
@@ -31,7 +46,6 @@ const layouts = {
 // Extend mdx-mui-components with custom components
 const components = {
   ...MuiComponents,
-  MdxButton
 };
 
 export default function ProjectShow() {

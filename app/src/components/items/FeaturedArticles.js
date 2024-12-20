@@ -6,7 +6,8 @@ import { styled } from '@mui/material/styles';
 import { Box, Chip, Button, Typography } from '@mui/material';
 
 // Page Component Imports
-
+import { getTimeAgo } from '../utils/date_format';
+import ArticlePreview from './ArticlePreview';
 
 // Content Import
 import { allArticles } from '../../../.contentlayer/generated/index.mjs';
@@ -19,46 +20,8 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-// Helper Function for Formatting
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-
-  const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'short' });
-  const year = date.getFullYear();
-
-  const daySuffix = (n) => {
-    const s = ["th", "st", "nd", "rd"];
-    const v = n % 100;
-    return s[(v - 20) % 10] || s[v] || s[0];
-  };
-
-  return `${day}${daySuffix(day)} ${month} ${year}`;
-};
-
-function Tags({ tags }) {
-  return (
-    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', marginTop: 4 }}>
-      {tags.map((tag, index) => (
-        <Chip
-          key={index}
-          label={tag}
-          sx={{
-            backgroundColor: '#f0f0f0', // Light gray background for the badge
-            color: '#333', // Dark text
-            fontSize: '0.75rem', // Smaller font size
-            fontWeight: 'bold',
-            padding: '4px 8px',
-            borderRadius: '16px', // Rounded edges for the badge
-          }}
-        />
-      ))}
-    </Box>
-  );
-}
-
 const FeaturedArticles = () => {
-  const featuredArticles = allArticles.filter(article => article.featured).slice(0, 5);
+  const featuredArticles = allArticles.filter(article => article.featured).slice(0, 3);
 
   return (
     <Box
@@ -75,7 +38,8 @@ const FeaturedArticles = () => {
           component={Button}
           sx={[
             (theme) => ({
-              p: 2,
+              pl: 2,
+              textAlign: 'left',
               height: '100%',
               width: '100%',
               '&:hover': {
@@ -84,7 +48,8 @@ const FeaturedArticles = () => {
             })
           ]}
         >
-          <Box
+          <ArticlePreview key={article.slug} article={article} paddingBottom={0} />
+          {/* <Box
             sx={[
               {
                 width: '100%',
@@ -113,23 +78,15 @@ const FeaturedArticles = () => {
                 }}
               >
                 <Typography variant="body2" color="text.secondary">
-                  Published: {formatDate(article.date)}
+                  Published {getTimeAgo(article.date)}
+                  {article.last_modified && ` and last modified ${getTimeAgo(article.last_modified)}`}
                 </Typography>
                 <Typography variant="body2" color="text.primary" sx={{ textAlign: 'right' }}>
                   Read Article
                 </Typography>
               </Box>
             </Link>
-            {/* <Typography variant="body2" color="text.secondary">
-              Published: {formatDate(article.date)}
-            </Typography>
-            {article.last_modified && (
-              <Typography variant="caption" color="text.secondary">
-                Last Modified: {new Date(article.last_modified).toLocaleDateString()}
-              </Typography>
-            )} */}
-            {/* <Tags tags={article.tags} sx={{ marginTop: '20px' }} /> */}
-          </Box>
+          </Box> */}
         </Box>
       ))}
     </Box>

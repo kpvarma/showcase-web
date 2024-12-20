@@ -72,9 +72,9 @@ const TransliterateDocument = () => {
         transliterate(line, selectedInputLanguage, selectedOutputLanguage)
       );
 
-      console.log("selectedInputLanguage: ", selectedInputLanguage)
-      console.log("selectedOutputLanguage: ", selectedOutputLanguage)
-      console.log("outputLines: ", outputLines)
+      // console.log("selectedInputLanguage: ", selectedInputLanguage)
+      // console.log("selectedOutputLanguage: ", selectedOutputLanguage)
+      // console.log("outputLines: ", outputLines)
 
       const outputContent = outputLines.join('\n');
       const outputBlob = new Blob([outputContent], { type: 'text/plain' });
@@ -93,7 +93,7 @@ const TransliterateDocument = () => {
       setSelectedOutputLanguage(value);
     }
 
-    console.log(languageSelectionError);
+    // console.log(languageSelectionError);
 
     if (selectedInputLanguage == selectedOutputLanguage) {
       setLanguageSelectionError('Both input and output language cannot be same.');
