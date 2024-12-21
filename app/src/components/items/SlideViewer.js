@@ -38,7 +38,7 @@ export default function SlideViewer({ images }) {
               <img
                 src={img}
                 alt={`Thumbnail ${index}`}
-                style={{ width: "100%", height: "80px", objectFit: "cover" }}
+                style={{ width: "100%", height: "auto", objectFit: "cover" }}
               />
             </Box>
           ))}
@@ -60,16 +60,17 @@ export default function SlideViewer({ images }) {
               key={index}
               sx={{
                 width: "100%",
-                // height: "100%",
+                height: "100%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                maxHeight: "70vh",
               }}
             >
               <img
                 src={img}
                 alt={`Slide ${index}`}
-                style={{ width: "100%", objectFit: "contain" }}
+                style={{ maxHeight: "80vh", maxWidth: "70vw", objectFit: "contain" }}
               />
             </Box>
           ))}

@@ -58,6 +58,30 @@ const Project = defineDocumentType(() => ({
   computedFields,
 }));
 
+const Demo = defineDocumentType(() => ({
+  name: 'Demo',
+  filePathPattern: 'demos/*.mdx',
+  contentDirPath: 'data',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    last_modified: { type: 'date' },
+    skills: { type: 'list', of: { type: 'string' }, required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    
+    thumb_image: { type: 'string', required: true },
+    cover_image: { type: 'string' },
+
+    featured: { type: 'boolean' },
+    layout: { type: 'string' },
+    draft: { type: 'boolean' },
+    url: { type: 'string' },
+  },
+  computedFields,
+}));
+
 const Article = defineDocumentType(() => ({
   name: 'Article',
   filePathPattern: 'articles/**/*.mdx',
@@ -92,7 +116,7 @@ export const rehypeDefaultLanguage = (defaultLanguage = 'text') => {
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Project, Article],
+  documentTypes: [Project, Demo, Article],
   mdx: {
     remarkPlugins: [remarkGfm], // Enables tables and GFM
     rehypePlugins: [
