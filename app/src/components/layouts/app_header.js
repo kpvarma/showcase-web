@@ -21,6 +21,7 @@ import imageLibrary from '../../components/utils/image_library';
 
 const buttons = {
   "/": "Home",
+  "/demos": "Demos",
   "/projects": "Projects",
   "/articles": "Articles",
   "/aboutme": "About Me",

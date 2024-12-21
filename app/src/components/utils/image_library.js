@@ -63,6 +63,7 @@ const image_mapping = {
     {
       getLogoImage: (imageFileName = 'logo.png') => getLogoUrl(imageFileName),
       getProjectImage: (imageFileName) => getDynamicImageUrl('projects', imageFileName),
+      getDemoImage: (imageFileName) => getDynamicImageUrl('demos', imageFileName),
       getArticleImage: (imageFileName) => getDynamicImageUrl('articles', imageFileName),
     },
     {

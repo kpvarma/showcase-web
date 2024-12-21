@@ -7,7 +7,7 @@
     "watch-content": "nodemon --watch data --ext mdx --exec \"rm -rf .contentlayer && npx contentlayer2 build\"",
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
-    "build": "contentlayer2 build && webpack --mode production"
+    "build": "rm -rf .contentlayer && npx contentlayer2 build && webpack --mode production"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",
@@ -18,11 +18,16 @@
     "@mdx-js/react": "^3.1.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.9",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@react-pdf/renderer": "^4.1.5",
     "axios": "^0.24.0",
     "chart.js": "^4.4.7",
     "contentlayer2": "^0.5.3",
+    "file-saver": "^2.0.5",
     "highlight.js": "^11.11.0",
+    "jszip": "^3.10.1",
     "markdown-to-jsx": "^7.x.x",
+    "pdfjs-dist": "4.0.379",
     "pliny": "^0.4.0",
     "react": "^18.0.0",
     "react-chartjs-2": "^5.2.0",
