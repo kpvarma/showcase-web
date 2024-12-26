@@ -125,7 +125,8 @@ ProjectCard.propTypes = {
     summary: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     last_modified: PropTypes.string,
-    skills: PropTypes.arrayOf(PropTypes.string).isRequired, // Updated to expect array of strings
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string),
     thumb_image: PropTypes.string.isRequired,
     cover_image: PropTypes.string.isRequired,
     layout: PropTypes.string,

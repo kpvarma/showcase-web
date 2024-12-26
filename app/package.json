@@ -7,7 +7,8 @@
     "watch-content": "nodemon --watch data --ext mdx --exec \"rm -rf .contentlayer && npx contentlayer2 build\"",
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
-    "build": "rm -rf .contentlayer && npx contentlayer2 build && webpack --mode production"
+    "build": "npx contentlayer2 build && webpack --mode production",
+    "build-no-cache": "rm -rf .contentlayer && npx contentlayer2 build && webpack --mode production"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",
@@ -56,7 +57,7 @@
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.7",
     "style-loader": "^3.3.4",
-    "webpack": "^5.90.2",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^4.15.1"
   },

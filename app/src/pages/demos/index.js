@@ -26,16 +26,22 @@ export default function DemoIndex() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const filterDemos = (tag = 'All', skill = 'All') => {
+  const filterDemos = (skill = 'All', tag = 'All') => {
     setSelectedSkill(skill);
     setSelectedTag(tag);
+
+    console.log("tag: ", tag);
+    console.log("skill: ", skill);
+
+    console.log("selectedTag: ", selectedTag);
+    console.log("setSelectedSkill: ", selectedSkill);
   
     // Step 1: Ignore all drafts
-    let filteredDemos = allDemos.filter((article) => !article.draft);
+    let filteredDemos = allDemos.filter((demo) => !demo.draft);
     
     // Step 2: Filter by tag
     if (tag !== 'All') {
-      filteredDemos = filteredDemos.filter((article) => article.tags.includes(tag));
+      filteredDemos = filteredDemos.filter((demo) => demo.tags.includes(tag));
     }
 
     // Step 3: Filtering by skill
@@ -63,7 +69,7 @@ export default function DemoIndex() {
   ];
 
   useEffect(() => {
-    filterDemos('All'); // Call the filtering function on page load
+    filterDemos('All', 'All'); // Call the filtering function on page load
   }, []); // Empty dependency array ensures it runs only once
 
   return (
@@ -87,7 +93,7 @@ export default function DemoIndex() {
       <Box sx={{ mt: 4 }}>
         {isMobile ? (
           // Show dropdown on mobile
-          <Select value={selectedSkill} onChange={(e) => filterDemos(e.target.value)} fullWidth displayEmpty 
+          <Select value={selectedSkill} onChange={(e) => filterDemos(selectedSkill, e.target.value)} fullWidth displayEmpty 
                   sx={{ backgroundColor: '#f9f9f9', borderRadius: 1, marginBottom: 2, padding: '8px', }}>
             {skills.map((skill) => (
               <MenuItem key={skill} value={skill}>
@@ -101,7 +107,7 @@ export default function DemoIndex() {
             sx={{ display: 'flex', flexDirection: 'row', gap: 1, flexWrap: 'wrap', }}
           >
             {skills.map((skill) => (
-              <Chip key={skill} label={skill} clickable onClick={() => filterDemos(skill)}
+              <Chip key={skill} label={skill} clickable onClick={() => filterDemos(skill, 'All')}
                 color={selectedSkill === skill ? 'primary' : 'default'}
                 sx={{ fontSize: '1rem', minHeight: '36px', padding: '0 16px', lineHeight: '36px',
                   borderRadius: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',}} />
@@ -116,7 +122,7 @@ export default function DemoIndex() {
         {isMobile ? (
           <Grid item xs={12} sx={{}}>
             <Select
-              value={selectedTag} onChange={(e) => filterArticles(e.target.value)} fullWidth displayEmpty
+              value={selectedTag} onChange={(e) => filteredDemos(e.target.value)} fullWidth displayEmpty
               sx={{ backgroundColor: '#f9f9f9', borderRadius: 1, mb: 2, }} >
               {tags.map((tag) => (
                 <MenuItem key={tag} value={tag}>

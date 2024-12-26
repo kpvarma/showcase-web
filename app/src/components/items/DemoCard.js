@@ -105,7 +105,7 @@ export default function DemoCard({
             borderColor: 'divider',
           }}
         />
-        <StyledCardContent>
+        {/* <StyledCardContent>
           <Typography gutterBottom variant="h6" component="div">
             {demo.title}
           </Typography>
@@ -113,7 +113,7 @@ export default function DemoCard({
             {demo.summary}
           </StyledTypography>
           <Skill skills={demo.skills} />
-        </StyledCardContent>
+        </StyledCardContent> */}
       </StyledCard>
     </Link>
   );
@@ -125,7 +125,8 @@ DemoCard.propTypes = {
     summary: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     last_modified: PropTypes.string,
-    skills: PropTypes.arrayOf(PropTypes.string).isRequired, // Updated to expect array of strings
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string),
     thumb_image: PropTypes.string.isRequired,
     cover_image: PropTypes.string.isRequired,
     layout: PropTypes.string,

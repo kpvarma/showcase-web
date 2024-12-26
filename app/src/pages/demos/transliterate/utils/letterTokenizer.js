@@ -103,7 +103,11 @@ const transliterateToken = (tokens, inputLanguage, outputLanguage) => {
       }
     }
     if (consonants[token.charAt(token.length - 1)]) {
-      trans_tokens.push(trans_chars.join('') + 'a');
+      if(outputLanguage == 'english'){
+        trans_tokens.push(trans_chars.join('') + 'a');
+      } else {
+        trans_tokens.push(trans_chars.join(''));
+      }
     } else {
       trans_tokens.push(trans_chars.join(''));
     }

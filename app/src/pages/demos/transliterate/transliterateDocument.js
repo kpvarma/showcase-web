@@ -289,7 +289,7 @@ const TransliterateDocument = () => {
                   whiteSpace: 'pre-wrap',
                 }}
               >
-                {selectedInputLanguage && (
+                {/* {selectedInputLanguage && (
                   <Typography color="success" variant="caption" sx={{ p: 2 }}>
                     {selectedInputLanguage}
                   </Typography>
@@ -299,7 +299,7 @@ const TransliterateDocument = () => {
                   <Typography color="success" variant="caption" sx={{ p: 2, textAlign: 'center' }}>
                     {selectedOutputLanguage}
                   </Typography>
-                )}
+                )} */}
 
                 
                 {languageSelectionError && (

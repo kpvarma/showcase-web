@@ -26,7 +26,7 @@ export default function ProjectIndex() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const filterProjects = (tag = 'All', skill = 'All') => {
+  const filterProjects = (skill = 'All', tag = 'All') => {
     setSelectedSkill(skill);
     setSelectedTag(tag);
   
@@ -63,7 +63,7 @@ export default function ProjectIndex() {
   ];
 
   useEffect(() => {
-    filterProjects('All'); // Call the filtering function on page load
+    filterProjects('All', 'All'); // Call the filtering function on page load
   }, []); // Empty dependency array ensures it runs only once
 
   return (
@@ -87,7 +87,7 @@ export default function ProjectIndex() {
       <Box sx={{ mt: 4 }}>
         {isMobile ? (
           // Show dropdown on mobile
-          <Select value={selectedSkill} onChange={(e) => filterProjects(e.target.value)} fullWidth displayEmpty 
+          <Select value={selectedSkill} onChange={(e) => filterProjects(selectedSkill, e.target.value)} fullWidth displayEmpty 
                   sx={{ backgroundColor: '#f9f9f9', borderRadius: 1, marginBottom: 2, padding: '8px', }}>
             {skills.map((skill) => (
               <MenuItem key={skill} value={skill}>
@@ -101,7 +101,7 @@ export default function ProjectIndex() {
             sx={{ display: 'flex', flexDirection: 'row', gap: 1, flexWrap: 'wrap', }}
           >
             {skills.map((skill) => (
-              <Chip key={skill} label={skill} clickable onClick={() => filterProjects(skill)}
+              <Chip key={skill} label={skill} clickable onClick={() => filterProjects(skill, 'All')}
                 color={selectedSkill === skill ? 'primary' : 'default'}
                 sx={{ fontSize: '1rem', minHeight: '36px', padding: '0 16px', lineHeight: '36px',
                   borderRadius: '24px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',}} />
