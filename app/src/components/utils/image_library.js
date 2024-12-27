@@ -1,8 +1,7 @@
 // utils/imageLibrary.js
 const imagesFolder = '/images'
-// const s3URl = https://assets.kpvarma.com
-// const s3URl = 'https://s3.us-east-1.amazonaws.com/assets.kpvarma.com'
-const s3URl = 'https://assets.kpvarma.com'
+const s3URl = 'https://s3.us-east-1.amazonaws.com/assets.kpvarma.com'
+// const s3URl = 'https://assets.kpvarma.com'
 
 const image_mapping = {
     // Mapping of image keys to file names

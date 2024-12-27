@@ -2,12 +2,15 @@ import React, { useState, useRef } from 'react';
 
 // UI Imports
 import { Link } from 'react-router-dom';
-import { Box, Grid, Typography, Paper, Button, CircularProgress } from '@mui/material';
+import { Box, Grid, Typography, Paper, Button, CircularProgress, Chip } from '@mui/material';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadIcon from '@mui/icons-material/Download';
 
 // Utility Imports
 import { transliterate } from './utils/transliterate';
+
+// Page Component Imports
+import TextFileViewer from '../../../components/utils/text_file_viewer';
 
 // Data
 const languages = [
@@ -18,6 +21,81 @@ const languages = [
   { value: 'tamil', label: 'Tamil' },
 ];
 
+const DisplayMetadata = ({ fileMetadata }) => {
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        p: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 1, // Space between rows
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Name:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.name}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Size:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.size}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Type:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.type}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Created At:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.createdAt}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Number of Pages:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.pages}</Typography>
+      </Box>
+    </Box>
+  );
+};
+
 const TransliterateDocument = () => {
   const [selectedInputLanguage, setSelectedInputLanguage] = useState('malayalam');
   const [selectedOutputLanguage, setSelectedOutputLanguage] = useState('english');
@@ -27,6 +105,7 @@ const TransliterateDocument = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fileError, setFileError] = useState('');
   const [uploadedFileName, setUploadedFileName] = useState('');
+  const [fileMetadata, setFileMetadata] = useState(null);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -58,7 +137,60 @@ const TransliterateDocument = () => {
     setFileError('');
     setUploadedFile(file);
     setUploadedFileName(file.name);
+    extractFileMetadata(file);
     parseAndTransliterateFile(file);
+  };
+
+  const extractFileMetadata = async (file) => {
+    const metadata = {};
+  
+    // Validate file type
+    const allowedTypes = ['text/plain', 'application/rtf'];
+    if (!allowedTypes.includes(file.type)) {
+      throw new Error('Unsupported file type. Please upload a .txt or .rtf file.');
+    }
+  
+    metadata.name = file.name;
+    metadata.size = (file.size / 1024).toFixed(2) + ' KB';
+    metadata.type = file.type;
+    metadata.createdAt = file.lastModified
+      ? new Date(file.lastModified).toLocaleString()
+      : 'Unknown';
+  
+    const fileReader = new FileReader();
+  
+    // Handle .txt files
+    if (file.type === 'text/plain') {
+      fileReader.onload = (e) => {
+        const content = e.target.result;
+  
+        // Calculate line and word count
+        const lines = content.split(/\r?\n/);
+        metadata.lines = lines.length;
+        metadata.words = content.split(/\s+/).filter(Boolean).length;
+  
+        setFileMetadata(metadata); // Store metadata in state
+        // console.log(metadata);
+      };
+      fileReader.readAsText(file);
+    }
+  
+    // Handle .rtf files (basic parsing example)
+    if (file.type === 'application/rtf') {
+      fileReader.onload = (e) => {
+        const content = e.target.result;
+  
+        // RTF parsing can be extended; here we count lines and words in raw content
+        const textContent = content.replace(/\\[a-zA-Z]+\d? ?/g, '').replace(/[\{\}]/g, ''); // Remove RTF tags
+        const lines = textContent.split(/\r?\n/);
+        metadata.lines = lines.length;
+        metadata.words = textContent.split(/\s+/).filter(Boolean).length;
+  
+        setFileMetadata(metadata); // Store metadata in state
+        // console.log(metadata);
+      };
+      fileReader.readAsText(file);
+    }
   };
 
   const parseAndTransliterateFile = async (file) => {
@@ -217,12 +349,12 @@ const TransliterateDocument = () => {
                   </Typography>
                 )}
                 {uploadedFileName && (
-                  <Typography variant="caption" sx={{ color: 'text.secondary', mt: 1 }}>
+                  <Typography variant="body1" sx={{ color: 'text.secondary', mt: 4 }}>
                     Uploaded: {uploadedFileName}
                   </Typography>
                 )}
                 <Typography variant="body2" sx={{ color: 'text.secondary', mt: 2 }}>
-                  Drag and drop a file here or click to upload. Only .txt and .rtf files are allowed.
+                  Drag and drop a <Chip label='.txt' color="primary" /> or <Chip label='.rtf' color="primary" /> file here or click to upload.
                 </Typography>
               </Box>
 
@@ -288,7 +420,11 @@ const TransliterateDocument = () => {
                   color: 'text.primary',
                   whiteSpace: 'pre-wrap',
                 }}
-              >
+              > 
+                {fileMetadata && (
+                  <DisplayMetadata fileMetadata={fileMetadata}></DisplayMetadata>
+                )}
+
                 {/* {selectedInputLanguage && (
                   <Typography color="success" variant="caption" sx={{ p: 2 }}>
                     {selectedInputLanguage}
@@ -332,7 +468,30 @@ const TransliterateDocument = () => {
             </Paper>
           </Grid>
         </Grid>
+        
+        {/* Preview Text File */}
+        {outputFile && (
+          <Grid container spacing={0} sx={{ maxWidth: '100%', justifyContent: 'center', mb: 20}} >
+            <Grid item xs={12} md={6} sx={{ pl: {xs: '0px !important', md: '16px !important'} }}>
+              <Paper
+                elevation={1}
+                sx={{
+                  padding: { xs: 3, sm: 4 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2,
+                  height: '100%',
+                }}
+              >
+                <TextFileViewer file={outputFile} />
+              </Paper>
+            </Grid>
+          </Grid>
+        )}
+
       </Box>
+
+      
 
     </div>
   );

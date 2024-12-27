@@ -10,7 +10,7 @@ import FeaturedArticles from '../../../components/items/FeaturedArticles';
 
 export default function Features() {
   return (
-    <Container sx={{my: { xs: 20, md: 0 }}}>
+    <Container sx={{my: { xs: 20, md: 10 }}}>
       <Box sx={{ width: { sm: '100%', md: '100%'}, textAlign: 'center' }}>
         <Typography component="h2" variant="h4" gutterBottom sx={{ color: 'text.primary' }} >
           Browse my Projects & Articles
@@ -45,7 +45,7 @@ export default function Features() {
             marginBottom: { xs: 0, md: 0 },
           }}
         >
-          <FeaturedArticles/>
+          <FeaturedArticles no_of_articles={4}/>
         </Grid>
       </Grid>
     </Container>

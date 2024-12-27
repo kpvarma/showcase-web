@@ -20,7 +20,7 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-const FeaturedArticles = () => {
+const FeaturedArticles = (no_of_articles=3) => {
   const featuredArticles = allArticles.filter(article => article.featured).slice(0, 3);
 
   return (
@@ -42,14 +42,15 @@ const FeaturedArticles = () => {
               textAlign: 'left',
               height: '100%',
               width: '100%',
+              textAlign: 'left',
               '&:hover': {
                 backgroundColor: (theme.vars || theme).palette.action.hover,
               },
             })
           ]}
         >
-          <ArticlePreview key={article.slug} article={article} paddingBottom={0} />
-          {/* <Box
+          {/* <ArticlePreview key={article.slug} article={article} paddingBottom={2} marginBottom={2} sx={{width: '100%'}} /> */}
+          <Box
             sx={[
               {
                 width: '100%',
@@ -86,7 +87,7 @@ const FeaturedArticles = () => {
                 </Typography>
               </Box>
             </Link>
-          </Box> */}
+          </Box>
         </Box>
       ))}
     </Box>

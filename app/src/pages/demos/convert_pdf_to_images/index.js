@@ -1,11 +1,92 @@
 import React, { useState } from "react";
+
+// UI Imports
 import { Box, Button, CircularProgress, Typography, Paper } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DownloadIcon from "@mui/icons-material/Download";
+
+// Utility Imports
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import SlideViewer from "../../../components/items/SlideViewer";
 import { convertPdfToImages } from "./utils/PdfToImageConverter";
+
+// Page Component Imports
+import SlideViewer from "../../../components/items/SlideViewer";
+
+const DisplayMetadata = ({ fileMetadata }) => {
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        p: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 1, // Space between rows
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Name:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.name}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Size:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.size}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Type:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.type}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Created At:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.createdAt}</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
+          Number of Pages:
+        </Typography>
+        <Typography variant="body2">{fileMetadata.pages}</Typography>
+      </Box>
+    </Box>
+  );
+};
 
 const PdfToImageConverter = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -13,6 +94,7 @@ const PdfToImageConverter = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fileError, setFileError] = useState("");
+  const [fileMetadata, setFileMetadata] = useState(null);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -32,7 +114,37 @@ const PdfToImageConverter = () => {
     setFileError("");
     setUploadedFileName(file.name);
     setUploadedFile(file);
+    extractFileMetadata(file);
     await processFile(file);
+  };
+
+  const extractFileMetadata = async (file) => {
+    const metadata = {};
+    metadata.name = file.name;
+    metadata.size = (file.size / 1024).toFixed(2) + ' KB';
+    metadata.type = file.type;
+    metadata.createdAt = file.lastModified
+      ? new Date(file.lastModified).toLocaleString()
+      : 'Unknown';
+  
+    const fileReader = new FileReader();
+    fileReader.onload = async (e) => {
+      const pdfData = new Uint8Array(e.target.result);
+      const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+      metadata.pages = pdf.numPages;
+  
+      let imagesCount = 0;
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const ops = await page.getOperatorList();
+        imagesCount += ops.fnArray.filter((fn) => fn === pdfjsLib.OPS.paintJpegXObject).length;
+      }
+      metadata.images = imagesCount;
+  
+      setFileMetadata(metadata); // Store metadata in state
+    };
+  
+    fileReader.readAsArrayBuffer(file);
   };
 
   const processFile = async (file) => {
@@ -139,14 +251,20 @@ const PdfToImageConverter = () => {
               </Typography>
             </Box>
           ) : images.length > 0 ? (
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<DownloadIcon />}
-              onClick={handleDownloadZip}
-            >
-              Download as ZIP
-            </Button>
+            <div>
+              {fileMetadata && (
+                <DisplayMetadata fileMetadata={fileMetadata}></DisplayMetadata>
+              )}
+
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<DownloadIcon />}
+                onClick={handleDownloadZip}
+              >
+                Download as ZIP
+              </Button>
+            </div>
           ) : (
             <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
               No images available for download. Upload a PDF to get started.
@@ -154,7 +272,7 @@ const PdfToImageConverter = () => {
           )}
         </Paper>
       </Box>
-
+      
       <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 4, padding: 2, width: "100%" }}>
         <Paper
             elevation={1}
@@ -169,7 +287,7 @@ const PdfToImageConverter = () => {
             }}
           >
           {isLoading ? (
-            <CircularProgress />
+            <CircularProgress sx={{m: 40}} />
           ) : (
             images.length > 0 && (
               <SlideViewer images={images} />

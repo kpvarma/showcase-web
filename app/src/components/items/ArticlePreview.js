@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import ArticleTags from './Tags'
 import { getTimeAgo } from '../utils/date_format';
 
-function ArticlePreview({ article, paddingBottom=4 }) {
+function ArticlePreview({ article, marginBottom=2, paddingBottom=2 }) {
   return (
     <Box
       sx={{
@@ -19,7 +19,9 @@ function ArticlePreview({ article, paddingBottom=4 }) {
         // boxShadow: 1,
         // borderRadius: 2,
         // backgroundColor: 'background.paper',
-        mb: paddingBottom,
+        mb: marginBottom,
+        pb: paddingBottom,
+        borderBottom: "1px solid #e0e0e0"
       }}
     >
       <Link to={`/articles/${article.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -31,7 +33,7 @@ function ArticlePreview({ article, paddingBottom=4 }) {
         {article.summary}
       </Typography>
       <Typography variant="caption" color="text.secondary">
-        Score: {article.score} &nbsp;
+        {/* Score: {article.score} &nbsp; */}
         Published {getTimeAgo(article.date)}
         {article.last_modified && ` and last modified ${getTimeAgo(article.last_modified)}`}
       </Typography>

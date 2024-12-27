@@ -1,8 +1,7 @@
 // utils/skillsLibrary.js
 const skillsFolder = '/images/skills'
+const s3URl = 'https://s3.us-east-1.amazonaws.com/assets.kpvarma.com'
 // const s3URl = 'https://assets.kpvarma.com'
-// const s3URl = 'https://s3.us-east-1.amazonaws.com/assets.kpvarma.com'
-const s3URl = 'https://assets.kpvarma.com'
 
 const skills_mapping = {
     python: "python.png",
