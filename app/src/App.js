@@ -11,8 +11,6 @@ import Header from './components/layouts/app_header.js';
 import Footer from './components/layouts/app_footer.js';
 import ScrollToTop from './components/layouts/scroll-to-top.js';
 
-
-
 const App = ({ children }) => (
   <AppTheme>
     <CssBaseline enableColorScheme /> {/* Reset CSS and apply light/dark mode */}
