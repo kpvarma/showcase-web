@@ -27,6 +27,8 @@ const Transliterate = () => {
   const [selectedOutputLanguage, setSelectedOutputLanguage] = useState('english');
   const maxCharacters = 1000; // Maximum characters allowed
 
+  let demo = allDemos.find((demo) => demo.slug === 'transliterate_indian_language_text');
+
   // Scroll to DebugTokensViewer when the button is clicked
   const handleScrollToDebugTokens = () => {
     const element = document.getElementById('debug-tokens-viewer');
@@ -45,6 +47,12 @@ const Transliterate = () => {
 
   return (
     <div>
+      <MetaTags
+        title={demo.title}
+        description={demo.summary}
+        url={`/demos/${demo.slug}`}
+        image={imageLibrary.getDemoImage(demo.cover_image)}
+      />
       <Box
         sx={{
           display: 'flex',

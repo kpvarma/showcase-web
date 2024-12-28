@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
 import { RouterProvider } from 'react-router-dom';
 import router from './router';
 
@@ -16,8 +15,16 @@ const root = createRoot(container);
 // Render the app
 root.render(
   <React.StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <RouterProvider
+      router={router}
+      future={{
+        v7_startTransition: true, // Opt-in for startTransition behavior
+        v7_relativeSplatPath: true, // Opt-in for relative splat path behavior
+        v7_fetcherPersist: true, // Opt-in for fetcher persistence changes
+        v7_normalizeFormMethod: true, // Opt-in for formMethod normalization
+        v7_partialHydration: true, // Opt-in for partial hydration
+        v7_skipActionErrorRevalidation: true, // Opt-in for skipping revalidation on errors
+      }}
+    />
   </React.StrictMode>
 );

@@ -31,7 +31,7 @@ To address this issue, this project leverages deep learning techniques to develo
 ### **Key Steps in the Solution**
 
 1. **Data Preprocessing**:
-   - Images were preprocessed by resizing them to `(299, 299)` and normalizing pixel values to the range `[-1, 1]`.
+   - Images were preprocessed by resizing them to <LabelHighlight>(299, 299)</LabelHighlight> and normalizing pixel values to the range <LabelHighlight>[-1, 1]</LabelHighlight>.
    - Captions were tokenized and padded to ensure uniform length.
 
    ```python
@@ -46,7 +46,7 @@ To address this issue, this project leverages deep learning techniques to develo
 
 2. **Feature Extraction**:
    - Features were extracted using a pre-trained InceptionV3 model.
-   - The extracted features have a shape of `(8, 8, 2048)`.
+   - The extracted features have a shape of <LabelHighlight>(8, 8, 2048)</LabelHighlight>.
 
    ```python
    # Load pre-trained InceptionV3 for feature extraction
@@ -82,7 +82,7 @@ To address this issue, this project leverages deep learning techniques to develo
    ```
 
 4. **Text-to-Speech Conversion**:
-   - Generated captions were converted to speech using Python's `gTTS` library.
+   - Generated captions were converted to speech using Python's <LabelHighlight>gTTS</LabelHighlight> library.
    
    ```python
    from gtts import gTTS

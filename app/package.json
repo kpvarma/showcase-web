@@ -4,7 +4,7 @@
   "description": "A simple bookmark app on google extension",
   "main": "src/index.js",
   "scripts": {
-    "watch-content": "nodemon --watch data --ext mdx --exec \"rm -rf .contentlayer && npx contentlayer2 build\"",
+    "watch-content": "nodemon --watch data --ext mdx --exec \"npx contentlayer2 build\"",
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
     "build": "npx contentlayer2 build && webpack --mode production",
@@ -33,7 +33,7 @@
     "react": "^18.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet-async": "^2.0.5",
+    "react-helmet": "^6.1.0",
     "react-material-ui-carousel": "^3.4.2",
     "react-router-dom": "^6.22.0",
     "react-scripts": "^5.0.1",

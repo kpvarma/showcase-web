@@ -107,6 +107,8 @@ const TransliterateDocument = () => {
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [fileMetadata, setFileMetadata] = useState(null);
 
+  let demo = allDemos.find((demo) => demo.slug === 'transliterate_indian_language_document');
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -241,6 +243,12 @@ const TransliterateDocument = () => {
 
   return (
     <div>
+      <MetaTags
+        title={demo.title}
+        description={demo.summary}
+        url={`/demos/${demo.slug}`}
+        image={imageLibrary.getDemoImage(demo.cover_image)}
+      />
       <Box
         sx={{
           display: 'flex',

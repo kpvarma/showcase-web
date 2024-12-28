@@ -21,7 +21,7 @@ import Transliterate from './pages/demos/transliterate/index.js';
 import TransliterateDocument from './pages/demos/transliterate/transliterateDocument.js';
 import TransliterateSample from './pages/demos/transliterate/transliterateSample.js';
 
-import PdfToImage from './pages/demos/convert_pdf_to_images/index.js';
+import PdfToImageConverter from './pages/demos/convert_pdf_to_images/index.js';
 import ImageCaptioning from './pages/demos/image_captioning_accessibility/index.js';
 
 const router = createBrowserRouter(
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
         { path: '/demos/transliterate', element: <Transliterate /> },
         { path: '/demos/transliterate_document', element: <TransliterateDocument /> },
         { path: '/demos/transliterate_sample', element: <TransliterateSample /> },
-        { path: '/demos/convert_pdf_to_images', element: <PdfToImage /> },
+        { path: '/demos/convert_pdf_to_images', element: <PdfToImageConverter /> },
         { path: '/demos/image_captioning_accessibility', element: <ImageCaptioning /> },
       ],
     },

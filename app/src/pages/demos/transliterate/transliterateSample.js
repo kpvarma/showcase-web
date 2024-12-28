@@ -16,6 +16,7 @@ const sampleSentences = [
 const TransliterateSample = () => {
   const selectedInputLanguage = 'malayalam';
   const selectedOutputLanguage = 'english';
+
   return (
     <div>
       <Grid container spacing={1} sx={{ mt: 10, mb: 10, display: 'display' }}>

@@ -56,7 +56,7 @@ module.exports = {
     client: {
       webSocketURL: {
         hostname: 'localhost', // Hostname for WebSocket
-        port: 6002,            // Port exposed on the host machine
+        port: 6001,            // Port exposed on the host machine
         protocol: 'ws',        // Use ws (or wss for secure connections)
       },
     },
