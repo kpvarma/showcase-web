@@ -62,7 +62,6 @@ export default function ArticlesIndex() {
         description={'kpvarma.com | My Articles - where I experiment with the latest technologies and share my learnings.'}
         url={'/articles'}
       />
-      
       {/* Heading and Description */}
       <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
         Browse&nbsp;

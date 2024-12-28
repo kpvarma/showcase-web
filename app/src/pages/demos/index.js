@@ -76,10 +76,9 @@ export default function DemoIndex() {
     <div>
       <MetaTags
         title={`Demos`}
-        description={'kpvarma.com | My Demos - where I experiment with the latest technologies and share my learnings.'}
+        description={'My Demos - where I experiment with the latest technologies and share my learnings.'}
         url={'/demos'}
       />
-
       {/* Heading and Description */}
       <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
         Browse&nbsp;

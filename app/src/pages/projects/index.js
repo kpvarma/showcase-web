@@ -73,7 +73,6 @@ export default function ProjectIndex() {
         description={'kpvarma.com | My Projects - where I experiment with the latest technologies and share my learnings.'}
         url={'/projects'}
       />
-
       {/* Heading and Description */}
       <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
         Browse&nbsp;

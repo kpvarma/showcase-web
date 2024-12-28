@@ -45,7 +45,7 @@ const image_mapping = {
       return `${s3URl}${imagesFolder}/${logoFileName}`;
     }
   };
-  
+
   const getImageUrl = (imageName) => {
     const fileName = image_mapping[imageName];
     if (!fileName) {
@@ -65,6 +65,7 @@ const image_mapping = {
       getProjectImage: (imageFileName) => getDynamicImageUrl('projects', imageFileName),
       getDemoImage: (imageFileName) => getDynamicImageUrl('demos', imageFileName),
       getArticleImage: (imageFileName) => getDynamicImageUrl('articles', imageFileName),
+      getLinkPreviewImage: (imageFileName) => getDynamicImageUrl('link-previews', imageFileName),
     },
     {
       get: (target, prop) => {

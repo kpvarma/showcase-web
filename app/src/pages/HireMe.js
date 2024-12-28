@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
+
+// UI Imports
 import { Box, Grid, Typography, TextField, Button, Alert } from "@mui/material";
+
+// Utility Imports
 import { useForm, ValidationError } from "@formspree/react";
+
+// Page Component Imports
 import imageLibrary from "../components/utils/image_library";
+import MetaTags from '../components/layouts/meta_tags'
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("mwpkjzkw");
@@ -22,10 +28,10 @@ export default function Contact() {
 
   return (
     <div>
-      <Helmet>
-        <title>Hire Me | kpvarma.com - My experiment with tech</title>
-        <meta name="description" content="" />
-      </Helmet>
+      <MetaTags
+        title={`About Me`}
+        url={'/aboutme'}
+      />
       <Box sx={{ maxWidth: '1200px', margin: '0 left', padding: '16px' }}>
         {/* Heading and Description */}
         <Box sx={{ mb: 3 }}>

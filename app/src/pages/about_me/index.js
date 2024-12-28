@@ -44,10 +44,9 @@ export default function AboutMe() {
     <div>
       <MetaTags
         title={`About Me`}
-        description={''}
         url={'/aboutme'}
+        image={imageLibrary.getLinkPreviewImage('aboutme.png')}
       />
-
       <Box
         sx={{
           position: "relative",
