@@ -93,7 +93,7 @@ export default function ArticleShow() {
         title={article.title}
         description={article.summary}
         url={`/articles/${article.slug}`}
-        image={article.cover_image}
+        image={imageLibrary.getArticleImage(article.cover_image)}
       />
       <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 3 }}>
         <Box sx={{ flex: 3, padding: 2 }}>

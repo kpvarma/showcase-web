@@ -11,7 +11,14 @@ import { saveAs } from "file-saver";
 import { convertPdfToImages } from "./utils/PdfToImageConverter";
 
 // Page Component Imports
+import MetaTags from '../../../components/layouts/meta_tags'
 import SlideViewer from "../../../components/items/SlideViewer";
+
+// Asset Imports
+import imageLibrary from '../../../components/utils/image_library';
+
+// Content Import
+import { allDemos } from '../../../../.contentlayer/generated/index.mjs';
 
 const DisplayMetadata = ({ fileMetadata }) => {
   return (
@@ -88,7 +95,7 @@ const DisplayMetadata = ({ fileMetadata }) => {
   );
 };
 
-const PdfToImageConverter = () => {
+export default function PdfToImageConverter() {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState("");
   const [images, setImages] = useState([]);
@@ -96,6 +103,8 @@ const PdfToImageConverter = () => {
   const [fileError, setFileError] = useState("");
   const [fileMetadata, setFileMetadata] = useState(null);
 
+  let demo = allDemos.find((demo) => demo.slug === 'convert_pdf_to_images');
+  
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     validateAndProcessFile(file);
@@ -170,133 +179,139 @@ const PdfToImageConverter = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding: 2, pb: 40 }}>
-      <Typography variant="h2" sx={{ color: "text.primary", mb: 2, textAlign: "center" }}>
-        Transform PDFs into&nbsp;
-        <Typography component="span" variant="h2" color="primary.main" sx={{ fontWeight: "inherit", p: "0px !important" }}>
-          High-Quality Images
+    <div>
+      <MetaTags
+        title={demo.title}
+        description={demo.summary}
+        url={`/demos/${demo.slug}`}
+        image={imageLibrary.getDemoImage(demo.cover_image)}
+      />
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding: 2, pb: 40 }}>
+        <Typography variant="h2" sx={{ color: "text.primary", mb: 2, textAlign: "center" }}>
+          Transform PDFs into&nbsp;
+          <Typography component="span" variant="h2" color="primary.main" sx={{ fontWeight: "inherit", p: "0px !important" }}>
+            High-Quality Images
+          </Typography>
         </Typography>
-      </Typography>
 
-      <Typography color="text.primary" variant="body1" sx={{ textAlign: "center", maxWidth: "70%" }}>
-        Quickly convert PDF files into individual high-resolution images for presentations, documentation, or sharing. 
-        Upload your PDF, or drag and drop it into the tool, and view the results in an interactive slider.
-      </Typography>
+        <Typography color="text.primary" variant="body1" sx={{ textAlign: "center", maxWidth: "70%" }}>
+          Quickly convert PDF files into individual high-resolution images for presentations, documentation, or sharing. 
+          Upload your PDF, or drag and drop it into the tool, and view the results in an interactive slider.
+        </Typography>
 
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 4, padding: 2, width: "100%" }}>
+        <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 4, padding: 2, width: "100%" }}>
 
-        {/* Left Box: Upload Section */}
-        <Paper
-          elevation={2}
-          sx={{
-            flex: 1,
-            padding: 4,
-            border: "1px solid #ddd",
-            borderRadius: 2,
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: 2 }}>
-            Upload PDF
-          </Typography>
-          <Button
-            variant="contained"
-            component="label"
-            startIcon={<FileUploadIcon />}
-            sx={{ marginBottom: 2 }}
-          >
-            Upload or Drag File Here
-            <input type="file" hidden onChange={handleFileUpload} accept=".pdf" />
-          </Button>
-
-          {fileError && (
-            <Typography color="error" variant="caption">
-              <br></br>{fileError}
-            </Typography>
-          )}
-
-          {uploadedFileName && (
-            <Typography variant="caption" sx={{ color: "text.secondary", marginTop: 1 }}>
-              <br></br>Uploaded: {uploadedFileName}
-            </Typography>
-          )}
-
-          {!uploadedFile && !isLoading && (
-            <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
-              Drag and drop a PDF file here, or click to upload. Only PDF files are supported.
-            </Typography>
-          )}
-        </Paper>
-
-        {/* Right Box: Download Section */}
-        <Paper
-          elevation={2}
-          sx={{
-            flex: 1,
-            padding: 4,
-            border: "1px solid #ddd",
-            borderRadius: 2,
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: 2 }}>
-            Download Images
-          </Typography>
-
-          {isLoading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-              <CircularProgress />
-              <Typography variant="body2" sx={{ marginLeft: 2 }}>
-                Processing PDF...
-              </Typography>
-            </Box>
-          ) : images.length > 0 ? (
-            <div>
-              {fileMetadata && (
-                <DisplayMetadata fileMetadata={fileMetadata}></DisplayMetadata>
-              )}
-
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<DownloadIcon />}
-                onClick={handleDownloadZip}
-              >
-                Download as ZIP
-              </Button>
-            </div>
-          ) : (
-            <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
-              No images available for download. Upload a PDF to get started.
-            </Typography>
-          )}
-        </Paper>
-      </Box>
-      
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 4, padding: 2, width: "100%" }}>
-        <Paper
-            elevation={1}
+          {/* Left Box: Upload Section */}
+          <Paper
+            elevation={2}
             sx={{
               flex: 1,
-              padding: 2,
-              // border: "1px solid #ddd",
-              // borderRadius: 2,
+              padding: 4,
+              border: "1px solid #ddd",
+              borderRadius: 2,
               textAlign: "center",
-              width: "100%",
-              height: "80vh",
             }}
           >
-          {isLoading ? (
-            <CircularProgress sx={{m: 40}} />
-          ) : (
-            images.length > 0 && (
-              <SlideViewer images={images} />
-            )
-          )}
-        </Paper>
+            <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: 2 }}>
+              Upload PDF
+            </Typography>
+            <Button
+              variant="contained"
+              component="label"
+              startIcon={<FileUploadIcon />}
+              sx={{ marginBottom: 2 }}
+            >
+              Upload or Drag File Here
+              <input type="file" hidden onChange={handleFileUpload} accept=".pdf" />
+            </Button>
+
+            {fileError && (
+              <Typography color="error" variant="caption">
+                <br></br>{fileError}
+              </Typography>
+            )}
+
+            {uploadedFileName && (
+              <Typography variant="caption" sx={{ color: "text.secondary", marginTop: 1 }}>
+                <br></br>Uploaded: {uploadedFileName}
+              </Typography>
+            )}
+
+            {!uploadedFile && !isLoading && (
+              <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
+                Drag and drop a PDF file here, or click to upload. Only PDF files are supported.
+              </Typography>
+            )}
+          </Paper>
+
+          {/* Right Box: Download Section */}
+          <Paper
+            elevation={2}
+            sx={{
+              flex: 1,
+              padding: 4,
+              border: "1px solid #ddd",
+              borderRadius: 2,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: 2 }}>
+              Download Images
+            </Typography>
+
+            {isLoading ? (
+              <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+                <CircularProgress />
+                <Typography variant="body2" sx={{ marginLeft: 2 }}>
+                  Processing PDF...
+                </Typography>
+              </Box>
+            ) : images.length > 0 ? (
+              <div>
+                {fileMetadata && (
+                  <DisplayMetadata fileMetadata={fileMetadata}></DisplayMetadata>
+                )}
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<DownloadIcon />}
+                  onClick={handleDownloadZip}
+                >
+                  Download as ZIP
+                </Button>
+              </div>
+            ) : (
+              <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
+                No images available for download. Upload a PDF to get started.
+              </Typography>
+            )}
+          </Paper>
+        </Box>
+        
+        <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 4, padding: 2, width: "100%" }}>
+          <Paper
+              elevation={1}
+              sx={{
+                flex: 1,
+                padding: 2,
+                // border: "1px solid #ddd",
+                // borderRadius: 2,
+                textAlign: "center",
+                width: "100%",
+                height: "80vh",
+              }}
+            >
+            {isLoading ? (
+              <CircularProgress sx={{m: 40}} />
+            ) : (
+              images.length > 0 && (
+                <SlideViewer images={images} />
+              )
+            )}
+          </Paper>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 };
-
-export default PdfToImageConverter;

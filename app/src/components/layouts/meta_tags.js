@@ -6,8 +6,8 @@ const MetaTags = ({ title, description, url, image }) => {
   // Default values
   const defaultTitle = 'kpvarma.com | My experiments with tech';
   const defaultDescription = 'kpvarma.com | A platform where I experiment with the latest technologies and share my learnings.';
-  const defaultImage = '/assets/images/logo.png';
   const defaultDomain = 'https://www.kpvarma.com';
+  const defaultImage = `${defaultDomain}/assets/images/logo.png`;
 
   // Helper function to ensure the URL includes the domain
   const ensureDomain = (path) => {
@@ -17,11 +17,21 @@ const MetaTags = ({ title, description, url, image }) => {
   };
 
   // Use default values if props are empty or undefined
-  const finalTitle = title ? `${title} | kpvarma.com` : defaultTitle;
+  const finalTitle = title ? `${title} || kpvarma.com` : defaultTitle;
   const finalDescription = description || defaultDescription;
-  const finalImage = image || defaultImage;
+  const finalImage = image ? ensureDomain(image) : defaultImage;
   const finalUrl = ensureDomain(url);
 
+  console.log("title: ", title);
+  console.log("description: ", description);
+  console.log("image: ", image);
+  console.log("url: ", url);
+
+  console.log("finalTitle: ", finalTitle);
+  console.log("finalDescription: ", finalDescription);
+  console.log("finalImage: ", finalImage);
+  console.log("finalUrl: ", finalUrl);
+  
   return (
     <Helmet>
       <title>{finalTitle}</title>
