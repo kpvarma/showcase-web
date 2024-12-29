@@ -43,10 +43,10 @@ const HireMe = () => {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={`Contact Me`}
         url={'/hireme'}
-      />
+      /> */}
       <Box sx={{ padding: 4, maxWidth: 800, margin: '0 auto' }}>
         <Typography variant="h3" gutterBottom>
           Hire Me

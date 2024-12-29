@@ -250,12 +250,12 @@ const TransliterateDocument = () => {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={demo.title}
         description={demo.summary}
         url={`/demos/${demo.slug}`}
         image={imageLibrary.getDemoImage(demo.cover_image)}
-      />
+      /> */}
       <Box
         sx={{
           display: 'flex',

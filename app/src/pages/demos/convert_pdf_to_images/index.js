@@ -180,12 +180,12 @@ export default function PdfToImageConverter() {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={demo.title}
         description={demo.summary}
         url={`/demos/${demo.slug}`}
         image={imageLibrary.getDemoImage(demo.cover_image)}
-      />
+      /> */}
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding: 2, pb: 40 }}>
         <Typography variant="h2" sx={{ color: "text.primary", mb: 2, textAlign: "center" }}>
           Transform PDFs into&nbsp;

@@ -2,6 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import router from './router';
+import { hydrateRoot } from 'react-dom/client';
+
 
 // Get the root DOM node
 const container = document.getElementById('root');
@@ -10,21 +12,24 @@ if (!container) {
 }
 
 // Create a root using the new API
-const root = createRoot(container);
+// const root = createRoot(container);
 
 // Render the app
-root.render(
+console.log('Starting React hydration');
+hydrateRoot(
+  container,
   <React.StrictMode>
     <RouterProvider
       router={router}
       future={{
-        v7_startTransition: true, // Opt-in for startTransition behavior
-        v7_relativeSplatPath: true, // Opt-in for relative splat path behavior
-        v7_fetcherPersist: true, // Opt-in for fetcher persistence changes
-        v7_normalizeFormMethod: true, // Opt-in for formMethod normalization
-        v7_partialHydration: true, // Opt-in for partial hydration
-        v7_skipActionErrorRevalidation: true, // Opt-in for skipping revalidation on errors
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
+        v7_skipActionErrorRevalidation: true,
       }}
     />
   </React.StrictMode>
 );
+console.log('React hydration complete');

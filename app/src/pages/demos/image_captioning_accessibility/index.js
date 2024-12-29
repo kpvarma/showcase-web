@@ -86,12 +86,12 @@ const ImageCaptioning = () => {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={demo.title}
         description={demo.summary}
         url={`/demos/${demo.slug}`}
         image={imageLibrary.getDemoImage(demo.cover_image)}
-      />
+      /> */}
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: 4, minHeight: '90vh' }}>
         <Typography variant="h2" sx={{ color: "text.primary", mb: 2 }}>
           Image Captioning for the &nbsp;

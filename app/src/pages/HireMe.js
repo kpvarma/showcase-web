@@ -28,10 +28,10 @@ export default function Contact() {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={`About Me`}
         url={'/aboutme'}
-      />
+      /> */}
       <Box sx={{ maxWidth: '1200px', margin: '0 left', padding: '16px' }}>
         {/* Heading and Description */}
         <Box sx={{ mb: 3 }}>

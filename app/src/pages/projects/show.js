@@ -79,12 +79,12 @@ export default function ProjectShow() {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={project.title}
         description={project.summary}
         url={'/articles/{article.slug}'}
         image={imageLibrary.getProjectImage(project.cover_image)}
-      />
+      /> */}
       <Box sx={{ padding: 2 }}>
 
         <ProjectCover project={project}/>

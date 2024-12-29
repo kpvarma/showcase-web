@@ -1,6 +1,16 @@
 {
     "rewrites": [
+        { "source": "/", "destination": "/index.html" },
         { "source": "/aboutme", "destination": "/aboutme/index.html" },
+        { "source": "/hireme", "destination": "/hireme/index.html" },
+        
+        { "source": "/projects", "destination": "/projects/index.html" },
+        { "source": "/projects/:slug", "destination": "/projects/:slug/index.html" },
+
+        { "source": "/demos", "destination": "/demos/index.html" },
+        { "source": "/demos/:slug", "destination": "/demos/:slug/index.html" },
+
+        { "source": "/articles", "destination": "/articles/index.html" },
         { "source": "/articles/:slug", "destination": "/articles/:slug/index.html" }
     ]
   }
