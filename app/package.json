@@ -8,7 +8,8 @@
     "start": "webpack serve --mode development --open --host 0.0.0.0 --port 8080",
     "start-prod": "webpack serve --open",
     "build": "npx contentlayer2 build && webpack --mode production",
-    "build-no-cache": "rm -rf .contentlayer && npx contentlayer2 build && webpack --mode production"
+    "build-no-cache": "rm -rf .contentlayer && npx contentlayer2 build && webpack --mode production",
+    "postbuild": "node generate-static-html.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",

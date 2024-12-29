@@ -42,11 +42,11 @@ export default function AboutMe() {
   const theme = useTheme();
   return (
     <div>
-      <MetaTags
-        title={`About Me`}
+      {/* <MetaTags
+        title={`About Me Working`}
         url={'/aboutme'}
         image={imageLibrary.getLinkPreviewImage('aboutme.png')}
-      />
+      /> */}
       <Box
         sx={{
           position: "relative",

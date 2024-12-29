@@ -89,12 +89,12 @@ export default function ArticleShow() {
 
   return (
     <div>
-      <MetaTags
+      {/* <MetaTags
         title={article.title}
         description={article.summary}
         url={`/articles/${article.slug}`}
         image={imageLibrary.getArticleImage(article.cover_image)}
-      />
+      /> */}
       <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 3 }}>
         <Box sx={{ flex: 3, padding: 2 }}>
           {/* Main Content */}
