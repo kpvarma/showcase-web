@@ -8,92 +8,19 @@ import DownloadIcon from "@mui/icons-material/Download";
 // Utility Imports
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { convertPdfToImages } from "./utils/PdfToImageConverter";
+import { convertPdfToImages } from "../utils/PdfToImageConverter";
+import { extractFileMetaData } from "../utils/ExtractFileMetaData";
+import { DisplayMetaData } from "../components/DisplayFileMetaData";
+import SlideViewer from "../../../components/items/SlideViewer";
 
 // Page Component Imports
 import MetaTags from '../../../components/layouts/meta_tags'
-import SlideViewer from "../../../components/items/SlideViewer";
 
 // Asset Imports
 import imageLibrary from '../../../components/utils/image_library';
 
 // Content Import
 import { allDemos } from '../../../../.contentlayer/generated/index.mjs';
-
-const DisplayMetadata = ({ fileMetadata }) => {
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        p: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1, // Space between rows
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
-          Name:
-        </Typography>
-        <Typography variant="body2">{fileMetadata.name}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
-          Size:
-        </Typography>
-        <Typography variant="body2">{fileMetadata.size}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
-          Type:
-        </Typography>
-        <Typography variant="body2">{fileMetadata.type}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
-          Created At:
-        </Typography>
-        <Typography variant="body2">{fileMetadata.createdAt}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontWeight: 'bold', flexShrink: 0 }}>
-          Number of Pages:
-        </Typography>
-        <Typography variant="body2">{fileMetadata.pages}</Typography>
-      </Box>
-    </Box>
-  );
-};
 
 export default function PdfToImageConverter() {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -123,37 +50,11 @@ export default function PdfToImageConverter() {
     setFileError("");
     setUploadedFileName(file.name);
     setUploadedFile(file);
-    extractFileMetadata(file);
-    await processFile(file);
-  };
 
-  const extractFileMetadata = async (file) => {
-    const metadata = {};
-    metadata.name = file.name;
-    metadata.size = (file.size / 1024).toFixed(2) + ' KB';
-    metadata.type = file.type;
-    metadata.createdAt = file.lastModified
-      ? new Date(file.lastModified).toLocaleString()
-      : 'Unknown';
-  
-    const fileReader = new FileReader();
-    fileReader.onload = async (e) => {
-      const pdfData = new Uint8Array(e.target.result);
-      const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
-      metadata.pages = pdf.numPages;
-  
-      let imagesCount = 0;
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const ops = await page.getOperatorList();
-        imagesCount += ops.fnArray.filter((fn) => fn === pdfjsLib.OPS.paintJpegXObject).length;
-      }
-      metadata.images = imagesCount;
-  
-      setFileMetadata(metadata); // Store metadata in state
-    };
-  
-    fileReader.readAsArrayBuffer(file);
+    const metadata = await extractFileMetaData(file);
+    setFileMetadata(metadata); // Store metadata in state
+    
+    await processFile(file);
   };
 
   const processFile = async (file) => {
@@ -269,7 +170,7 @@ export default function PdfToImageConverter() {
             ) : images.length > 0 ? (
               <div>
                 {fileMetadata && (
-                  <DisplayMetadata fileMetadata={fileMetadata}></DisplayMetadata>
+                  <DisplayMetaData fileMetadata={fileMetadata}></DisplayMetaData>
                 )}
 
                 <Button
@@ -299,7 +200,7 @@ export default function PdfToImageConverter() {
                 // borderRadius: 2,
                 textAlign: "center",
                 width: "100%",
-                height: "80vh",
+                height: "90vh",
               }}
             >
             {isLoading ? (

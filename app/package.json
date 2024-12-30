@@ -29,6 +29,7 @@
     "highlight.js": "^11.11.0",
     "jszip": "^3.10.1",
     "markdown-to-jsx": "^7.x.x",
+    "pdf-lib": "^1.17.1",
     "pdfjs-dist": "4.0.379",
     "pliny": "^0.4.0",
     "react": "^18.0.0",

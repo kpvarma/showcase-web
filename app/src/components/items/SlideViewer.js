@@ -10,7 +10,7 @@ export default function SlideViewer({ images }) {
   };
 
   return (
-    <Box sx={{ width: "100%", display: "flex", maxHeight: "60vh" }}>
+    <Box sx={{ width: "100%", display: "flex", maxHeight: "80vh" }}>
       {/* Thumbnails on the Left */}
       <Box
         sx={{
@@ -64,13 +64,13 @@ export default function SlideViewer({ images }) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                maxHeight: "70vh",
+                maxHeight: "80vh",
               }}
             >
               <img
                 src={img}
                 alt={`Slide ${index}`}
-                style={{ maxHeight: "80vh", maxWidth: "70vw", objectFit: "contain" }}
+                style={{ maxHeight: "78vh", maxWidth: "70vw", objectFit: "contain" }}
               />
             </Box>
           ))}

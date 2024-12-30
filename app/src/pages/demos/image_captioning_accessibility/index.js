@@ -80,7 +80,7 @@ const ImageCaptioning = () => {
       setCaption(response.data.caption || 'No caption received.');
       setRelatedImages(response.data.relatedImages || []);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to process the image.');
+      setError(err.response?.data?.error || 'Server at full capacity' || 'Failed to process the image.');
     }
   };
 
