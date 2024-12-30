@@ -151,7 +151,7 @@ export default function StitchPDFs() {
         <Typography variant="h2" sx={{ color: "text.primary", mb: 0, textAlign: "center" }}>
           Stitch &nbsp;
           <Typography component="span" variant="h2" color="primary.main" sx={{ fontWeight: "inherit", p: "0px !important" }}>
-          Stitch Multiple PDFs
+          Multiple PDFs
           </Typography>
           &nbsp; Into One
         </Typography>

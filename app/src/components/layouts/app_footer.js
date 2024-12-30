@@ -174,7 +174,7 @@ export default function Footer() {
             </Link> */}
             <Copyright />
             <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-              Crafted with passion, using <strong>React.js</strong>, <strong>Contentlayer</strong>, <strong>Django</strong>, and <strong>MongoDB</strong>.
+              Crafted with passion, using <strong>React.js</strong>, <strong>Contentlayer</strong>, <strong>FAST API</strong>, and <strong>MongoDB</strong>.
             </Typography>
           </div>
           <Stack

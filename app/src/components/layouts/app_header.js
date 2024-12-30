@@ -21,10 +21,10 @@ import imageLibrary from '../../components/utils/image_library';
 
 const buttons = {
   "/": "Home",
-  "/demos": "Demos",
-  "/projects": "Projects",
-  "/articles": "Articles",
-  "/aboutme": "About Me",
+  "/demos/": "Demos",
+  "/projects/": "Projects",
+  "/articles/": "Articles",
+  "/aboutme/": "About Me",
 };
 
 
@@ -50,8 +50,10 @@ export default function Header() {
 
   // Function to check if the current path matches a given pattern
   const isActive = (pattern) => {
-    const regex = new RegExp(pattern);
-    return regex.test(location.pathname);
+    if (pattern === "/") {
+      return location.pathname === "/"; // Only highlight "Home" for exact matches
+    }
+    return location.pathname.startsWith(pattern); // Highlight others for nested paths
   };
 
   const toggleDrawer = (newOpen) => () => {
@@ -85,10 +87,10 @@ export default function Header() {
                   href={path}
                   sx={{
                     fontSize: '1.0em',
-                    color: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'gray',
-                    fontWeight: isActive(`^${path}(/[^/]+)?$`) ? 'bold' : 'normal',
-                    border: isActive(`^${path}(/[^/]+)?$`) ? '0px solid' : 'none',
-                    borderColor: isActive(`^${path}(/[^/]+)?$`) ? 'primary.main' : 'transparent',
+                    color: isActive(path) ? 'primary.main' : 'gray',
+                    fontWeight: isActive(path) ? 'bold' : 'normal',
+                    border: isActive(path) ? '0px solid' : 'none',
+                    borderColor: isActive(path) ? 'primary.main' : 'transparent',
                     borderRadius: 1,
                     m: '0px 5px',
                     padding: '4px 12px',
@@ -97,8 +99,7 @@ export default function Header() {
                       border: '0px solid',
                       borderColor: 'primary.main',
                     },
-                  }}
-                >
+                  }}>
                   {text}
                 </Button>
               ))}
