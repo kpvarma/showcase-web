@@ -34,7 +34,7 @@ const Transliterate = () => {
   const [outputText, setOutputText] = useState('');
   const [selectedInputLanguage, setSelectedInputLanguage] = useState('malayalam');
   const [selectedOutputLanguage, setSelectedOutputLanguage] = useState('english');
-  const maxCharacters = 1000; // Maximum characters allowed
+  const maxCharacters = 10000; // Maximum characters allowed
 
   let demo = allDemos.find((demo) => demo.slug === 'transliterate_indian_language_text');
 
@@ -256,7 +256,7 @@ const Transliterate = () => {
                   alignSelf: 'flex-end',
                 }}
               >
-                Debug Tokens
+                View Tokens
               </Button>
             </Paper>
           </Grid>
