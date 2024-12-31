@@ -466,7 +466,7 @@ const TransliterateDocument = () => {
                   <Box sx={{ textAlign: 'center' }}>
                     <Button
                       variant="contained"
-                      color="primary"
+                      color="success"
                       startIcon={<DownloadIcon />}
                       href={outputFile}
                       download={`transliterated_${uploadedFileName}`}

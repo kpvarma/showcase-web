@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 
 // Utility Imports
-import { stitchPDFs } from "./utils/stitchPDFs";
+import { stitchPDFs } from "../utils/stitchPDFs";
 import { convertPdfToImages } from "../utils/PdfToImageConverter";
 import { extractFileMetaData } from "../utils/ExtractFileMetaData";
 import { DisplayMetaData } from "../components/DisplayFileMetaData";
@@ -32,7 +32,7 @@ export default function StitchPDFs() {
   const [images, setImages] = useState([]);
   const [fileMetaData, setFileMetaData] = useState(null);
   
-  let demo = allDemos.find((demo) => demo.slug === "stitch_pdfs");
+  const demo = allDemos.find((demo) => demo.slug === "stitch_pdfs");
 
   const handleFileUpload = (e) => {
     const newFiles = Array.from(e.target.files);
@@ -291,7 +291,7 @@ export default function StitchPDFs() {
                 </Typography>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   startIcon={<DownloadIcon />}
                   onClick={handleDownloadPdf}
                 >

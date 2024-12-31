@@ -17,8 +17,8 @@ const MetaTags = ({ title, description, url, image }) => {
   };
 
   // Use default values if props are empty or undefined
-  const finalTitle = title ? `${title} || kpvarma.com` : defaultTitle;
-  const finalDescription = description || defaultDescription;
+  const finalTitle = title ? `${title} | kpvarma.com` : defaultTitle;
+  const finalDescription = description | defaultDescription;
   const finalImage = image ? ensureDomain(image) : defaultImage;
   const finalUrl = ensureDomain(url);
 

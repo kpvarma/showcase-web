@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // UI Imports
-import { Box, Button, CircularProgress, Typography, Paper } from "@mui/material";
+import { Box, Button, CircularProgress, Typography, Paper, Chip } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DownloadIcon from "@mui/icons-material/Download";
 
@@ -28,7 +28,7 @@ export default function PdfToImageConverter() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fileError, setFileError] = useState("");
-  const [fileMetadata, setFileMetadata] = useState(null);
+  const [fileMetaData, setFileMetaData] = useState(null);
 
   let demo = allDemos.find((demo) => demo.slug === 'convert_pdf_to_images');
   
@@ -52,7 +52,7 @@ export default function PdfToImageConverter() {
     setUploadedFile(file);
 
     const metadata = await extractFileMetaData(file);
-    setFileMetadata(metadata); // Store metadata in state
+    setFileMetaData(metadata); // Store metadata in state
     
     await processFile(file);
   };
@@ -140,7 +140,7 @@ export default function PdfToImageConverter() {
 
             {!uploadedFile && !isLoading && (
               <Typography variant="body2" sx={{ color: "text.secondary", marginTop: 2 }}>
-                Drag and drop a PDF file here, or click to upload. Only PDF files are supported.
+                Drag and drop a <Chip label='.PDF' color="primary" /> file here, or click to upload.
               </Typography>
             )}
           </Paper>
@@ -169,13 +169,13 @@ export default function PdfToImageConverter() {
               </Box>
             ) : images.length > 0 ? (
               <div>
-                {fileMetadata && (
-                  <DisplayMetaData fileMetadata={fileMetadata}></DisplayMetaData>
+                {fileMetaData && (
+                  <DisplayMetaData fileMetaData={fileMetaData}></DisplayMetaData>
                 )}
 
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   startIcon={<DownloadIcon />}
                   onClick={handleDownloadZip}
                 >

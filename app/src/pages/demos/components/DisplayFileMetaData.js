@@ -10,6 +10,7 @@ import { Box, Typography } from "@mui/material";
  */
 
 export const DisplayMetaData = ({ fileMetaData }) => {
+    console.log("fileMetaData", fileMetaData);
     return (
       <Box
         sx={{
