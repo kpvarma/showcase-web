@@ -13,7 +13,7 @@ const MetaTags = ({ title, description, url, image }) => {
     return isFullDomain ? (path.startsWith('http') ? path : `https://${path}`) : `${defaultDomain}${path.startsWith('/') ? '' : '/'}${path}`;
   };
 
-  const finalTitle = title ? `${title} || kpvarma.com` : defaultTitle;
+  const finalTitle = title ? `${title} | kpvarma.com` : defaultTitle;
   const finalDescription = description || defaultDescription;
   const finalImage = image ? ensureDomain(image) : defaultImage;
   const finalUrl = ensureDomain(url);

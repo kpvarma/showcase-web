@@ -24,8 +24,8 @@ import imageLibrary from "../../../components/utils/image_library";
 import { allDemos } from "../../../../.contentlayer/generated/index.mjs";
 
 export default function StitchPDFs() {
+  const [isProcessing, setIsProcessing] = useState(false);
   const [files, setFiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [uploadFileError, setUploadFileError] = useState("");
   const [stitchFileError, setStitchFileError] = useState("");
   const [stitchedPdf, setStitchedPdf] = useState(null);
@@ -97,7 +97,7 @@ export default function StitchPDFs() {
       return;
     }
 
-    setIsLoading(true);
+    setIsProcessing(true);
     setStitchFileError("");
 
     try {
@@ -127,7 +127,7 @@ export default function StitchPDFs() {
       setStitchFileError(`Failed to stitch the PDF files. ${error}`);
     }
 
-    setIsLoading(false);
+    setIsProcessing(false);
   };
 
   const handleDownloadPdf = () => {
@@ -266,6 +266,7 @@ export default function StitchPDFs() {
             <Typography variant="body1" sx={{ color: "text.secondary", p: 2 }}>
               Once you have uploaded all the files you want to combine, the "Start Stitching" button will be enabled. Click on it to merge the uploaded files into a single PDF. 
             </Typography>
+            
             <Divider/>
             
             {stitchFileError && (
@@ -277,7 +278,7 @@ export default function StitchPDFs() {
               </div>
             )}
 
-            {isLoading ? (
+            {isProcessing ? (
               <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100px" }}>
                 <CircularProgress />
                 <Typography variant="body2" sx={{ marginLeft: 2 }}>
@@ -341,7 +342,7 @@ export default function StitchPDFs() {
               height: "90vh",
             }}
           >
-          {isLoading ? (
+          {isProcessing ? (
             <CircularProgress sx={{m: 40}} />
           ) : (
             images.length > 0 && (

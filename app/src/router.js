@@ -23,9 +23,14 @@ import TransliterateSample from './pages/demos/transliterate/transliterateSample
 
 import PdfToImageConverter from './pages/demos/convert_pdf_to_images/index.js';
 import StitchPDFs from './pages/demos/stitch_pdfs/index.js';
+import ConvertPdfToImagePdf from  './pages/demos/convert_pdf_to_image_pdf/index.js';
+
 import OptimizeImages from './pages/demos/optimize_images/index.js';
+import OcrImages from './pages/demos/ocr_images/index.js';
+import OcrImagePDF from './pages/demos/ocr_image_pdf/index.js';
 
 import ImageCaptioning from './pages/demos/image_captioning_accessibility/index.js';
+
 
 const router = createBrowserRouter(
   [
@@ -53,7 +58,10 @@ const router = createBrowserRouter(
         
         { path: '/demos/convert_pdf_to_images', element: <PdfToImageConverter /> },
         { path: '/demos/stitch_pdfs', element: <StitchPDFs /> },
+        { path: '/demos/convert_pdf_to_image_pdf', element: <ConvertPdfToImagePdf /> },
         { path: '/demos/optimize_images', element: <OptimizeImages /> },
+        { path: '/demos/ocr_images', element: <OcrImages /> },
+        { path: '/demos/ocr_image_pdf', element: <OcrImagePDF /> },
 
         { path: '/demos/image_captioning_accessibility', element: <ImageCaptioning /> },
       ],
