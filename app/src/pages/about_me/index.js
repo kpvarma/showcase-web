@@ -32,7 +32,7 @@ const sections = [
     title: "Find me Online",
     description:
       "Feel free to <b>Connect</b> or <b>Follow me</b> on my <b>Linkedin</b> and <b>Github</b> where I post useful content related to Web Development and Programming.",
-    button: [{ text: "LinkedIn", variant: "contained", color: "secondary", size: "large", link: "https://www.linkedin.com/in/krishnaprasadvarma" }, 
+    button: [{ text: "LinkedIn", variant: "contained", color: "secondary", size: "large", link: "https://www.linkedin.com/in/krishnapvarma" }, 
              { text: "Github", variant: "outlined", color: "primary", size: "large", link: "https://www.github.com/kpvarma" }, 
              { text: "Kaggle", variant: "outlined", color: "secondary", size: "large", link: "https://www.kaggle.com/kpvarma27" }],
   },

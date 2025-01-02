@@ -125,7 +125,7 @@ export default function Footer() {
             <Link color="text.secondary" variant="body2" href="/AboutMe">
               My Profile
             </Link>
-            <Link color="text.secondary" variant="body2" href="https://www.linkedin.com/in/krishnaprasadvarma" target="_blank">
+            <Link color="text.secondary" variant="body2" href="https://www.linkedin.com/in/krishnapvarma" target="_blank">
               My LinkedIn
             </Link>
             <Link color="text.secondary" variant="body2" href="https://github.com/kpvarma" target="_blank">
@@ -206,7 +206,7 @@ export default function Footer() {
             <IconButton
               color="inherit"
               size="small"
-              href="https://www.linkedin.com/in/krishnaprasadvarma"
+              href="https://www.linkedin.com/in/krishnapvarma"
               aria-label="LinkedIn"
               target="_blank"
               sx={{ alignSelf: 'center' }}
@@ -285,7 +285,7 @@ export default function Footer() {
           <Link
             color="text.secondary"
             variant="body2"
-            href="https://www.linkedin.com/in/krishnaprasadvarma"
+            href="https://www.linkedin.com/in/krishnapvarma"
             target="_blank"
           >
             My LinkedIn
@@ -352,7 +352,7 @@ export default function Footer() {
             <IconButton
               color="inherit"
               size="small"
-              href="https://www.linkedin.com/in/krishnaprasadvarma"
+              href="https://www.linkedin.com/in/krishnapvarma"
               aria-label="LinkedIn"
               target="_blank"
             >
