@@ -8,7 +8,27 @@ const standAloneLetter = (char, { vowels, consonants, chillu, numerals, punctuat
 
 function isSpecialCharacter(char) {
   // Define a set of special characters to check against
-  const specialCharacters = ['\n', '\r', '\t', '\b', '\f', '\v'];
+  const specialCharacters = [
+    // Escape Sequences
+    '\n', '\r', '\t', '\b', '\f', '\v', '\\', '\'', '\"', '\0', 
+    '\u0000', '\uFFFF', '\x00', '\xFF',
+  
+    // Common Punctuation
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=',
+  
+    // Brackets and Delimiters
+    '{', '}', '[', ']', '(', ')', '<', '>', '|',
+  
+    // Quotation Marks
+    '\'', '"', '`',
+  
+    // Miscellaneous Symbols
+    '~', ':', ';', ',', '.', '/', '\\', '?',
+  
+    // Math Symbols
+    '+', '-', '*', '/', '=', '!', '%', '<', '>'
+  ];
+  // const specialCharacters = ['\n', '\r', '\t', '\b', '\f', '\v'];
 
   // Check if the character is in the list
   return specialCharacters.includes(char);

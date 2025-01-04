@@ -1,0 +1,113 @@
+---
+title: "What is LlamaOCR.com and How to Use It in Your Code"
+summary: "Discover LlamaOCR.com, an open-source OCR tool powered by Llama 3.2 Vision, and learn how to integrate it into your projects with simple code examples."
+date: "2025-01-03"
+last_modified: "2025-01-03"
+thumb_image: "llama-ocr.png"
+cover_image: "llama-ocr.png"
+tags:
+  - OCR
+  - LlamaOCR
+  - Image to Text
+  - JavaScript
+featured: false
+layout: "PostLayout"
+draft: false
+---
+
+# What is LlamaOCR.com and How to Use It in Your Code  
+
+If you’ve ever struggled with extracting text from images or scanning documents, **LlamaOCR** is here to save your day. This open-source OCR (Optical Character Recognition) tool is built on **Llama 3.2 Vision**, making it super smart and capable of handling even tricky layouts like tables, receipts, and more. Let’s dive into what it does and how you can use it in your projects.  
+
+---
+
+## Why is LlamaOCR a Big Deal?  
+
+Here’s what makes LlamaOCR stand out from the crowd:  
+
+1. **Smart Layout Recognition**: It’s not just about reading text; it also understands the structure, which means it can process things like rows, columns, and formatted text easily.  
+2. **Outputs in Markdown**: Forget messy plain text! LlamaOCR can output text in Markdown, so your formatting is preserved. Perfect for documentation and well-organized data.  
+3. **Flexible Deployment**: Use it locally if you’re concerned about privacy, or deploy it in the cloud for bigger projects.  
+4. **Easy Integration**: Available as an **npm package**, it’s simple to add to any JavaScript project.  
+
+---
+
+## What Can You Use LlamaOCR For?  
+
+Here are some cool use cases:  
+
+- **Digitizing Receipts and Bills**: Extract text from receipts to track your expenses.  
+- **Processing Forms**: Convert paper forms into digital formats with preserved layouts.  
+- **Organizing Notes**: Scan handwritten notes or screenshots into clean, usable markdown text.  
+- **Data Extraction from Images**: Extract data from screenshots, posters, or even PDFs.  
+
+---
+
+## How to Use LlamaOCR in Your Code  
+
+Using LlamaOCR is pretty straightforward, especially if you’re into coding. Here’s a step-by-step guide to get started:  
+
+### 1. **Install LlamaOCR**  
+First, you’ll need Node.js installed on your system. Then, run this command to install LlamaOCR:  
+
+```bash
+npm install llama-ocr
+
+# Make sure you have the required dependencies installed:
+npm install together-ai
+npm install fs
+```
+
+## 2. Import LlamaOCR into Your Project
+
+Once it’s installed, import it into your JavaScript project:
+
+``` JavaScript
+const llamaOCR = require('llama-ocr');
+```
+
+## 3. Extract Text from an Image
+
+Here’s a simple example of how to extract text from an image:
+
+``` JavaScript
+const fs = require('fs');
+
+const runOCR = async () => {
+  const image = fs.readFileSync('path/to/your/image.jpg');
+  const result = await llamaOCR.processImage(image);
+
+  console.log('Extracted Text:', result.text);
+};
+
+runOCR();
+```
+
+## 4. Output Markdown
+
+If you want your output in Markdown, LlamaOCR makes it easy:
+
+``` JavaScript
+const runOCRWithMarkdown = async () => {
+  const image = fs.readFileSync('path/to/your/image.jpg');
+  const result = await llamaOCR.processImage(image, { outputFormat: 'markdown' });
+
+  console.log('Extracted Markdown:', result.markdown);
+};
+
+runOCRWithMarkdown();
+```
+
+## 5. Deploy It Locally or in the Cloud
+
+For local use:
+	•	Just run the script on your system.
+
+For cloud deployment:
+	•	Integrate it into a serverless platform like AWS Lambda or Google Cloud Functions.
+
+## Final Thoughts
+
+LlamaOCR is a next-gen tool that makes text extraction easy, fast, and super efficient. Whether you’re managing personal tasks or building a large-scale project, it’s got the features to make your life easier.
+
+So, why not give it a try? Check out the demo at LlamaOCR.com and start building something amazing!
