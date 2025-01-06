@@ -1,0 +1,202 @@
+---
+title: "How I Replaced My Local Node.js Setup with a Versatile Docker Image"
+summary: "Discover how I simplified my Node.js workflow by creating a powerful Docker image. From building Next.js and Express apps to running JavaScript scripts on the fly, this image does it all. No more local installations or managing nvm—my development is now faster, cleaner, and fully containerized."
+date: "2022-12-14"
+last_modified: "2025-01-06"
+thumb_image: "utility-docker-images.png"
+cover_image: "utility-docker-images.png"
+tags:
+  - Node.js
+  - Docker
+featured: true
+layout: "PostLayout"
+draft: false
+---
+
+As a developer, managing multiple versions of Node.js and ensuring a clean, consistent environment across projects can be a hassle. Switching between versions with tools like nvm or dealing with system-wide installations often leads to clutter and frustration. 
+To simplify my workflow, I created a Docker image tailored for Node.js development. This single image now powers everything I do—from building Next.js and Express apps to running quick JavaScript scripts. It’s streamlined, efficient, and has completely replaced my need for a local Node.js setup. In this article, I’ll share how this image works, why it’s a game-changer, and how you can use it to boost your own development productivity.
+
+## A note on the Node.js Base Docker Image
+
+This is a base Docker image for Node.js projects, built on top of the official <LabelHighlight>node:21-alpine</LabelHighlight> image. It includes essential tools and configurations for Node.js development.
+
+### Features
+
+- Lightweight Node.js environment with npm pre-installed.
+- Based on <LabelHighlight>node:21-alpine</LabelHighlight> for a lightweight setup.
+- Pre-installed essential system dependencies (<LabelHighlight>bash</LabelHighlight>, <LabelHighlight>git</LabelHighlight>, <LabelHighlight>curl</LabelHighlight>).
+- Ready for use as a base image for Node.js projects or specialized images.
+- Ideal for development, testing, and automation workflows.
+
+You can access the image and the setup from my GitHub repository. In this article, I’ll guide you through cloning the repository and getting started with this Docker-based workflow.
+
+## Step 1: Clone the Repository
+
+Start by cloning the utility-docker-images repository to your local machine:
+
+```bash
+git clone https://github.com/kpvarma/utility-docker-images.git
+cd utility-docker-images
+```
+
+This repository contains Docker configurations for a variety of development environments, including the versatile node-base image.
+
+## Step 2: Build the Node.js Base Image
+
+Once you’ve cloned the repository, navigate to the base/node directory and build the node-base image:
+
+```bash
+docker-compose build node-base
+```
+
+This will create a local Docker image named node-base, optimized for Node.js development.
+
+## Step 3: Start Using the Node.js Base Image
+
+Use the node-base image for a variety of usecases:
+
+### 1. Create Apps
+
+Use the node-base image to create projects for popular frameworks:
+
+#### Examples
+
+```bash
+# Create a projects directory. Navigate to this project directory. The apps will be created in this projects directory 
+mkdir projects/ 
+cd projects/ 
+
+# Set the PROJECT_DIR environment variable to the path of your script (PWD: Present Working Directory, in this case)
+export PROJECT_DIR=$PWD
+
+# Generate an Express App
+docker-compose run node-base npx express-generator express-app
+
+# Generate a react.js app
+docker-compose run node-base npx create-react-app react-app
+
+# Generate a vue.js app
+docker-compose run node-base npx @vue/cli create vue-app
+
+# Generate a next.js app
+docker-compose run node-base npx create-next-app@latest next-app
+
+# Generate a nuxt.js app
+docker-compose run node-base npx create-nuxt-app nuxt-app
+```
+
+### 2. General Node.js Development
+
+```bash
+docker-compose run node-base
+```
+
+#### Examples
+1. **Test and Debug JavaScript Snippets**
+   Quickly test small blocks of JavaScript code without creating a file.
+
+   Example:
+   ```javascript
+   const nums = [1, 2, 3];
+   nums.map(n => n * 2); // Output: [2, 4, 6]
+   ```
+
+2. **Explore Libraries and APIs**
+   Experiment with Node.js modules or external libraries before integrating them into your project.
+
+   Example:
+   ```javascript
+   const axios = require('axios');
+   let response = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+   response.data;
+
+   // Fetch a random cat fact
+   response = await axios.get('https://catfact.ninja/fact');
+   response.data;
+   ```
+
+3. **Prove Concepts or Ideas Quickly**
+   Before writing a full script, validate the logic in the REPL.
+
+   Example:
+   ```javascript
+   const isEven = num => num % 2 === 0;
+   console.log(isEven(4)); // true
+   console.log(isEven(5)); // false
+   ```
+
+### 3. Running your JavaScript Files
+
+You can dynamically mount your current working directory into the container at runtime using the <LabelHighlight>-v</LabelHighlight> flag with <LabelHighlight>docker-compose run</LabelHighlight>. This ensures that the container has access to the scripts or files you need.
+
+Example:
+```bash
+# Navigate to your project directory:
+cd utils/
+
+# Set the PROJECT_DIR environment variable to the path of your script
+export PROJECT_DIR=$PWD
+
+# Run the script
+docker-compose run node-base node test_script.js
+```
+
+### 4. Use in CI/CD Pipelines
+
+Integrating the node-base image into CI/CD pipelines ensures:
+
+- **Consistency**: Tests are executed in an environment identical to production.
+- **Isolation**: The Node.js runtime and dependencies are isolated from the host machine.
+- **Automation**: Automated testing, linting, and builds can run efficiently.
+
+#### Examples
+
+A development team automates testing for a Node.js application:
+
+1. The node-base container is started in a CI tool like GitHub Actions.
+2. The container runs <LabelHighlight>npm test</LabelHighlight> to execute unit tests.
+3. Test results are reported, and if successful, the pipeline proceeds to deploy the application.
+
+Pipeline Snippet:
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      node-base:
+        image: node-base:latest
+    steps:
+    - run: npm test
+```
+
+### 5. Prototyping
+
+Prototyping with the node-base image allows:
+
+- Quick experimentation with new ideas or features in a clean Node.js environment.
+- Testing of small scripts, APIs, or application components without affecting the host system.
+- On-demand access to a Node.js environment without the need for local installation.
+
+#### Examples
+
+A developer prototypes a simple Express.js server:
+1. Start the container:
+   ```bash
+   docker-compose run node-base bash
+   ```
+
+2. Write and run a quick Express.js server:
+   ```bash
+   npm install express
+   echo "const express = require('express'); const app = express(); app.get('/', (req, res) => res.send('Hello!')); app.listen(3000);" > server.js
+   node server.js
+   ```
+
+This allows the developer to quickly prototype and validate ideas without setting up a full project or environment locally.
+
+## Conclusion
+
+The node-base image is versatile for tasks ranging from small-scale experiments to large-scale automated pipelines. It provides a consistent and isolated Node.js environment that adapts to a wide range of development needs.
+
+## Shared Volume
+The <LabelHighlight>shared/</LabelHighlight> directory can be used as a mounted volume at <LabelHighlight>/app</LabelHighlight> to store and access project files across services.

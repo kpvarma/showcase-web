@@ -1,0 +1,132 @@
+---
+title: "How to Update Emails in Git Commit History: A Step-by-Step Guide"
+summary: "Learn how to update email addresses in your Git commit history using two powerful methods: git-filter-repo and git-filter-branch."
+date: "2025-01-02"
+last_modified: "2025-01-02"
+thumb_image: "update-git-emails.png"
+cover_image: "update-git-emails.png"
+tags:
+  - Git
+  - Commit History
+  - Email Update
+featured: false
+layout: "PostLayout"
+draft: false
+---
+
+# How to Update Emails in Git Commit History: A Step-by-Step Guide
+
+If you’ve changed your email address and want to reflect this in your old Git commits, it’s entirely possible. This guide will walk you through two methods to update email addresses in Git commit history: one using the modern `git-filter-repo` and the other using the older `git filter-branch`. Let's get started.
+
+---
+
+## Why Update Email Addresses in Commit History?
+
+1. **Profile Association:** GitHub associates commits with your profile based on the email in the commit metadata.
+2. **Privacy Concerns:** You may have used an email you no longer wish to display publicly.
+3. **Consistency:** You want all commits to reflect your current email.
+
+---
+
+## Prerequisites
+
+Before proceeding, ensure you have:
+1. A backup of your repository to avoid data loss.
+2. A Git installation on your machine.
+3. Installed `git-filter-repo` if you plan to use the modern method.
+
+---
+
+## Method 1: Using `git-filter-repo`
+
+The `git-filter-repo` tool is the recommended way to rewrite Git commit history. It is faster, more reliable, and safer than older tools like `git filter-branch`.
+
+### Steps:
+
+### Step 1: Clone the Repository as a Mirror
+```bash
+git clone --mirror <repository-url>
+cd <repository-name>.git
+```
+
+### Step 2: Install `git-filter-repo`
+Install `git-filter-repo` using Python's package manager:
+```bash
+pip install git-filter-repo
+```
+
+### Step 3: Rewrite Commit History
+Run the following command to replace old email addresses with the new one:
+```bash
+git filter-repo --commit-callback '
+if commit.author_email == b"old-email@example.com":
+    commit.author_email = b"new-email@example.com"
+    commit.committer_email = b"new-email@example.com"
+if commit.author_email == b"another-old-email@example.com":
+    commit.author_email = b"new-email@example.com"
+    commit.committer_email = b"new-email@example.com"
+'
+```
+
+### Step 4: Push Changes
+Force-push the rewritten history to the remote repository:
+```bash
+git push --force --mirror
+```
+
+---
+
+## Method 2: Using `git filter-branch`
+
+The `git filter-branch` command is an older tool for rewriting commit history. It’s still functional but less reliable and slower than `git-filter-repo`. Use it only if `git-filter-repo` isn’t an option.
+
+### Steps:
+
+### Step 1: Backup Your Repository
+```bash
+git clone --mirror <repository-url> backup-repo
+```
+
+### Step 2: Rewrite Commit History
+Run the following command to replace email addresses:
+```bash
+git filter-branch --env-filter '
+if [ "$GIT_COMMITTER_EMAIL" = "old-email@example.com" ]; then
+    GIT_COMMITTER_EMAIL="new-email@example.com";
+    GIT_AUTHOR_EMAIL="new-email@example.com";
+fi
+' -- --all
+```
+
+### Step 3: Push Changes
+Force-push the updated history to the remote repository:
+```bash
+git push --force --all
+```
+
+---
+
+## Comparison: `git-filter-repo` vs `git filter-branch`
+
+| Feature               | `git-filter-repo`                  | `git filter-branch`                |
+|-----------------------|-------------------------------------|-------------------------------------|
+| Speed                | Faster                              | Slower                              |
+| Reliability          | High                                | Risk of mangled history             |
+| Ease of Use          | Requires installation              | Built-in                            |
+| Recommendation       | Preferred for modern workflows      | Legacy, use only if necessary       |
+
+---
+
+## Important Considerations
+
+- **Impact on Collaborators:** Changing commit history will invalidate old commit hashes. Inform collaborators and advise them to reset their local repositories.
+- **Testing:** Always test rewritten history on a local clone before pushing to production.
+
+---
+
+## Conclusion
+
+Both `git-filter-repo` and `git filter-branch` allow you to update email addresses in Git commit history. For most use cases, `git-filter-repo` is the better choice due to its speed and reliability. Remember to back up your repository and test thoroughly before pushing changes.
+
+Let us know if you face any issues or have additional queries!
+
