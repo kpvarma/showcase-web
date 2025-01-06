@@ -20,6 +20,13 @@ To simplify my workflow, I created a Docker image tailored for Node.js developme
 
 This is a base Docker image for Node.js projects, built on top of the official <LabelHighlight>node:21-alpine</LabelHighlight> image. It includes essential tools and configurations for Node.js development.
 
+With this image, you can:
+
+✅ Build Next.js, Express.js, React, Vue, and Nuxt apps effortlessly.
+✅ Run JavaScript scripts in an isolated environment.
+✅ Say goodbye to nvm and local Node.js setups—everything is containerized.
+
+
 ### Features
 
 - Lightweight Node.js environment with npm pre-installed.
@@ -62,26 +69,47 @@ Use the node-base image to create projects for popular frameworks:
 #### Examples
 
 ```bash
-# Create a projects directory. Navigate to this project directory. The apps will be created in this projects directory 
+mkdir projects
+cd projects
+```
+
+
+#### Examples
+
+Create a projects directory. Navigate to this project directory. The apps will be created in this projects directory 
+
+```bash
 mkdir projects/ 
 cd projects/ 
+```
 
-# Set the PROJECT_DIR environment variable to the path of your script (PWD: Present Working Directory, in this case)
+Set the PROJECT_DIR environment variable to the path of your script (PWD: Present Working Directory, in this case)
+```bash
 export PROJECT_DIR=$PWD
+```
 
-# Generate an Express App
+Generate an Express App
+```bash
 docker-compose run node-base npx express-generator express-app
+```
 
-# Generate a react.js app
+Generate a react.js app
+```bash
 docker-compose run node-base npx create-react-app react-app
+```
 
-# Generate a vue.js app
+Generate a vue.js app
+```bash
 docker-compose run node-base npx @vue/cli create vue-app
+```
 
-# Generate a next.js app
+Generate a next.js app
+```bash
 docker-compose run node-base npx create-next-app@latest next-app
+```
 
-# Generate a nuxt.js app
+Generate a nuxt.js app
+```bash
 docker-compose run node-base npx create-nuxt-app nuxt-app
 ```
 
@@ -129,15 +157,18 @@ docker-compose run node-base
 
 You can dynamically mount your current working directory into the container at runtime using the <LabelHighlight>-v</LabelHighlight> flag with <LabelHighlight>docker-compose run</LabelHighlight>. This ensures that the container has access to the scripts or files you need.
 
-Example:
+Navigate to your project directory:
 ```bash
-# Navigate to your project directory:
 cd utils/
+```
 
 # Set the PROJECT_DIR environment variable to the path of your script
+```bash
 export PROJECT_DIR=$PWD
+```
 
 # Run the script
+```bash
 docker-compose run node-base node test_script.js
 ```
 
@@ -180,17 +211,11 @@ Prototyping with the node-base image allows:
 #### Examples
 
 A developer prototypes a simple Express.js server:
-1. Start the container:
-   ```bash
-   docker-compose run node-base bash
-   ```
 
-2. Write and run a quick Express.js server:
-   ```bash
-   npm install express
-   echo "const express = require('express'); const app = express(); app.get('/', (req, res) => res.send('Hello!')); app.listen(3000);" > server.js
-   node server.js
-   ```
+Start the container:
+```bash
+docker-compose run node-base bash
+```
 
 This allows the developer to quickly prototype and validate ideas without setting up a full project or environment locally.
 
@@ -200,3 +225,7 @@ The node-base image is versatile for tasks ranging from small-scale experiments 
 
 ## Shared Volume
 The <LabelHighlight>shared/</LabelHighlight> directory can be used as a mounted volume at <LabelHighlight>/app</LabelHighlight> to store and access project files across services.
+
+
+
+
