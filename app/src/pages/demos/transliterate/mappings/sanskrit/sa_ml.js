@@ -22,7 +22,8 @@ const sanskritMalayalamMapping = {
     'ॐ': 'ഓം', // Sacred Om symbol
   },
   joiners: {
-    '्': '്', // Virama
+    // '्': '്', // Virama
+    '्': 'ം', // Virama
   },
   modifiers: {
     'ा': 'ാ', 'ि': 'ി', 'ी': 'ീ', 'ु': 'ു', 'ू': 'ൂ',

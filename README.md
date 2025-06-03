@@ -1,0 +1,1 @@
+npx contentlayer2 build
